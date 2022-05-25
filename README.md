@@ -5,6 +5,7 @@ As a webbased dApp, WillNFT running on OraiChain (testnet.scan.orai.io), users h
 # main functions
 ## mint a nft, check nft file data (image/text/audio) is unique
 ```
+//must have OraiChain wallet & account, pls register https://scan.orai.io/wallet/
 //authen via firebase (with gmail)
 //do mint nft with data of audio/text/image
 //then system will validate nft data is valid and unique
