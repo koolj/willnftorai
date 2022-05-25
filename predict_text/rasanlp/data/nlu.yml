@@ -9,6 +9,7 @@ nlu:
     - mẹ mày
     - con chó
     - ăn hại
+    - chính quyền
 - intent: greet
   examples: |
     - hey

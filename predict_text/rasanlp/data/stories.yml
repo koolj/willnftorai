@@ -13,16 +13,3 @@ stories:
   steps:
   - intent: badwords
   - action: utter_bad
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
-
-- story: sad path 2
-  steps:
-  - intent: badwords
-  - action: utter_bad
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye

@@ -551,7 +551,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 				console.log("==============================================================");
 
 
-				chatbot = "http://localhost:5002/api";
+				chatbot = "http://localhost:5005/webhooks/rest/webhook";
 				//nft 0
 				if(type == 0 ){
 					if(text.length >= 8){
