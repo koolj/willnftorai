@@ -1,22 +1,19 @@
 # willnftorai
 As a webbased dApp, WillNFT running on OraiChain (CliffNet testnet), users here can create NFT digital assets (based on IPFS, cw721) with a self-distinguishing mechanism for digital assets (text, images, audio) to ensure: uniqueness, ownership, and transferability. Users can buy, sell, exchange NFT digital assets with cryptos or Vietnamese dong.
 
+
 # main functions
-## mint a nft
+## mint a nft, check nft file data (image/text/audio) is unique
 ```
 //authen via firebase (with gmail)
 //do mint nft with data of audio/text/image
 //then system will validate nft data is valid and unique
 ```
-## check nft file data (image/text/audio) is unique
+## transfer a nft
 ```
 //view a nft
 //add a price
 //do transfer function
-```
-## transfer a nft
-```
-//add
 ```
 ## view
 Build then access dApp to view and create, buy, sell NFTs
@@ -51,6 +48,7 @@ http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 - API for AI bot validates text nft: elastichsearch, rasa, bart simpletransformer, python + flask, port 5001
 - API for AI bot validates audio/sound nft: elastichsearch, cnn, python + flask, port 5002
 ```
+
 # prepare before build
 ### create firebase account with your project, and do authentication with sms and Google email
 ```
@@ -132,6 +130,7 @@ http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 ```
 //view readme
 ```
+
 # build 
 ### build frontend
 ```
@@ -159,8 +158,10 @@ https://testnet.scan.orai.io/smart-contract/orai1gwhauj6vclhelqlllvc7hxlrc77fmas
 https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0dfcq2xaz3
 ```
 
+
 # document intro to Hakathon Orai 2022
 https://drive.google.com/file/d/1tf8QPI0NKZU7gPTheyKE_cvhrZMVMXXV/view?usp=sharing
+
 
 # video clip intro
 https://drive.google.com/drive/folders/1qVdXkSDOQFMaeciy1Befm9Is83dGOJs4?usp=sharing 
