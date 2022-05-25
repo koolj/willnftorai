@@ -401,14 +401,14 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 							unixtime:currunixtime
 						}
 
-						let createblockqryres = "1"; //await createblockqry(token,blockobj,idobject)
+						let createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
 						console.log("hash created: "+createblockqryres);
 						if(createblockqryres.length > 1){
 							if((type == 0) )
 								return await dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
 									//console.log({result: '0',message: "Thêm bản ghi #"+ createblockqryres.substring(0,5) +"...# thành công!",txt:createblockqryres});
 
-									return {result: '0',message: "Created NFT #"+ createblockqryres.substring(0,5) +"...# successfully!",txt:createblockqryres}	
+									return {result: '0',message: "Created NFT #"+ createblockqryres +"...# successfully!",txt:createblockqryres}	
 								})
 							else if((type == 4) || (type == 1) || (type == 2) || (type == 3))		
 								return await dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
