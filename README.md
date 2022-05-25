@@ -148,7 +148,7 @@ npm start
 //After building dapp & components, access dapp via
 http://localhost:8077/nft/
 ```
-### build some blockchain contracts: cw_erc20, cw721, comnpile & deploy to OraiChainet
+### build some blockchain contracts: cw_erc20, cw721, comnpile & deploy to OraiChai testnet
 ```
 //accounts address
 orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
