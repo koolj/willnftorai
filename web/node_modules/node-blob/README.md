@@ -1,0 +1,10 @@
+This module provides a shim for the browser blob for use with node.js
+
+
+**Example Usage**
+```
+const Blob = require('node-blob');
+
+let myBlob = new Blob(["something"], { type: 'text/plain' });
+
+```

@@ -1,0 +1,1107 @@
+<!--
+/*
+Created by anhpt@
+Apr 28, 2021.
+*/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>WillNFT 4 OraiChain</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
+  <!-- IonIcons
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  -->
+  <!-- DataTables -->
+  <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+<link href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="./dist/css/adminlte.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    
+
+  <!--Uber Font-->
+  <link rel="stylesheet" href="https://d1a3f4spazzrp4.cloudfront.net/kepler.gl/uber-fonts/4.0.0/superfine.css">
+  
+  <style>
+    .modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('img/ld.gif') 
+                50% 50% 
+                no-repeat;
+    }
+
+    /* When the body has the loading class, we turn
+      the scrollbar off with overflow:hidden */
+    body.loading .modal {
+        overflow: hidden;   
+    }
+
+    /* Anytime the body has the loading class, our
+      modal element will be visible */
+    body.loading .modal {
+        display: block;
+    }
+    .form-check-input{
+      width: 30px;
+      height: 30px;
+    }
+
+  </style>
+    
+  <!-- Load React/Redux 
+  <script src="https://unpkg.com/react@16.8.4/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16.8.4/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/redux@3.7.2/dist/redux.js" crossorigin></script>
+  <script src="https://unpkg.com/react-redux@5.1.1/dist/react-redux.min.js" crossorigin></script>
+  <script src="socketio/socket.io.js" type="text/javascript"></script>
+  -->
+</head>
+
+
+<body class="hold-transition sidebar-mini">
+   <!-- Content Wrapper. Contains page content -->
+   
+  <div class="wrapper" >
+    <div id = "navid"></div>
+      <div style="text-align: right">    
+        <a style="text-align: right" id="hiid"></a>
+      </div>
+    <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+          <!--progress bar-->
+
+
+
+
+
+
+
+
+          <div id="loginview">
+          </div> <!--LOGIN AREA-->
+
+
+
+
+          
+
+          <div id="helpview">
+          </div><!-- /.help view --> 
+
+          <div id="MedExamView">
+            <div class="content-header">
+              <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Đăng ký tạo tài sản số/ Create NFT</h1>
+                      </div><!-- /.col -->
+                      <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                          <li class="breadcrumb-item"><a href="#">Home</a></li>
+                          <li class="breadcrumb-item active">Create NFT</li>
+                        </ol>
+                      </div><!-- /.col -->
+                </div><!-- /.row -->
+              </div><!-- /.container-fluid -->
+          </div>
+            <!-- /.content-header -->
+        
+            <!-- Main content SITE-->
+          <div class="content">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Nhu cầu NFT</h3>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                    <!-- /.d-flex -->
+
+                      <div class="position-relative mb-4"  style="height: 300px; width: 100%;">
+                          <div id="chartContainer4" style="height: 300px; width: 100%;"></div>
+                      </div>
+                    </div>
+                  </div> <!-- /.card -->
+                </div> <!-- /.col -->  
+
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-header border-0">
+                  <div class="d-flex justify-content-between">
+                    <h3 class="card-title">Thống kê Netflix NFT 2016</h3>
+                  </div>
+                  </div>
+                  <div class="card-body">
+                  <!-- /.d-flex -->
+                  <div class="position-relative mb-4">
+                        <div id="chartContainer51" style="height: 300px; width: 100%;"></div>
+                  </div>
+                  </div>
+                </div> <!-- /.card -->
+              </div> <!-- /.col -->  
+
+              <style>
+                nft{
+                  font-size: small;
+                  border-bottom: 1px;
+                  color: #ff7400;
+                  display: block;
+                }
+              </style>
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                  <h3 class="card-title">Tài sản số phổ biến trên mạng WillNFT</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-left" id="listnft">
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/q.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft017</nft>
+                        <nft>Giá trị: 100k </nft>
+                        <nft>Lượt xem: 35</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/q.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft021</nft>
+                        <nft>Giá trị: 200k </nft>
+                        <nft>Lượt xem: 105</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/sound.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft0300</nft>
+                        <nft>Giá trị: 500k+ </nft>
+                        <nft>Lượt xem: 355</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/sound.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft022</nft>
+                        <nft>Giá trị: 1000k+</nft>
+                        <nft> Lượt xem: 1k+</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/video.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft007</nft>
+                        <nft>Giá trị: 50k</nft>
+                        <nft> Lượt xem: 21</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/doc.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft005</nft>
+                        <nft>Giá trị: 50k</nft>
+                        <nft> Lượt xem: 21</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/img.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft002</nft>
+                        <nft>Giá trị: 50k</nft>
+                        <nft> Lượt xem: 21</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/img.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft011</nft>
+                        <nft>Giá trị: 50k</nft>
+                        <nft> Lượt xem: 21</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                    </div>  
+                    <div class="d-flex justify-content-left">
+                      NFT mới tạo gần đây
+                    </div>
+                    <div class="d-flex justify-content-left" id="last3nft">
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/sound.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft012</nft>
+                        <nft>Giá trị: 50k</nft>
+                        <nft> Lượt xem: 5</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div class="position-relative mb-4" style="padding: 5px;">
+                        <img src="img/sound.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>
+                        <nft>nft009</nft>
+                        <nft>Giá trị: 50k</nft>
+                        <nft> Lượt xem: 5</nft>
+                      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                  </div><!-- /.card-body -->
+                </div> <!-- /.card -->
+              </div> <!-- /.col -->      
+                            
+
+
+      
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                  <h3 class="card-title">Tạo tài sản số - Tìm hiểu thêm về NFT:<a href="https://vi.wikipedia.org/wiki/Non-fungible_token" target="_blank">Link</a></h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-left">
+                      <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropbnbenh" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Chọn loại tài sản
+                        </button>
+                        <div id="dropbnsearch1menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" id="b001">Một đoạn câu chữ văn bản ngắn (8-20 chữ)</a>
+                        <a class="dropdown-item" id="b002">Tập tin .txt .md, văn bản dài, bài viết, truyện, tiểu thuyết (300 chữ - 500.000 chữ)</a>
+                        <a class="dropdown-item" id="b003">Tập tin âm thanh, ca khúc, nhạc, .mp3, .webm (không quá 1 phút)</a>
+                        <a class="dropdown-item" id="b004">Tập tin hình ảnh động, video clip, hình động, animation, .mp4, .gif (không quá 30 giây - khung hình 640x480, dung lượng 500kb - 5mb)
+                        </a>
+                        <a class="dropdown-item" id="b005">Tập tin hình ảnh tĩnh, tác phẩm nghệ thuật số: tranh vẽ, biểu tượng, hình ảnh chụp ảnh .jpg, .png (1920x1080, dung lượng 500kb - 2mb)
+                        </a>
+                        </div>
+                      </div>  
+                      &nbsp;&nbsp;&nbsp;
+                      <script>
+                        function quydinh(){
+                          alert(`5 Quy định cho nội dung tài sản số trên mạng WillNFT\n- Nội dung cần DUY NHẤT và KHÔNG THUỘC những phạm trù chung, khái niệm chung, những NFT đã tạo trước đó.\n- Nội dung phải phù hợp với đạo đức, lễ nghĩa, các cấp học theo chương trình đào tạo của Bộ giáo dục và Đào tạo Việt Nam\n- Nội dung phải phù hợp với thuần phong mỹ tục người Việt Nam, không vi phạm Pháp luật Nhà nước Việt Nam\n- Nội dung không nêu chính trị, tôn giáo, không đả kích, gây hấn, nói xấu tới danh tính ai khác, không quảng bá thương hiệu, buôn bán, slogan, tuyển dụng, thuê mướn, cho vay, đòi nợ\n- Nội dung NFT có thể bị gỡ bỏ bất cứ lúc nào bởi Hệ thống mạng WillNFT`);
+                        }
+                      </script>
+                      <button class="btn btn-info" type="button" id="suggestbnbenh111" onclick="quydinh();">
+                        Quy định chung về nội dung thông tin cho tạo tài sản số NFT
+                       </button>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div  id="divinputvb">
+                    <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+                      <input type="email" class="form-control" id="nfttext" style="width:450px" autocomplete="on" placeholder="(Cho kiểu NFT text ngắn): Nhập câu chữ text cho loại NFT câu chữ ngắn" name="email"></input>
+                    </div>
+                    </div>
+                    <div  id="divfileimg">
+                      <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+                        <a>Tải tập tin lên</a>
+                        &nbsp;&nbsp;
+                        <input type="file" name="img[]" class="file" accept="image/*">
+                        <input type="text" class="form-control" style="width:150px" disabled placeholder="Ảnh..." id="file">
+                      </div>
+                    </div>
+                    <div  id="divfiletext">
+                      <input type="file" id="filetext" name="files" />
+                      <br/>
+                    </div>
+
+                    <div id= "previewImg" style="width:400px;height: auto;">
+                    </div>
+                    &nbsp;
+
+                    <div class="d-flex justify-content-left">
+                      <img id="momo3" src="img/m1.png" style="width: 677px; height: auto;" class="img-thumbnail" alt="c1"/>
+                    </div>
+                    &nbsp;
+                    <div class="d-flex justify-content-left">
+                      <button id="btntaonft" name="x" class="btn btn-info">Tạo NFT</button>
+                      &nbsp;
+                    </div>
+                    <div class="d-flex justify-content-left">
+                      <div id="txtstatusview">
+                      </div>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="d-flex justify-content-left">
+                      (Các tài sản số NFT khi bạn tạo sẽ mặc định không phải quyền sở hữu của bạn. Nếu mong muốn sở hữu tài sản đó bạn cần Đăng ký Bản quyền số trong mạng WillNFT. Các NFT bạn tạo có thể bị tước quyền sở hữu khi đang chưa được đăng ký Bản quyền)
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="d-flex justify-content-left">
+                      (Bạn được miễn phí 01 tài sản số NFT với account mới. Từ tài sản số thứ 2, hệ thống tính phí 250.000 vnd/ một tài sản, qua ví điện tử MoMo &nbsp;<img id="momo2" src="img/mm.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>, bạn chưa có tài khoản Momo,<a href="https://momo.vn/huong-dan#menutop">đăng ký ngay.</a>)
+                    </div>
+
+                  </div><!-- /.card-body -->
+                </div> <!-- /.card -->
+              </div> <!-- /.col -->      
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Kiểm tra mã NFT, block</h3>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <!-- /.d-flex -->
+          
+                      <div class="d-flex justify-content-left" style="padding-bottom: 12px">
+                        <input type="email" class="form-control" id="inputtxt" style="width:250px" autocomplete="on" placeholder="Mã transaction" name="email"></input>&nbsp;&nbsp;
+                        <button id="btnblockqry" type="ordercode" name="gia" class="btn btn-info">Xem NFT với HASH</button>&nbsp;&nbsp;
+                        <button id="btnblockqryall" type="ordercode" name="gia" class="btn btn-info">Xem tình trạng chuỗi khối</button>&nbsp;&nbsp;
+                      </div>
+                      <div class="d-flex justify-content-left" style="padding-bottom: 12px">
+                      <textarea id="outputblock" style="width:650px" autocomplete="on" placeholder="
+                      " name="email" rows="8" cols="50"></textarea>
+                    </div>
+
+                  </div>
+                </div> <!-- /.card -->
+              </div> <!-- /.col -->  
+      
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h2 class="card-title">Lịch sử lưu trữ NFT - Đăng ký bản quyền số</h2>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-left">
+                      <div id= "tablerend4" class="position-relative mb-4"> 
+                        <table id="table10" class="display" style="width:100%">
+                          <thead>
+                          <tr>
+                            <th>Ngày</th>
+                            <th>Mã NFT</th>
+                            <th>Nội dung NFT</th>
+                            <th>Bản quyền số</th>
+                            <th>Định giá</th>
+                            <th>Yêu cầu sở hữu</th>
+                            <th>Xem lưu trữ</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>May 25</td>
+                            <th>nft002</th>
+                            <td>Tập tin hình ảnh, biểu tượng</td>
+                            <td>0</td>
+                            <td>50.000</td>
+                            <td>0</td>
+                            <td>Xem lưu trữ</td>
+                          </tr>
+                          <tr>
+                            <td>May 25</td>
+                            <th>nft003</th>
+                            <td>Tập tin âm thanh</td>
+                            <td>0</td>
+                            <td>50.000</td>
+                            <td>0</td>
+                            <td>Xem lưu trữ</td>
+                          </tr>
+                          <tr>
+                            <td>May 25</td>
+                            <th>nft004</th>
+                            <td>Tập tin videoclip</td>
+                            <td>0</td>
+                            <td>50.000</td>
+                            <td>0</td>
+                            <td>Xem lưu trữ</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>  
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="d-flex justify-content-left">
+                      <img id="momo3" src="img/m2.png" style="width: 677px; height: auto;" class="img-thumbnail" alt="c1"/>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="d-flex justify-content-left">
+                      <input type="email" class="form-control" id="nftedit" style="width:250px" autocomplete="on" placeholder="Nhập mã NFT, vd: nft002" name="email"></input>
+                      &nbsp;&nbsp;&nbsp;
+                      <button id="btnbanquyen" name="x" class="btn btn-info">Đăng ký Bản quyền số</button>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="d-flex justify-content-left">
+                      (thanh toán 650.000 vnd cho việc đăng ký Bản quyền số cho 01 tài sản trên mạng NFT, qua ví điện tử MoMo &nbsp;<img id="momo" src="img/mm.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>)
+                    </div>
+                    
+                  </div><!-- /.card-body -->
+                </div> <!-- /.card -->
+              </div> <!-- /.col -->  
+      
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h2 class="card-title">Lịch sử thanh toán chi phí</h2>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="d-flex justify-content-left">
+                      <h3 class="card-title">Ví MoMo</h3>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      0983308279
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button id="btnchangesche" name="x" class="btn btn-info">Điều chỉnh</button>
+                    </div>
+                    <div class="d-flex justify-content-left">
+                      <div id= "tablerend4" class="position-relative mb-4"> 
+                        <table id="table11" class="display" style="width:100%">
+                          <thead>
+                          <tr>
+                            <th>Ngày</th>
+                            <th>Mã NFT</th>
+                            <th>Chi phí</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>May 25</td>
+                            <td>nft001</td>
+                            <td>250.000</td>
+                          </tr>
+                          <tr>
+                            <td>May 25</td>
+                            <td>nft002</td>
+                            <td>250.000</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                        </div>   
+                    </div>
+                  </div><!-- /.card-body -->
+                </div> <!-- /.card -->
+              </div> <!-- /.col -->  
+
+
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Thông tin cá nhân - Xác định danh tính phục vụ giao dịch</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+
+                    <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+                        <h2 style="color:firebrick"> <i class="fas fa-tasks"></i> &nbsp;Tình trạng: Đang chờ duyệt....</h2>
+
+                    </div>
+                    <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+                      <input type="email" class="form-control" id="bsinputhoten" style="width:250px" autocomplete="on" placeholder="Họ tên đầy đủ" name="email"></input>&nbsp;&nbsp;
+                      <input type="email" class="form-control" id="bsinputemail1" style="width:250px" autocomplete="on" placeholder="Email/Số điện thoại liên hệ" name="email"></input>&nbsp;&nbsp;
+                    </div>
+                    <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+                      <a>CCCD, CMT liên quan (chụp/sao chép) gửi tệp đính kèm.</a>
+                      &nbsp;&nbsp;
+                      <input type="file" name="img[]" class="file" accept="image/*">
+                      <input type="text" class="form-control" style="width:120px" disabled placeholder="Ảnh..." id="filecmt">
+                    </div>
+                    <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+                      <button id="bssavethongtin" name="x" class="btn btn-info">Lưu & Chờ xét duyệt</button>
+                    </div>
+                  </div><!-- /.card-body -->
+                </div> <!-- /.card -->
+              </div> <!-- /.col --> 
+
+      
+              </div>  <!-- /.row-->
+            </div><!-- /.fluid-->
+          </div><!-- /.content--> 
+          </div><!-- /.kham live --> 
+          <div id="LookPlantView">
+            	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0 text-dark">Đăng ký token giao dịch chỗi khối cho nghiệp vụ tổ chức / Token Registration</h1>
+				</div><!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item active">RegiToken</li>
+					</ol>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</div><!-- /.content-header -->
+
+	<!-- Main content -->
+	<div class="content">
+		<div class="container-fluid">
+		<!-- /.detail data -->
+		<div class="row">
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header border-0">
+            <div class="d-flex justify-content-between">
+              <h3 class="card-title">Về "giao dịch chuỗi khối hoá" các nghiệp vụ của tổ chức - Tìm hiểu thêm về "chuỗi khối":<a href="https://vi.wikipedia.org/wiki/Blockchain" target="_blank">Link</a></h3>
+            </div>
+          </div>
+          <hr>
+          <div class="card-body">
+            <!-- /.d-flex -->
+            <div class="d-flex justify-content-left">
+              <img id="momo4" src="img/m3.png" style="width: 677px; height: 100px;" class="img-thumbnail" alt="c1"/>
+          </div>
+          &nbsp;&nbsp;&nbsp;
+            <div class="d-flex justify-content-left">
+              <a style="font-size: xx-large;">Step 0</a><br>
+             Hiểu về "giao dịch chuỗi khối hoá" các nghiệp vụ của tổ chức"? khi nào cần? lợi ích?
+            </div>
+              <div class="d-flex justify-content-left">
+              - Giả sử tổ chức bạn có nghiệp vụ, ví dụ như: khám bệnh chăm sóc sức khoẻ; ngân hàng tổ chức cho vay tín dụng; bán lẻ mì tôm, bát phở, mớ rau muống; bán buôn công-ten-nơ hoa quả dưa hấu sang biên giới
+              </div>
+              <div class="d-flex justify-content-left">
+              - Khi tổ chức muốn thực hiện giao dịch trong nước, ngoài nước; và mong muốn giao dịch đó phải được mã hoá khó phá vỡ; không thể thay thế, không thể sửa đổi; tường minh các bên đều biết; tốc độ cao; không biên giới; không bị ngăn cản cản trở bởi Ngân hàng Nhà nước; thì bạn cần tới..."giao dịch mã hoá chuỗi khối"
+              </div>
+              <div class="d-flex justify-content-left">
+                - Khi tổ chức bạn chỉ là bên đại lý kinh doanh; chưa có cơ sở hạ tầng để "giao dịch mã hoá chuỗi khối": vậy bạn cần đăng ký trực tuyến với cơ sở hạ tầng WillNFT để "giao dịch mã hoá chuỗi khối"
+              </div>
+              <div class="d-flex justify-content-left">
+                - Khi các khách hàng của bạn chỉ cần ra ngân hàng và nhận hoặc chi tiền thanh khoản qua ví điện tử Momo; còn các việc còn lại "giao dịch mã hoá chuỗi khối", thanh khoản các khoản tiền trong và ngoài nước, hãy để WillNFT lo hết.
+              </div>
+            <hr>
+            <div class="d-flex justify-content-left">
+              <a style="font-size: xx-large;">Step 1</a><br>
+              Tổ chức tạo smartcontract (hợp đồng thông minh) cho nghiệp vụ của mình
+            </div>
+
+
+            <div class="d-flex justify-content-left">
+              - Ví dụ smartcontract đơn giản:
+            </div>
+            &nbsp;&nbsp;
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <input type="email" class="form-control" id="bsinputhoten3" style="width:450px" autocomplete="on" placeholder="Tên smartcontract, viết chữ thường, vd: sc0002_congty_abc" name="email"></input>&nbsp;&nbsp;
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <input type="email" class="form-control" id="bsinputemail4" style="width:650px" autocomplete="on" placeholder="Số hoá đơn hd00021, lượng hàng 50 đơn vị, lượng tiền cần chuyển 50k vnd, để cách dấu #, ví dụ: hd00021#50#500000" name="email"></input>&nbsp;&nbsp;
+            </div>
+            &nbsp;&nbsp;
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <button id="btnscsimple" name="x" class="btn btn-info">Test smartcontract đơn giản</button>
+            </div>
+            <div class="d-flex justify-content-left">
+              - Ví dụ Ví dụ smartcontract phức tạp:
+            </div>
+            &nbsp;&nbsp;
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <textarea id="bsinputarea" style="width:450px" autocomplete="on" placeholder="
+            abc1(){
+                zyx
+            }
+            " name="email" rows="8" cols="50"></textarea>&nbsp;&nbsp;
+            </div>
+            &nbsp;&nbsp;
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <button id="btnsccomplex" name="x" class="btn btn-info">Test smartcontract phức tạp</button>
+            </div>
+
+
+
+            <hr>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <a style="font-size: xx-large;">Step 2</a><br>
+              Tổ chức đăng ký token, thực thi smartcontract trên tài nguyên của WillNFT
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <button id="btngetapi" name="x" class="btn btn-info">Thực thi smartcontract & Lấy api</button>
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <input type="email" class="form-control" id="bsinputemail5" style="width:450px" autocomplete="on" placeholder="Đầu ra API cho cho tích hợp" name="email"></input>&nbsp;&nbsp;
+            </div>
+            <hr>
+            <div class="d-flex justify-content-left">
+              <a style="font-size: xx-large;">Step 3</a><br>
+              Tổ chức thực hiện tích hợp các sản phẩm của mình vào đầu cuối từ smartcontract mình tạo ra
+            </div>
+            <div class="d-flex justify-content-left">
+              <h3 class="card-title">(tổ chức doanh nghiệp tự tích hợp thử nghiệm mẫu với API trên)</h3>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-left">
+              <a style="font-size: xx-large;">Step 4</a><br>
+              Tổ chức xác nhận danh tính, đóng phí sử dụng, để sở hữu chính thức token và smartcontact mình đã tạo
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <h3 class="card-title">(hoàn thiện danh tính doanh nghiệp, đóng phí <b>8.500.000 vnd/năm</b> cho đăng ký 1 token)</h3>
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <h3 class="card-title">(mỗi giao dịch tính phí $3, kèm với 0.01 * số tiền giao dịch, vd: bạn giao dịch 50 triệu vnd, vậy phí là: 570.000 vnd)</h3>
+            </div>
+
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <button id="btnsccomplex" name="x" class="btn btn-info">Kiểm tra hồ sơ doanh nghiệp</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button id="btnsccomplex" name="x" class="btn btn-info">Đóng phí qua Momo</button>&nbsp;&nbsp;(ví điện tử MoMo &nbsp;<img id="momo2" src="img/mm.png" style="width: 50px; height: 50px;" class="img-thumbnail" alt="c1"/>, bạn chưa có tài khoản Momo,<a href="https://momo.vn/huong-dan#menutop">đăng ký ngay.</a>)
+            </div>
+            <hr>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <a style="font-size: xx-large;">Step 5</a><br>
+              Kết thúc: Tổ chức nhận token id với Chứng Nhận Sở Hữu
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <input type="email" class="form-control" id="bsinputemail6" style="width:450px" autocomplete="on" placeholder="Sau khi đăng ký, đóng phí, token sẽ hiện ở đây" name="email"></input>&nbsp;&nbsp;
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <h3 class="card-title">(nếu không đăng ký, API và token sẽ vô hiệu lực sau 24h)</h3>
+            </div>
+          </div>
+
+        </div> <!-- /.card -->
+      </div> <!-- /.col -->  
+
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Thông tin tổ chức, doanh nghiệp - Xác định danh tính phục vụ giao dịch</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+                <h2 style="color:firebrick"> <i class="fas fa-tasks"></i> &nbsp;Tình trạng: Đang chờ duyệt....</h2>
+
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <input type="email" class="form-control" id="bsinputhoten1" style="width:250px" autocomplete="on" placeholder="Họ tên đầy đủ người đại diện" name="email"></input>&nbsp;&nbsp;
+              <input type="email" class="form-control" id="bsinputemail" style="width:250px" autocomplete="on" placeholder="Email/Số điện thoại liên hệ" name="email"></input>&nbsp;&nbsp;
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <input type="email" class="form-control" id="dnsdk5" style="width:250px" autocomplete="on" placeholder="Số  đăng ký doanh nghiệp" name="email"></input>&nbsp;&nbsp;
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <input type="email" class="form-control" id="dnsdk3" style="width:250px" autocomplete="on" placeholder="Số ví điện tử Momo để giao dịch" name="email"></input>&nbsp;&nbsp;
+            </div>
+            
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <a>Giấy đăng ký doanh nghiệp (chụp/sao chép) gửi tệp đính kèm.</a>
+              &nbsp;&nbsp;
+              <input type="file" name="img[]" class="file" accept="image/*">
+              <input type="text" class="form-control" style="width:70px" disabled placeholder="Ảnh..." id="filedkdn">
+            </div>
+            <div class="d-flex justify-content-left" style="padding-bottom: 6px">
+              <button id="bssavethongtin" name="x" class="btn btn-info">Lưu & Chờ xét duyệt</button>
+            </div>
+          </div><!-- /.card-body -->
+        </div> <!-- /.card -->
+      </div> <!-- /.col --> 
+
+			<!-- /.chart map -->
+			<div class="col-12">
+				<div class="card">
+				
+						<div class="card-header border-0">
+						<div class="d-flex justify-content-left">
+						<h3 class="card-title">Thống kê, báo cáo, in ấn, tìm kiếm token</h3>
+						</div>
+						</div>
+
+						<div class="card-body">
+
+						<div class="d-flex justify-content-left">
+							<div class="position-relative mb-4">
+							<div class="dropdown">
+							<button class="btn btn-info dropdown-toggle" type="button" id="dropsearch5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Chọn báo cáo
+							</button>
+							<div id="dropsearch5menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" id="trend2d" href="#">Báo cáo dữ liệu token</a>
+								<a class="dropdown-item" id="trend2d2" href="#">Bác cáo dữ liệu smartcontract</a>
+							</div>
+							</div>
+							</div>
+							&nbsp;&nbsp;
+
+
+
+							<div class="position-relative mb-4">
+							<div class="dropdown">
+							<button class="btn btn-info dropdown-toggle" type="button" id="dropsearch6menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Chọn hiển thị
+							</button>
+							<div id="dropsearch6menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" id="trend2d" href="#">In ra PDF</a>
+								<a class="dropdown-item" id="trend2d" href="#">In ra máy in</a>
+								<a class="dropdown-item" id="trend2d" href="#">Biểu đồ 2D</a>
+							</div>
+							</div>
+							</div>
+
+
+						</div>
+
+						<div class="d-flex justify-content-left">
+							<div class="position-relative mb-4">
+							<div id= "charttrend" class="position-relative mb-4">
+							<div id="carocount3"></div>
+							</div>
+							</div>
+						</div>
+
+						<div class="d-flex justify-content-left">
+							<h3 class="card-title">Tìm kiếm mở rộng</h3><br>
+							</div>
+
+
+              <div class="d-flex justify-content-left">
+                <div class="position-relative mb-4">
+                <input type="email" class="form-control" id="searchkeyR142" style="width: 250px" autocomplete="on" placeholder="Enter keyword" name="email">
+                </div>
+                &nbsp;&nbsp; 
+                và &nbsp;&nbsp;      
+          
+                <div class="position-relative mb-4">
+                  <div class="dropdown">
+                  <button class="btn btn-info dropdown-toggle" type="button" id="dropsearchR1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  None
+                  </button>
+                  <div id="dropsearch1menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" >Phòng ban</a>
+                    <a class="dropdown-item" >Khu vực</a>
+                    <a class="dropdown-item" >Tiêu đề</a>
+                    <a class="dropdown-item" >Nội dung</a>
+                    <a class="dropdown-item" >Kiểu tài liệu</a>
+                    <a class="dropdown-item" >Nhóm tài liệu</a>
+                    <a class="dropdown-item" >Lĩnh vực</a>
+                    <a class="dropdown-item" >Người làm</a>
+                  </div>
+                  </div>
+                </div>
+          
+                &nbsp;&nbsp;
+                <div class="position-relative mb-4">
+                  <input type="email" class="form-control" id="searchkeyR24" style="width: 130px" autocomplete="on" placeholder="Enter keyword" name="email">
+                </div>
+          
+                <div class="position-relative mb-4">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                và &nbsp;&nbsp;
+                <div class="position-relative mb-4">
+                  <div class="dropdown">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropsearch2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    None
+                    </button>
+                    <div id="dropsearch2menu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" >Phòng ban</a>
+                      <a class="dropdown-item" >Khu vực</a>
+                      <a class="dropdown-item" >Tiêu đề</a>
+                      <a class="dropdown-item" >Nội dung</a>
+                      <a class="dropdown-item" >Kiểu tài liệu</a>
+                      <a class="dropdown-item" >Nhóm tài liệu</a>
+                      <a class="dropdown-item" >Lĩnh vực</a>
+                      <a class="dropdown-item" >Người làm</a>
+                    </div>
+                  </div>
+                </div>
+                &nbsp;&nbsp;
+                <div class="position-relative mb-4">
+                <input type="email" class="form-control" id="searchkeyR342" style="width: 130px" autocomplete="on" placeholder="Enter keyword" name="email">
+                </div>
+                <div class="position-relative mb-4">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          
+                <div class="position-relative mb-4">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="position-relative mb-4">
+                  <span class="mr-2">
+                  <button id="searchbtn2" name="x" class="btn btn-block btn-info">&nbsp;&nbsp;Search</button>
+                  </span>
+                </div>
+            </div>
+
+
+
+						<div class="d-flex justify-content-left">
+							<span id = "searchres" class="text-trend4 text-sm">Đang cập nhật...</span>
+						</div>
+						<br>
+
+						<div class="d-flex justify-content-left">
+							<h3 class="card-title">In ấn, xuất pdf, csv</h3><br>
+						</div>
+
+
+
+						<div class="d-flex justify-content-left">
+							<div id= "tablerend4" class="position-relative mb-4"> 
+							<table id="table6" class="display" style="width:100%">
+								<thead>
+								<tr>
+									<th>Phòng ban</th>
+									<th>Khu vực số</th>
+									<th>Tiêu đề</th>
+									<th>Nội dung</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>hr</td>
+									<td>cong van toi</td>
+									<td>Cây hoa lan</td>
+									<td>Cây hoa lan</td>
+								</tr>
+								</tbody>
+							</table>
+							</div>              
+						</div><!-- /d-flex table -->
+						</div> <!-- /.card body -->
+
+
+			</div> <!-- /.card -->
+		</div><!-- /.col -->
+
+		</div> <!-- /.row -->
+
+
+	</div><!-- /.container fluid -->
+	</div><!-- /.content -->
+          </div><!-- /.search thuoc, benh --> 
+         <div id="ManageMedView">
+            <div class="content-header">
+              <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1 class="m-0 text-dark">Về DongXuanCoin/ DXC</h1>
+                  </div><!-- /.col -->
+                  <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">DongXuanCoin</li>
+                  </ol>
+                  </div><!-- /.col -->
+              </div><!-- /.row -->
+              </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+          
+            <!-- Main content SITE-->
+            <!-- Main content SITE-->
+            <div class="content">
+              <div class="container-fluid">
+                <div class="row">
+  
+                  <div class="col-lg-6">
+                    <div class="card">
+                <div class="card-header border-0">
+                <div class="d-flex justify-content-between">
+                  <h3 class="card-title">Mức tăng trưởng DXC</h3>
+                </div>
+                </div>
+                <div class="card-body">
+                <!-- /.d-flex -->
+
+                  <div class="position-relative mb-4"  style="height: 300px; width: 100%;">
+                      <div id="chartContainer41" style="height: 300px; width: 100%;"></div>
+                  </div>
+                </div>
+              </div> <!-- /.card -->
+            </div> <!-- /.col -->  
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header border-0">
+              <div class="d-flex justify-content-between">
+                <h3 class="card-title">Lịch sử biến động DXC</h3>
+              </div>
+              </div>
+              <div class="card-body">
+              <!-- /.d-flex -->
+              <div class="position-relative mb-4">
+                    <div id="chartContainer52" style="height: 300px; width: 100%;"></div>
+              </div>
+              </div>
+            </div> <!-- /.card -->
+          </div> <!-- /.col -->  
+
+
+                  <div class="col-12">                
+                    <div class="card">
+                      <div class="card-header border-0">
+                        <div class="d-flex justify-content-between">
+                          <h3 class="card-title">Hiểu về DongXuanCoin - Tìm hiểu thêm về đồng tiền ảo:<a href="https://vi.wikipedia.org/wiki/Ti%E1%BB%81n_%E1%BA%A3o" target="_blank">Link</a></h3>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="card-body">
+                        <!-- /.d-flex -->
+                        <div class="d-flex justify-content-between">
+                          <h3 class="card-title">1. Tỷ giá hiện tại của DongXuanCoin?</h3>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                          <h3 class="card-title">2. Tiến độ tiếp cận thị trường của DongXuanCoin? Khi nào bạn cần DongXuanCoin?</h3>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                          <h3 class="card-title">3. DongXuanCoin có được cấp phép của Ngân Hàng Nhà Nước Việt Nam không?</h3>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                          <h3 class="card-title">4. Tôi muốn mua DongXuanCoin (DXC) thì phải làm thế nào?</h3>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                          <h3 class="card-title">5. Tôi ở nước ngoài (ngoài Việt Nam) thì có mua được DongXuanCoin (DXC)  không?</h3>
+                        </div>
+                      </div>
+                      
+                    </div> <!-- /.card -->
+                  </div> <!-- /.col -->  
+            
+              </div>  <!-- /.row-->
+            </div><!-- /.fluid-->
+            </div><!-- /.content-->   
+            
+          </div><!-- /.manage doctor --> 
+                 
+
+  </div>
+  <div id="AdminView">
+    <div class="content-header">
+      <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Administration</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Admin</li>
+          </ol>
+          </div><!-- /.col -->
+      </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+  
+    <!-- Main content SITE-->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header border-0">
+                  <div class="d-flex justify-content-between">
+                    <h3 class="card-title">Thống kê</h3>
+                  </div>
+                </div>
+                <div class="card-body">
+                <!-- /.d-flex -->
+                  <div class="position-relative mb-4">
+                    
+                  </div>
+    
+                </div><!-- /.card body -->
+              </div> <!-- /.card -->
+            </div> <!-- /.col -->  
+        </div>  <!-- /.row-->
+      </div><!-- /.fluid-->
+    </div><!-- /.content-->   
+    
+  </div><!-- /.manage doctor --> 
+         
+
+</div><!-- /.content-wrapper -->
+
+
+  <!-- Main Footer #ff7400  #fdad14 #e26700-->
+  <!-- 069799 46d2d4 007678-->
+  <footer class="main-footer">
+    <strong>Copyright&copy; 2022 <a href="https://drive.google.com/file/d/1R-5JAnI37gZPZRZZaMh353DFzJt__p4V/view?usp=sharing">BookWorm Team</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 0.9
+    </div>
+  </footer>
+</div><!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="./plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="./dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="./plugins/chart.js/Chart.min.js"></script>
+<script src="./dist/js/demo.js"></script>
+<script src="./dist/js/date.js"></script>
+<script src="./dist/js/cv.js"></script>
+<script src="./dist/js/qrcode.min.js"></script>
+<script src="./dist/js/jsenc.js"></script>
+<script src="./dist/js/crypto-js.js"></script>
+
+
+<!--
+<script src="./dist/js/vendor/modernizr.min.js"></script>
+<script src="./dist/js/vendor/bootstrap.min.js"></script>
+<script src="./dist/js/vendor/jquery.Jcrop.js"></script>
+<script src='https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.14/dist/tesseract.min.js'></script>
+<script src="./dist/js/vendor/glfx.min.js"></script>
+
+<script src="./plugins/datatables/jquery.dataTables.js"></script>
+<script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+<script type="text/javascript" src="./dist/js/cs.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://rawgit.com/tempusdominus/bootstrap-4/master/build/js/tempusdominus-bootstrap-4.js"></script>
+<script src="./dist/js/datepic.js"></script>
+-->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+
+<script>
+  var firebaseConfig = {
+      apiKey: "AIzaSyA3JbaibjjHKgyZb2wdxK9tysItODZ3U74",
+      authDomain: "willnft.firebaseapp.com",
+      projectId: "willnft",
+      storageBucket: "willnft.appspot.com",
+      messagingSenderId: "117139651861",
+      appId: "1:117139651861:web:50de212425d9dd7ad97d1c",
+      measurementId: "G-PS7GBVMN1G"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+<script src="./dist/js/mainpage.js"></script>
+
+<div class="modal"></div>
+<style>
+.datatable-column-width  {
+   min-width: 620px;
+}
+
+.table {
+  table-layout: fixed;
+}
+
+</style>   
+</body>
+</html>

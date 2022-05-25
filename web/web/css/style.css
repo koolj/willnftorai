@@ -1,0 +1,686 @@
+/*
+Licensed under Miraway license, all rights reserved 2019.
+Created by anhpt@caro.vn
+Sept 25, 2019.
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+
+header {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+	z-index: 800;
+}
+
+.header-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.headersub1 {
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #075f73;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding-top: 6px;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.9);
+}
+
+.textsub1 {
+  padding: 5px;
+  text-align: center;
+  font-size: 10px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  color: Gray;
+}
+
+
+/* Container for flexboxes */
+
+main {
+    margin-top: 62px;
+
+}
+
+.section-data {
+    padding-top: 0px;
+    padding-bottom: 50px;
+}
+
+.section-speak {
+    background: #075f73;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#title-ack h2 {
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-size: 24px;
+    color: #075f73;
+}
+
+.speak-content {
+    text-align: center;
+}
+
+#title-ack h5 {
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+.s1 {
+    color: #ff7400;
+}
+
+.s2 {
+    color: #0065ff;
+}
+
+.s3 {
+    color: #238c00;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+nav {
+    /*-webkit-flex: 1;
+    -ms-flex: 1;*/
+    overflow: hidden;
+}
+
+/* Style the list inside the menu */
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 300px;
+}
+
+/* Style the content */
+
+article {
+    margin-top: 5px;
+    padding: 0px;
+    background-color: #ffffff;
+
+}
+
+/* Clear floats after the columns */
+
+section:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+
+footer {
+    background: #333;
+}
+
+.footersub1 {
+    font-size: 10px;
+    margin-top: 80px;
+    color: white;
+}
+
+.textsub3 {
+    text-align: center;
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+}
+
+.textsub2 {
+    text-align: center;
+    font-size: 16px;
+    color: white;
+}
+
+.speak-content a {
+    font-size: 18px;
+    color: #fff;
+}
+
+.speak-content a.footersub1 {
+    font-weight: bold;
+    color: #000;
+    font-size: 16px;
+}
+
+.AcknowledgeOuterDiv {
+    padding: 25px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border: 2px solid #e5e5e5;
+    padding-right: 0;
+}
+
+.AcknowledgeInnerDiv::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.AcknowledgeInnerDiv::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #F5F5F5;
+}
+
+.AcknowledgeInnerDiv::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #FFF;
+    background-image: -webkit-linear-gradient(top,     #fe72000d 0%,     #fe72006e 50%,     #fe72008c 51%,     #075f73 100%);
+}
+
+.AcknowledgeInnerDiv {
+    text-align: justify;
+    background-color: #fff;
+    height: 495px;
+    overflow: auto;
+    padding-right: 25px;
+
+}
+
+#AcknowledgeCheckBoxC-tit {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#AcknowledgeCheckBoxC {
+    width: 31px;
+    height: 20px;
+    position: relative;
+    top: 4px;
+}
+
+
+
+.blockchart1 {
+    position: relative;
+    height: 200px;
+    width:300px;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+
+
+
+.blockchart2 .canvasjs-chart-container:after {
+    position: relative;
+    content: "";
+    padding-top: 60%;
+    display: block;
+}
+
+.blockchart2 {
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.blockchart2 .canvasjs-chart-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 500;
+
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    font: 14px/1.55 Helvetica, sans-serif;
+    color: #393938;
+}
+
+.wrapper {
+    height: 100%;
+    overflow: auto;
+    float: left;
+    width: 100%;
+}
+
+.wrapper.scrollbar-dynamic {
+    max-height: none;
+    float: left;
+    width: 100%;
+}
+
+.page-content {
+    margin-left: 0;
+    /*max-width: 300px;*/
+    padding: 5px;
+    float: left;
+    width: 100%;
+}
+
+
+
+h1 {
+    font: bold 32px/1.2 Helvetica, sans-serif;
+    margin: 24px 0 16px;
+}
+
+h2 {
+    font: bold 26px/1.2 Helvetica, sans-serif;
+    margin: 0px 0 0px;
+}
+
+h3 {
+    font: bold 22px/1.2 Helvetica, sans-serif;
+    margin: 24px 0 16px;
+}
+
+h4 {
+    font: bold 18px/1.2 Helvetica, sans-serif;
+    margin: 24px 0 16px;
+}
+
+h5 {
+    font: bold 16px/1.2 Helvetica, sans-serif;
+    margin: 24px 0 16px;
+}
+
+h6 {
+    font: bold 14px/1.2 Helvetica, sans-serif;
+    margin: 24px 0 16px;
+}
+
+/** Custom page styles **/
+
+.content {
+    max-width: 1900px;
+}
+
+
+#leftpart .container > table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1500px;
+}
+
+#leftpart .container > table .search-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: table;
+}
+
+#leftpart .container > table .search-container input {
+    height: 35px;
+    padding: 0 10px;
+    border-radius: 0px;
+    border: 0.5px solid #075f73;
+}
+
+#leftpart .container > table .search-container button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 35px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    box-shadow: unset;
+    border: none;
+    padding: 0px 14px;
+    background: #075f73;
+    color: #fff;
+}
+
+#leftpart .container > table .btn-group > .btn:first-child {
+    border-radius: 0;
+    background: #075f73;
+    border: 1px solid #075f73;
+    font-size: 16px;
+}
+
+
+@media only screen and (min-width: 1500px) {
+
+    header {
+        height: auto;
+        background-color: #ffffff;
+        text-align: center;
+    }
+	 div.ex3 {
+		background-color: lightblue;
+		overflow-wrap: break-word;
+		width: 1200px;
+		height: auto;
+		overflow: auto;
+		font-size:10px;
+	}
+    .canvasjs-chart-container{
+        height: auto;
+        width: 150%;
+        display: block;
+    }
+    .header-content {
+        display: block;
+    }
+    .headersub1 {
+        text-align: center;
+    }
+    main {
+        margin-top: 94px;
+    }
+        .container {
+        max-width: 1900px;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1499px) {
+    header {
+        height: auto;
+        background-color: #ffffff;
+        text-align: center;
+    }
+	 div.ex3 {
+		background-color: lightblue;
+		overflow-wrap: break-word;
+		width: 800px;
+		height: auto;
+		overflow: auto;
+		font-size:10px;
+	}
+
+    .canvasjs-chart-container{
+        height: auto;
+        width: 150%;
+        display: block;
+    }
+    .header-content {
+        display: block;
+    }
+    .headersub1 {
+        text-align: center;
+    }
+    main {
+        margin-top: 94px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .headersub1 {
+        font-size: 16px;
+    }
+	 div.ex3 {
+		background-color: lightblue;
+		overflow-wrap: break-word;
+		width: 800px;
+		height: auto;
+		overflow: auto;
+		font-size:14px;
+	}
+    .canvasjs-chart-container{
+        height: auto;
+        width: 150%;
+        display: block;
+    }
+    #title-ack h2 {
+        font-size: 20px;
+    }
+    #title-ack h5 {
+        font-size: 16px;
+    }
+    .content .tinyscroll {
+        padding: 15px;
+    }
+        header {
+        height: auto;
+        background-color: #ffffff;
+        text-align: center;
+    }
+    .header-content {
+        display: block;
+    }
+    .headersub1 {
+        text-align: center;
+    }
+    main {
+        margin-top: 94px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    header {
+        height: auto;
+        text-align: center;
+    }
+	 div.ex3 {
+		background-color: lightblue;
+		overflow-wrap: break-word;
+		width: 600px;
+		height: auto;
+		overflow: auto;
+		font-size:10px;
+	}
+    .canvasjs-chart-container{
+        height: 320px;
+        text-align: center;
+        width: 400px;
+        display: block;
+    }
+    .tinyscroll table {
+        width: 100%;
+    }
+    main {
+        margin-top: 121px;
+    }
+    .headersub1 {
+        font-size: 16px;
+    }
+    #title-ack h2 {
+        font-size: 20px;
+    }
+    #title-ack h5 {
+        font-size: 16px;
+    }
+    .AcknowledgeOuterDiv {
+        padding: 15px;
+    }
+    .font-weight-light {
+        padding-right: 15px;
+    }
+    #apppart > div {
+        padding: 20px;
+    }
+    #apppart {
+        margin: -100px 0;
+    }
+    .content .tinyscroll {
+        padding: 0px 0px;
+    }
+    .scroll-wrapper > .scroll-content {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    header {
+        height: auto;
+        background-color: #ffffff;
+        text-align: center;
+    }
+	 div.ex3 {
+		background-color: lightblue;
+		overflow-wrap: break-word;
+		width: 340px;
+		height: auto;
+		overflow: auto;
+		font-size:10px;
+	}
+    .canvasjs-chart-container{
+        height: 280px;
+        text-align: center;
+        width: 320px;
+        display: block;
+    }
+    .header-content {
+        display: block;
+    }
+    .headersub1 {
+        text-align: center;
+    }
+    main {
+        margin-top: 94px;
+    }
+    .AcknowledgeCheckBox {
+        display: flex;
+    }
+    #AcknowledgeCheckBoxC-tit {
+        margin-top: 0;
+    }
+    .pagination li a {
+        width: 30px;
+    }
+    .pagination li:first-child a,
+    .pagination li:last-child a {
+        width: 40px;
+    }
+    #leftpart .container > table {
+        width: 100%;
+    }
+    #leftpart .container > table .search-container input {
+        width: 205px;
+    }
+    .blockchart1 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .blockchart2 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .login {
+        padding: 20px;
+    }
+}
+@media only screen and (min-width: 1900px){
+    .container {
+        max-width: 1900px;
+    }
+	 div.ex3 {
+		background-color: lightblue;
+		overflow-wrap: break-word;
+		width: 1200px;
+		height: auto;
+		overflow: auto;
+		font-size:10px;
+	}
+    header {
+        height: auto;
+        background-color: #ffffff;
+        text-align: center;
+    }
+    .header-content {
+        display: block;
+    }
+    .headersub1 {
+        text-align: center;
+    }
+    main {
+        margin-top: 94px;
+    }
+}
+.datacell1 {
+	background-color: #faf4e6;
+    padding: 8px;
+}
+.datacell2 {
+	background-color: #ebf3ff;
+    padding: 8px;
+}
+
+div.ex3 p  {
+   font-size: 11px;
+	padding: 10px 0;
+	border-bottom: 1px solid #fff;
+	font-family: monospace;
+	color: #545454;
+	margin-bottom: 0;
+	word-break: break-all;
+ }
+div.ex3 a  {
+   font-size: 11px;
+	padding: 10px 0;
+	border-bottom: 1px solid #fff;
+	font-family: monospace;
+	color: #545454;
+	margin-bottom: 0;
+	word-break: break-all;
+ }
+.uitab {
+	z-index: 700;
+}
+.resultlev1 {
+    font-size: 21px;
+    line-height: 1.2;
+	font-family: 14px/1.55 Helvetica, sans-serif;
+	color: #337ab7;
+	margin-bottom: 0;
+}
+.resultlev1 p {
+    font-size: 21px;
+	color: #337ab7;
+}
+.resultlev1 t {
+    font-size: 26px;
+    font-weight: bold;
+	color: #a13f38;
+}
+.resultlev1 t2 {
+    font-size: 14px;
+	color: #ff1100;
+}
+.resultlev1 t3 {
+    background-color:#424242 ;
+    font-size:18px;
+	color: #fff;
+}
+.resultlev1 t4 {
+    font-size: 16px;
+	color: #9c9ea1;
+}
