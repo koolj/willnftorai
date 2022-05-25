@@ -26,9 +26,9 @@ http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 ```
 
 # architecture
-```
 ![Design Architecture](https://github.com/koolj/willnftorai/blob/main/web/web/img/art.png?raw=true)
 
+```
 - Frontend: html + bootstrap + cosmosjs
 - Backend: nodejs + couchdb, port 8077
 - Authentication: Google firebase
