@@ -2,11 +2,9 @@
 Created by anhpt@
 Jan 18, 2021.
 */
-const {dbdhexp,dbu,dbexp,dbfreeslot,
-	
+const {
 	dbnftasset,dblog,dbu,dbexp,
-	
-	dbwtsched,dbwtsymp} = require('../database/database')
+	} = require('../database/database')
 
 const esUrl = "http://localhost:9200";
 
@@ -497,10 +495,7 @@ var searchesnftid= async (id,idobject) => {
     try {
 		//console.log(token)
 		var searchURL = esUrl + "/nft/_search?pretty";
-		const headers = {
-				"Authorization": "Basic ZWxhc3RpYzp3dDIwMDFAYnc=",
-				"Content-Type": "application/json"
-		};
+		const headers = {};
 
 		return await axios({url:searchURL,
 			method: 'GET',
@@ -993,7 +988,7 @@ var validText= async (message,chatbot) => {
 }
 
 module.exports = {
-	exptok,valgoogle,toES,searchES, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend
+	exptok,valgoogle,searchesnftid, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend
 }
 //dbvhspark,dbvhslog,dbu,dbexp,dbvhsnews,dbvhscomm,dbvhsecoservice,dblog
 // currentGtoken = "";

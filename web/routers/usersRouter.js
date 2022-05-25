@@ -7,7 +7,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-	exptok,valgoogle,toES,searchES, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend
+	valgoogle,newnft
 } = require('../implements/implements')
 //const { itestredis } = require('../database/models/coremap');
 var path    = require("path");
@@ -83,9 +83,18 @@ router.post('/newnft', async (req, res) =>{
 
 router.post('/searchES', async (req, res) =>{
 	//console.log(req)
-	let {fe1,val1,fe2,val2,fe3,val3} = req.body
+	let {id} = req.body
 	try {
-			let rep = await searchES(fe1,val1,fe2,val2,fe3,val3)
+			//get ip
+			clientIp = requestIp.getClientIp(req); 
+			reqip = clientIp.toString().replace(":fff:","");
+			reqip = reqip.replace(":ffff:","");
+			reqip = reqip.replace(":","");
+			let idobject = {
+				ip: reqip,
+				act: "search nft"
+			}
+			let rep = await searchesnftid(id,idobject)
 			res.json({rep})
 		} catch(error) {
 			console.log(error)
