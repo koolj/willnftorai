@@ -72,6 +72,12 @@ sudo docker run -d --name couchdb -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_
 
 //then creat 3 db: nftlog, nftu, nftasset
 ```
+### get api and payment via Momo wallet
+```
+//view and create organization test api payment via Momo
+https://developers.momo.vn/v3/docs/payment/api/wallet/onetime
+
+```
 ### run docker elasticsearch
 ```
 //git clone & and run docker
