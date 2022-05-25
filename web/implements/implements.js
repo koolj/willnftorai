@@ -427,10 +427,7 @@ var searchesnft= async (db,val1,token,idobject) => {
     try {
 		//console.log(token)
 		var searchURL = esUrl + "/nft/_search?pretty";
-		const headers = {
-				"Authorization": "Basic ZWxhc3RpYzp3dDIwMDFAYnc=",
-			"Content-Type": "application/json"
-		};
+		const headers = {};
 
 			//if(db == "nftdb"){
 				if(val1.toString().trim().length < 10){
@@ -548,10 +545,13 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 				cosmos.setBech32MainPrefix('orai');
 				const childKey = cosmos.getChildKey(mnemonic);
 				const address = cosmos.getAddress(mnemonic);
-				console.log("=========================== ORAI CHAIN ============================");
-				console.log(message);
-				console.log(cosmos);
+				console.log("=========================== ORAI CHAIN =======================");
+				console.log(childKey);
+				console.log(address);
 				console.log("==============================================================");
+
+
+				chatbot = "http://localhost:5002/api";
 				//nft 0
 				if(type == 0 ){
 					if(text.length >= 8){
@@ -986,7 +986,7 @@ var nftfilesend= async (fileid,token, type,idobject) => {
 var validText= async (message,chatbot) => {
     try {
 		console.log("------check VN culture-------------")
-		console.log(chatbot)
+		
 		return axios.post(chatbot,
 		{
 			"sender": "us1",
@@ -994,8 +994,9 @@ var validText= async (message,chatbot) => {
 		}
 		)
 		.then(async(resp1) => {
-			//console.log(resp1.data[0].text)
-			if(resp1.data[0].text.indexOf("hành xử giao tiếp") != -1)
+			console.log(resp1.data[0].text)
+			console.log(resp1.data[0].text)
+			if(resp1.data[0].text.indexOf("bad") != -1)
 				return false
 			else
 				return true

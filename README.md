@@ -46,7 +46,7 @@ http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 - Interact with blockchain: OraiChain (testnet)
 - IPFS: nft data storage, port 8080
 - API for AI bot validates image nft: elastichsearch, yolo, pytorch + flask, port 5000, picpurify.com + api analyse v1.1
-- API for AI bot validates text nft: elastichsearch, rasa, bart simpletransformer, python + flask, port 5001
+- API for AI bot validates text nft: elastichsearch, rasa, bart simpletransformer, python + flask, port 5001 & 5005
 - API for AI bot validates audio/sound nft: elastichsearch, cnn, python + flask, port 5002
 ```
 
