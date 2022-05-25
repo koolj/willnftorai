@@ -7,7 +7,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-	valgoogle,newnft
+	valgoogle,newnft,getnftid,get3nft,nftsendimg
 } = require('../implements/implements')
 //const { itestredis } = require('../database/models/coremap');
 var path    = require("path");
@@ -105,7 +105,85 @@ router.post('/searchES', async (req, res) =>{
 		}
 	});
 
-		
+	router.get('/getnftid', async (req, res) =>{
+		//console.log(req)
+		let {nftid} = req.query
+		try {
+				//get ip
+				clientIp = requestIp.getClientIp(req); 
+				reqip = clientIp.toString().replace(":fff:","");
+				reqip = reqip.replace(":ffff:","");
+				reqip = reqip.replace(":","");
+				let idobject = {
+					ip: reqip,
+					act: "get nft with id"
+				}
+				let rep = await getnftid(nftid,idobject)
+				res.render("view_nft34.html", {stream:rep.message});
+	
+				res.json({rep})
+			} catch(error) {
+				console.log(error)
+				res.json({
+				result: '1',
+				message: `Could not get nft: Internal Error!`
+				})
+			}
+	});
+	router.post('/get3nft', async (req, res) =>{
+		//console.log(req)
+		let {token} = req.body
+	
+		try {
+				//get ip
+				clientIp = requestIp.getClientIp(req); 
+				reqip = clientIp.toString().replace(":fff:","");
+				reqip = reqip.replace(":ffff:","");
+				reqip = reqip.replace(":","");
+				let idobject = {
+					ip: reqip,
+					act: "get nft with id"
+				}
+				let rep = await get3nft(token,idobject)
+				res.json({rep})
+			} catch(error) {
+				console.log(error)
+				res.json({
+				result: '1',
+				message: `Could not get nft: Internal Error!`
+				})
+			}
+	});
+	router.post('/nftsendimg', async (req, res) =>{
+		let {imgid, token} = req.body
+	  //      console.log(req.body)
+		try {
+			//get ip
+			clientIp = requestIp.getClientIp(req); 
+			reqip = clientIp.toString().replace(":fff:","");
+			reqip = reqip.replace(":ffff:","");
+			reqip = reqip.replace(":","");
+			let idobject = {
+				ip: reqip,
+				act: "send img"
+			}
+	
+			//console.log(imgid);
+					
+			let rep = await nftsendimg(imgid,token,idobject)
+			//console.log('--vinxray---------------');
+			//console.log(rep)
+			res.json({
+					rep
+				})
+		} catch(error) {
+			console.log(error)
+			res.json({
+				result: '1',
+				message: `Could not send nft image: Internal Error!`
+			})
+		}
+	})
 /*	
 router.post('/blockqry', async (req, res) =>{
 	let {token} = req.body
@@ -168,36 +246,7 @@ router.post('/nftfilesend', async (req, res) =>{
 	}
 
 })
-router.post('/nftsendimg', async (req, res) =>{
-	let {imgid, token} = req.body
-  //      console.log(req.body)
-	try {
-		//get ip
-		clientIp = requestIp.getClientIp(req); 
-		reqip = clientIp.toString().replace(":fff:","");
-		reqip = reqip.replace(":ffff:","");
-		reqip = reqip.replace(":","");
-		let idobject = {
-			ip: reqip,
-			act: "send img"
-		}
 
-		//console.log(imgid);
-                
-		let rep = await nftsendimg(imgid,token,idobject)
-		//console.log('--vinxray---------------');
-		//console.log(rep)
-		res.json({
-				rep
-			})
-	} catch(error) {
-		console.log(error)
-		res.json({
-			result: '1',
-			message: `Could not send nft image: Internal Error!`
-		})
-	}
-})
 router.post('/getnft', async (req, res) =>{
 	let {token} = req.body
 	try {
@@ -212,55 +261,6 @@ router.post('/getnft', async (req, res) =>{
 			}
 			let rep = await getnft(token,idobject)
 
-			res.json({rep})
-		} catch(error) {
-			console.log(error)
-			res.json({
-			result: '1',
-			message: `Could not get nft: Internal Error!`
-			})
-		}
-});
-router.get('/getnftid', async (req, res) =>{
-	//console.log(req)
-	let {nftid} = req.query
-	try {
-			//get ip
-			clientIp = requestIp.getClientIp(req); 
-			reqip = clientIp.toString().replace(":fff:","");
-			reqip = reqip.replace(":ffff:","");
-			reqip = reqip.replace(":","");
-			let idobject = {
-				ip: reqip,
-				act: "get nft with id"
-			}
-			let rep = await getnftid(nftid,idobject)
-			res.render("view_nft34.html", {stream:rep.message});
-
-			res.json({rep})
-		} catch(error) {
-			console.log(error)
-			res.json({
-			result: '1',
-			message: `Could not get nft: Internal Error!`
-			})
-		}
-});
-router.post('/get3nft', async (req, res) =>{
-	//console.log(req)
-	let {token} = req.body
-
-	try {
-			//get ip
-			clientIp = requestIp.getClientIp(req); 
-			reqip = clientIp.toString().replace(":fff:","");
-			reqip = reqip.replace(":ffff:","");
-			reqip = reqip.replace(":","");
-			let idobject = {
-				ip: reqip,
-				act: "get nft with id"
-			}
-			let rep = await get3nft(token,idobject)
 			res.json({rep})
 		} catch(error) {
 			console.log(error)
