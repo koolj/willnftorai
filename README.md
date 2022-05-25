@@ -2,9 +2,22 @@
 As a webbased dApp, WillNFT running on OraiChain (CliffNet testnet), users here can create NFT digital assets (based on IPFS, cw721) with a self-distinguishing mechanism for digital assets (text, images, audio) to ensure: uniqueness, ownership, and transferability. Users can buy, sell, exchange NFT digital assets with cryptos or Vietnamese dong.
 
 # main functions
-## min a nft
+## mint a nft
+```
+//authen via firebase (with gmail)
+//do mint nft with data of audio/text/image
+//then system will validate nft data is valid and unique
+```
 ## check nft file data (image/text/audio) is unique
+```
+//view a nft
+//add a price
+//do transfer function
+```
 ## transfer a nft
+```
+//add
+```
 ## view
 Build then access dApp to view and create, buy, sell NFTs
 ```
@@ -32,7 +45,7 @@ http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 - Frontend: html + bootstrap + cosmosjs
 - Backend: nodejs + couchdb, port 8077
 - Authentication: Google firebase
-- Interact with blockchain: OraiChain (CliffNet testnet)
+- Interact with blockchain: OraiChain (testnet)
 - IPFS: nft data storage, port 8080
 - API for AI bot validates image nft: elastichsearch, yolo, pytorch + flask, port 5000, picpurify.com + api analyse v1.1
 - API for AI bot validates text nft: elastichsearch, rasa, bart simpletransformer, python + flask, port 5001
@@ -109,15 +122,15 @@ http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 ```
 ### setup api detect image
 ```
-<tbd>
+//view readme
 ```
 ### setup api detect text
 ```
-<tbd>
+//view readme
 ```
 ### setup api detect sound
 ```
-<tbd>
+//view readme
 ```
 # build 
 ### build frontend
