@@ -58,8 +58,8 @@ module.exports = function(io) {
 		}
 	})
 router.post('/newnft', async (req, res) =>{
-	//console.log(req)
-	let {db,text,type,b64,token} = req.body
+	
+	let {db,seed,text,type,b64,token} = req.body
 	try {
 			//get ip
 			clientIp = requestIp.getClientIp(req); 
@@ -70,7 +70,8 @@ router.post('/newnft', async (req, res) =>{
 				ip: reqip,
 				act: "newnft"
 			}
-			let rep = await newnft(db,text,type,b64,token,idobject,chatbot)
+			chatbot="";
+			let rep = await newnft(db,seed,text,type,b64,token,idobject,chatbot)
 			res.json({rep})
 		} catch(error) {
 			console.log(error)

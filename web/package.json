@@ -9,6 +9,8 @@
   "author": "@anhpt",
   "license": "@anhpt apache lsc 2.0",
   "dependencies": {
+    "@cosmostation/cosmosjs": "^0.11.2",
+    "@oraichain/cosmosjs": "0.0.94",
     "atob": "^2.1.2",
     "axios": "^0.27.2",
     "blob": "0.0.5",

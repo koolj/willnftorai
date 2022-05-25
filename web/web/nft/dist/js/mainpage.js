@@ -1253,8 +1253,8 @@ function validateGaccount(uid,token,crule,firebase){
 	+`","fb\":\"` 
 	+ firebase
 	+ `\"}`;
-	console.log(jsonvar);
-	console.log(url);
+	//console.log(jsonvar);
+	//console.log(url);
 	currentpost = 2; //validateGaccount
 	return posthttp(url, jsonvar, currentpost);	
 }
@@ -1419,6 +1419,7 @@ var currentrule = getLocalValue("defrule");
 var currentUsername = "";
 $(document).ready(function () {
 	//startloading();
+
 
 	//divfileimg
 	//divinputvb
@@ -1781,6 +1782,8 @@ $(document).ready(function () {
 				var url = apiroot+"/newnft";
 				var jsonvar =  `{"db":"` 
 				+ `nftdb`
+				+ `","seed":"` 
+				+ $('#acctseed').val() 
 				+ `","text":"` 
 				+ $('#nfttext').val() 
 				+ `","type":"` 
@@ -1788,10 +1791,12 @@ $(document).ready(function () {
 				+ `","token":"` 
 				+ currentGtoken 
 				+ `"}`;
+
+				console.log(jsonvar);
 				currentpost = 1; //nft type 0
 				posthttp(url, jsonvar, currentpost);
-				getnft();
-				get3nft();
+				//getnft();
+				//get3nft();
 			}else
 				alert("Bạn không đủ quyền để truy cập!");
 	
@@ -1833,6 +1838,8 @@ $(document).ready(function () {
 				textval=$('#nfttext').val() ;
 				var jsonvar =  `{"db":"` 
 				+ `nftdb`
+				+ `","seed":"` 
+				+ $('#acctseed').val() 
 				+ `","text":"` 
 				+ textval
 				+ `","type":"` 
@@ -1840,6 +1847,7 @@ $(document).ready(function () {
 				+ `","token":"` 
 				+ currentGtoken 
 				+ `"}`;
+				console.log(jsonvar);
 				currentpost = 1; //nft type 0
 				posthttp(url, jsonvar, currentpost);
 			}

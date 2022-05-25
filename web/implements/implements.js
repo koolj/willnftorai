@@ -66,9 +66,6 @@ var valgoogle= async (userid,googletoken,role,appid,idobject,fb) => {
 					return await dbexp.find(q).then(async(body2) => {
 						if(body2.docs.length >0){
 							exprev = body2.docs[0]._rev;
-							//console.log("--REV-------" + googletoken)
-							//console.log("--REV-------" + JSON .stringify(body2.docs[0]))
-							//console.log("--REV-------" + exprev);
 							await dbexp.destroy(body2.docs[0]._id,exprev).then(async(body7) => {})
 							return exprev;
 
@@ -357,10 +354,7 @@ var saveSTOREDOCimg= async (imgbase64,imgname,txt) => {
 var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
     try {
 		var searchURL = esUrl + "/nft/_doc?pretty";
-		const headers = {
-				"Authorization": "Basic ZWxhc3RpYzp3dDIwMDFAYnc=",
-			"Content-Type": "application/json"
-		}
+		const headers = {}
 		var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 		var texthash = '';
 		for(i=0; i < 20; i++ )
@@ -527,7 +521,13 @@ var searchesnftid= async (id,idobject) => {
     }
 }
 
-var newnft= async (db,text,type,b64,token,idobject,chatbot) => {
+const Cosmos = require("@oraichain/cosmosjs").default;
+
+const lcdUrl = "https://testnet-lcd.orai.io";
+const chainId = "Oraichain-testnet";
+
+
+var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
     try {
 		//validate token expire
 		let oktoken = await checkYESTokExp(token);
@@ -535,6 +535,23 @@ var newnft= async (db,text,type,b64,token,idobject,chatbot) => {
 			let okdocter = await toUserfromTok(token);
 			//validate user is existed
 			if(okdocter){
+
+				//console.log(db,seed,text,type,b64,token,idobject,chatbot);
+
+				const mnemonic = seed;
+				const toAddr = "orai1x6xl5kls4xkmkv3rst5tndmxtqt0u8dxhnw7cg";
+				const amount = 10;
+				const fees = 100;
+
+				const message = Cosmos.message;
+				const cosmos = new Cosmos(lcdUrl, chainId);
+				cosmos.setBech32MainPrefix('orai');
+				const childKey = cosmos.getChildKey(mnemonic);
+				const address = cosmos.getAddress(mnemonic);
+				console.log("=========================== ORAI CHAIN ============================");
+				console.log(message);
+				console.log(cosmos);
+				console.log("==============================================================");
 				//nft 0
 				if(type == 0 ){
 					if(text.length >= 8){
@@ -639,7 +656,7 @@ var get3nft= async (token,idobject) => {
 			if(okdocter){
 
 				//
-				return await axios({url:"http://admin:SDFdf786576fdgyrtr123435@45.118.145.43:5984/nftasset/_all_docs?limit=3&include_docs=true&descending=true",
+				return await axios({url:"http://admin:123@localhost:5984/nftasset/_all_docs?limit=3&include_docs=true&descending=true",
 				method: 'GET',
 				data:{}	
 				})
@@ -715,7 +732,7 @@ var nftsendimg= async (imgid,token,idobject) => {
 			//validate user is existed
 			if(okdocter){
 				console.log("-----new nft image----------------------")
-				const imghost = "/home/da/_master_services/_shared/";
+				const imghost = "../_shared/";
 				const imghostshare = imghost; //"/home/kj/Documents/_projects/wormtelehealth/wt_master/_shared/";
 				//const imghost = imghostshare;
 				var base64Data = imgid.replace(/^data:image\/jpeg;base64,/, "");
@@ -809,6 +826,8 @@ var nftsendimg= async (imgid,token,idobject) => {
         return {result: '1',message: `Error: ${error}`}
     }
 }
+
+
 var nftfilesend= async (fileid,token, type,idobject) => {
     try {
 		//validate token expire
@@ -818,7 +837,7 @@ var nftfilesend= async (fileid,token, type,idobject) => {
 			//validate user is existed
 			if(okdocter){
 				//console.log(fileid)
-				const imghost = "/home/da/_master_services/_shared/";
+				const imghost = "../_shared/";
 				const imghostshare = imghost; //"/home/kj/Documents/_projects/wormtelehealth/wt_master/_shared/";
 				//const imghost = imghostshare;
 				var base64Data = fileid.replace(/^data:image\/jpeg;base64,/, "");
