@@ -1378,6 +1378,30 @@ function searchES(data){
 	currentpost = 9; //logout
 	posthttp(url, jsonvar, currentpost);
 }
+function viewInput(num){
+	if(num == 0){
+		$("#divfileimg").hide();
+		$("#divinputvb").show();
+		$("#divfiletext").hide();
+	}else if (num ==1){
+		$("#divfileimg").hide();
+		$("#divinputvb").hide();
+		$("#divfiletext").show();
+	}else if (num ==2){
+		$("#divfileimg").hide();
+		$("#divinputvb").hide();
+		$("#divfiletext").show();
+	}else if (num ==3){
+		$("#divfileimg").hide();
+		$("#divinputvb").hide();
+		$("#divfiletext").show();
+	}
+	else if (num ==4){
+		$("#divfileimg").show();
+		$("#divinputvb").hide();
+		$("#divfiletext").hide();
+	}
+}
 
 /*
 ====================================================================================================================
@@ -1395,6 +1419,13 @@ var currentrule = getLocalValue("defrule");
 var currentUsername = "";
 $(document).ready(function () {
 	//startloading();
+
+	//divfileimg
+	//divinputvb
+	//divfiletext
+	$("#divfileimg").hide();
+	$("#divinputvb").show();
+	$("#divfiletext").hide();
 
 	firebase.auth().languageCode = 'en';
 	var provider = new firebase.auth.GoogleAuthProvider();
@@ -1847,6 +1878,9 @@ $(document).ready(function () {
 		}else
 			alert("Bạn không đủ quyền để truy cập!");
 	});
+
+
+
 	$("#dropbnsearch1menu a").on('click', function(e) {
 		e.preventDefault(); // cancel the link behaviour
 		selText = $(this).text();
@@ -1858,7 +1892,8 @@ $(document).ready(function () {
 		else if(currentsymp == "b003") currentnfttype = 2
 		else if(currentsymp == "b004") currentnfttype = 3
 		else if(currentsymp == "b005") currentnfttype = 4
-															
+		console.log(currentnfttype);	
+		viewInput(currentnfttype);													
 		$("#dropbnbenh").text(selText);
 	});
 
