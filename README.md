@@ -11,13 +11,24 @@ Build then access dApp to view and create, buy, sell NFTs
 //After building dapp & components, access dapp via
 http://localhost:8077/nft/
 ```
-Access CliffNet to view transactions
+Access OraiChain testnet to view transactions
 ```
-https://block-explorer.cliffnet.cosmwasm.com/
+//account
+https://testnet.scan.orai.io/account/orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
+
+//ow20
+https://testnet.scan.orai.io/smart-contract/orai1gwhauj6vclhelqlllvc7hxlrc77fmasmctcxtc
+
+//ow712 nft contract
+https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0dfcq2xaz3
+//with local ipfs nft data
+http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 ```
 
 # architecture
 ```
+[Design Architecture](https://github.com/koolj/willnftorai/blob/main/web/web/img/art.png?raw=true)
+
 - Frontend: html + bootstrap + cosmosjs
 - Backend: nodejs + couchdb, port 8077
 - Authentication: Google firebase
@@ -42,7 +53,7 @@ https://docs.docker.com/compose/gettingstarted/
 ### get html and bootstrap 4 tempalte, and cosmosjs library, to build frontend
 ```
 //follow https://getbootstrap.com/docs/5.0/getting-started/download
-//follow https://github.com/cosmostation/cosmosjs
+//follow https://github.com/oraichain/cosmosjs 
 ```
 ### run docker couchdb, create dbs
 ```
@@ -126,35 +137,13 @@ orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
 //build contract
 //go to contracts/erc20, then build and deploy
 //go to contracts/cw721-fixed-price, then build and deploy
-RUSTFLAGS='-C link-arg=-s' cargo wasm
+//then check, account
+https://testnet.scan.orai.io/account/orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
 
-//deploy CW_ERC20 to CliffNet
-RES=$(wasmd tx wasm store target/wasm32-unknown-unknown/release/cw_erc20.wasm --from wallet $TXFLAG -y --output json -b block)
-CODE_ID=$(echo $RES | jq -r '.logs[0].events[-1].attributes[0].value')
-
-//deploy CW_NFT to CliffNet
-RES=$(wasmd tx wasm store target/wasm32-unknown-unknown/release/cw721_fixed_price.wasm --from wallet $TXFLAG -y --output json -b block)
-CODE_ID=$(echo $RES | jq -r '.logs[0].events[-1].attributes[0].value')
-
-
-//init
-INIT='{"decimals":17,"initial_balances":[{"address":"wasm1q25lcug98xprkln92urher0s7jknxk77j683mr","amount":"100000000000000000"}],"name":"WillNFT","symbol":"WNFT"}'
-wasmd tx wasm instantiate $CODE_ID "$INIT" --from wallet --label "erc20 of koolj" $TXFLAG -y  --no-admin
-
-INIT='{"cw20_address":"wasm1vl4kjl647uunz46tjrvrjv70kwl354n0k9uj23tcrqejsshgvjaqt05jyw","max_tokens":1000,"name":"nfts of koolj","owner":"wasm1q25lcug98xprkln92urher0s7jknxk77j683mr","symbol":"KJNFT","token_code_id":1,"token_uri":"http://localhost:8080/ipfs/QmYNJDr4dFLzR87HrgcjVcWChSr8BdFRVyADhWoSi4xBiR","unit_price":"12"}'
-wasmd tx wasm instantiate $CODE_ID "$INIT" --from wallet --label "nfts of koolj" $TXFLAG -y  --no-admin
-
-//check contract status
-CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contracts[-1]')
-echo $CONTRACT
-```
-# get contract addresses
-```
-//check via https://block-explorer.cliffnet.cosmwasm.com
-//contract address cw_erc20
-wasm1vl4kjl647uunz46tjrvrjv70kwl354n0k9uj23tcrqejsshgvjaqt05jyw
-//contract address cw721
-wasm13llryqhs3nj8dvyva7xlf2ar2m09je2jf5mpp5jnv7zpa0aspk7qdk9lc8
+//then check, ow20 contract
+https://testnet.scan.orai.io/smart-contract/orai1gwhauj6vclhelqlllvc7hxlrc77fmasmctcxtc
+//then check, ow712 nft contract
+https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0dfcq2xaz3
 ```
 
 # document intro to Hakathon Orai 2022
