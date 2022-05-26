@@ -1800,7 +1800,7 @@ $(document).ready(function () {
 				+ currentGtoken 
 				+ `"}`;
 
-				console.log(jsonvar);
+				//console.log(jsonvar);
 				currentpost = 1; //nft type 0
 				posthttp(url, jsonvar, currentpost);
 				//getnft();
@@ -1855,7 +1855,7 @@ $(document).ready(function () {
 				+ `","token":"` 
 				+ currentGtoken 
 				+ `"}`;
-				console.log(jsonvar);
+				//console.log(jsonvar);
 				currentpost = 1; //nft type 0
 				posthttp(url, jsonvar, currentpost);
 			}
