@@ -1032,21 +1032,27 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 									+`\n-------------------------\nChọn một tệp khác!`};
 									
 								}else{
-									//console.log("----- go here 2");
-									//console.log(filedata);
-									//if (/^[a-z0-9.,"?]+$/.test(filedata)) {
+									return await searchesnft("",base64Data,token,idobject)
+									//console.log(research);
+									.then(async(research) => {
+										console.log(research);
+										if(!research.stat){
+											console.log("----found dup file -----------------------");
+											console.log(research);
+											return {result: '1',message: research.message,hit:research.hit}
+										}
+										else{
 
-										return await newnft("nftdb",seed,"_shared/"+texthash+".txt",1,base64Data,token,idobject,"")
-										.then(async(foundX2)=>{
-											//console.log("-------------------- here 82 + " + foundX2);
-											return foundX2
-										})
-										.catch((error)=>{ 
-											return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
-										})
-									//}
-									//else
-										//return {result: '1',message: `Nội dung không cho phép ký tự đặc biệt!\n`}
+											return await newnft("nftdb",seed,"_shared/"+texthash+".txt",1,base64Data,token,idobject,"")
+											.then(async(foundX2)=>{
+												//console.log("-------------------- here 82 + " + foundX2);
+												return foundX2
+											})
+											.catch((error)=>{ 
+												return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+											})
+										}
+									})//done search
 								}
 							}).catch((error)=>{ 
 								return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
@@ -1065,14 +1071,28 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 								//read file content
 								filedata = fs.readFileSync(imghost+texthash+".mp3", '',async(err,data,) => {})
 
-								return await newnft("nftdb",seed,"_shared/"+texthash+".mp3",1,base64Data,token,idobject,"")
-								.then(async(foundX2)=>{
-									//console.log("-------------------- here 82 + " + foundX2);
-									return foundX2
-								})
-								.catch((error)=>{ 
-									return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
-								})
+
+								return await searchesnft("",base64Data,token,idobject)
+								//console.log(research);
+								.then(async(research) => {
+									console.log(research);
+									if(!research.stat){
+										console.log("----found dup audio -----------------------");
+										console.log(research);
+										return {result: '1',message: research.message,hit:research.hit}
+									}
+									else{
+
+										return await newnft("nftdb",seed,"_shared/"+texthash+".mp3",1,base64Data,token,idobject,"")
+										.then(async(foundX2)=>{
+											//console.log("-------------------- here 82 + " + foundX2);
+											return foundX2
+										})
+										.catch((error)=>{ 
+											return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+										})
+									}
+								})//done search
 
 							}).catch((error)=>{ 
 								return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
@@ -1093,13 +1113,25 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 								//read file content
 								filedata = fs.readFileSync(imghost+texthash+".mp4", '',async(err,data,) => {})
 
-								return await newnft("nftdb",seed,"_shared/"+texthash+".mp4",1,base64Data,token,idobject,"")
-								.then(async(foundX2)=>{
-									//console.log("-------------------- here 82 + " + foundX2);
-									return foundX2
-								})
-								.catch((error)=>{ 
-									return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+								return await searchesnft("",base64Data,token,idobject)
+								//console.log(research);
+								.then(async(research) => {
+									console.log(research);
+									if(!research.stat){
+										console.log("----found dup video -----------------------");
+										console.log(research);
+										return {result: '1',message: research.message,hit:research.hit}
+									}
+									else{
+										return await newnft("nftdb",seed,"_shared/"+texthash+".mp4",1,base64Data,token,idobject,"")
+										.then(async(foundX2)=>{
+											//console.log("-------------------- here 82 + " + foundX2);
+											return foundX2
+										})
+										.catch((error)=>{ 
+											return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+										})
+									}
 								})
 
 							}).catch((error)=>{ 
