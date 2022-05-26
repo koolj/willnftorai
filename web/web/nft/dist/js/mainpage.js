@@ -1880,7 +1880,7 @@ $(document).ready(function () {
 				  	console.log(data.substr(0,50)+"...");
 				  	//console.log(canvasdata.length);
 					if ((data.length < 30) || (data.length > 2100000) ){   
-						alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
+						alert("Đầu vào cần có tệp tin TEXT, dung lượng <2mb.");
 						stoploading();
 					}else{    
 						startloading();
@@ -1904,8 +1904,62 @@ $(document).ready(function () {
 
 
 			}
-			else if(currentnfttype == 2)  textval = ""; 
-			else if(currentnfttype == 3)  textval = ""; 
+			else if(currentnfttype == 2) {
+				var file = document.querySelector('#filetext').files[0];
+				getBase64(file).then((data)=>{
+				  	console.log(data.substr(0,50)+"...");
+				  	//console.log(canvasdata.length);
+					if ((data.length < 30) || (data.length > 2100000) ){   
+						alert("Đầu vào cần có tệp tin audio, dung lượng <2mb.");
+						stoploading();
+					}else{    
+						startloading();
+						return fetch(apiroot+'/nftfilesend', {
+							method: 'POST',
+							headers: { 'Content-type': 'application/json' },
+							body: JSON.stringify({ fileid: data, seed:$('#acctseed').val()  , token: currentGtoken, type:2})					
+						})
+						.then(res => res.json())
+						.then((data2) => {
+							console.log(data2);
+							stoploading();
+							//alert(JSON.stringify(data))
+							getnft();
+							get3nft();
+							
+							alert(data2.rep.message);
+						})
+					}	
+				});
+			}
+			else if(currentnfttype == 3)  {
+				var file = document.querySelector('#filetext').files[0];
+				getBase64(file).then((data)=>{
+				  	console.log(data.substr(0,50)+"...");
+				  	//console.log(canvasdata.length);
+					if ((data.length < 30) || (data.length > 2100000) ){   
+						alert("Đầu vào cần có tệp tin video/mp4, dung lượng <2mb.");
+						stoploading();
+					}else{    
+						startloading();
+						return fetch(apiroot+'/nftfilesend', {
+							method: 'POST',
+							headers: { 'Content-type': 'application/json' },
+							body: JSON.stringify({ fileid: data, seed:$('#acctseed').val()  , token: currentGtoken, type:3})					
+						})
+						.then(res => res.json())
+						.then((data2) => {
+							console.log(data2);
+							stoploading();
+							//alert(JSON.stringify(data))
+							getnft();
+							get3nft();
+							
+							alert(data2.rep.message);
+						})
+					}	
+				});
+			}
 			else if(currentnfttype == 4)  {
 				const canvasdata = $("#preview").prop('src');
 				console.log(canvasdata.length);

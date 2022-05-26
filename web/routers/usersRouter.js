@@ -98,15 +98,13 @@ router.post('/nftsendimg', async (req, res) =>{
 		//console.log(imgid);
 				
 		await nftsendimg(imgid,seed,token,idobject)
-		//console.log('--vinxray---------------');
-		//console.log(rep)
 		.then((rep)=>{
-			console.log(rep);
+			console.log("---------------" + rep);
 			res.json({
 				rep
 			})
 		})
-
+		
 	} catch(error) {
 		console.log(error)
 		res.json({
@@ -132,7 +130,7 @@ router.post('/nftfilesend', async (req, res) =>{
 		//console.log(base64data);
 		await nftfilesend(fileid,seed,token, type,idobject)
 		.then((rep)=>{
-			console.log(rep);
+			//console.log("-------------------- here 9 + " + rep);
 			res.json({
 				rep
 			})
