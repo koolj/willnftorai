@@ -360,7 +360,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 		for(i=0; i < 20; i++ )
 			texthash += charset.charAt(Math.floor(Math.random() * charset.length));
 
-
+		var ipfsFileUrl = "";
 		var myObj = {
 			"rawdata": rawdata,
 			"nftid":texthash
@@ -401,20 +401,51 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 							unixtime:currunixtime
 						}
 
-						let createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
-						console.log("hash created: "+createblockqryres);
-						if(createblockqryres.length > 1){
-							if((type == 0) )
-								return await dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
-									//console.log({result: '0',message: "Thêm bản ghi #"+ createblockqryres.substring(0,5) +"...# thành công!",txt:createblockqryres});
+						//to ipfs
+						var FormData = require('form-data');
+						var fs = require('fs');
+						var data = new FormData();
+						data.append('path', fs.createReadStream(rawdata));
+						var configIPFS = {
+							method: 'post',
+							url: 'http://localhost:5001/api/v0/add',
+							headers: { 
+							  ...data.getHeaders()
+							},
+							data : data
+						};
 
-									return {result: '0',message: "Created NFT #"+ createblockqryres +"...# successfully!",txt:createblockqryres}	
-								})
-							else if((type == 4) || (type == 1) || (type == 2) || (type == 3))		
-								return await dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
-									return {result: '0',message: "Create NFT #"+ createblockqryres.substring(0,5) +"...# successfully!",txt:createblockqryres}	
-								})	
-						}else return {result: '1',message: `Internal error when creating NFT!`}				
+						axios(configIPFS)
+							.then(async(response)=>{
+							console.log(JSON.stringify(response.data));
+							ipfsFileUrl = "http://localhost:8080/ipfs/" + response.data.Hash;
+							
+							console.log("UPFS url created: "+ipfsFileUrl);
+							//to blockchain
+							let createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
+
+							//to db
+							console.log("Block hash created: "+createblockqryres);
+							if(createblockqryres.length > 1){
+								if((type == 0) )
+									return await dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
+										//console.log({result: '0',message: "Thêm bản ghi #"+ createblockqryres.substring(0,5) +"...# thành công!",txt:createblockqryres});
+
+										return {result: '0',message: "Created NFT #"+ createblockqryres +"...# successfully!",txt:createblockqryres}	
+									})
+								else if((type == 4) || (type == 1) || (type == 2) || (type == 3))		
+									return await dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
+										return {result: '0',message: "Create NFT #"+ createblockqryres +"...# successfully!",txt:createblockqryres}	
+									})	
+							}else return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+
+
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+
+				
 					}				
 				});	
 			//}else return {result: '1',message: `Database không tồn tại!`}
@@ -431,7 +462,7 @@ var searchesnft= async (db,val1,token,idobject) => {
 
 			//if(db == "nftdb"){
 				if(val1.toString().trim().length < 10){
-					return {result: '0',message: 'Data is not long enough for creating NFT! Should be >10 chars'}
+					return {result: '0',message: 'Dữ liệu không đủ dài để tạo NFT! Phải> 10 ký tự'}
 				}			
 				else{
 					//turn data to base 64

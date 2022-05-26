@@ -730,10 +730,11 @@ function posthttp(url, jsonvar, currentpostVar){
 							createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
 						}
 						else if (doc.type == 4){
+							//rooturl+doc.imglink
 							//console.log(doc.imglink);
 							htmlvari = `
 							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+rooturl+doc.imglink+`" target="_blank">
+								<a href="`+doc.url+`" target="_blank">
 									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+`></canvas>
 									<nft>`+nfturl+`</nft>
 									<nft>Giá: `+nftprice+`k</nft>
@@ -742,7 +743,7 @@ function posthttp(url, jsonvar, currentpostVar){
 							</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							`;
 							$("#listnft").append(htmlvari);	
-							createqrcode(doc.url,sockhost+doc.imglink);
+							createqrcode(doc.url,doc.url);
 						}
 					}
 				})
@@ -778,7 +779,7 @@ function posthttp(url, jsonvar, currentpostVar){
 							//console.log(doc.doc.imglink);
 							htmlvari = `
 							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+rooturl+doc.doc.imglink+`" target="_blank">
+								<a href="`+doc.doc.url+`" target="_blank">
 									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.doc.url+`xxx2></canvas>
 									<nft>`+nfturl+`</nft>
 									<nft>Giá: `+nftprice+`k</nft>
@@ -787,7 +788,8 @@ function posthttp(url, jsonvar, currentpostVar){
 							</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							`;
 							$("#last3nft").append(htmlvari);	
-							createqrcode(doc.doc.url+"xxx2",sockhost+doc.doc.imglink);
+							//sockhost+doc.doc.imglink
+							createqrcode(doc.doc.url+"xxx2",doc.doc.url);
 						}	
 					}
 				})
