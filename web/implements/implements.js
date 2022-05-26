@@ -847,143 +847,156 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 				const imghostshare = imghost; //"/home/kj/Documents/_projects/wormtelehealth/wt_master/_shared/";
 				//const imghost = imghostshare;
 				//data:text/plain;base64
-				var base64Data = fileid.replace(/^data:text\/plain;base64,/, "");
-				var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
-				var texthash = '';
-				let rep = '';
-				for(i=0; i < 20; i++ )
-					texthash += charset.charAt(Math.floor(Math.random() * charset.length));
 
-				var filedata = "";
-				var foundBadWord = false;
-				console.log(base64Data.length);
-				//console.log(base64Data.substring(0,56))
-				if((base64Data.length < 30) || (base64Data.length > 2000000) ){
-					return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là TEXT và kích thước <2mb."}
-				}
-				//else if(fileerr != 'txt' || fileerr != 'txt'){ return {result:'1', message:"Tệp tin format không đúng format TEXT. Cần file TXT, kích cỡ dung lượng <2mb."} }
-				else{
-  
-					//write file
-					var foundX = false;
-					if(type == 1){
-						//console.log(base64Data);
-						return new Promise((resolve, reject) => {
-							require('fs').writeFile(imghost+texthash+".txt", base64Data, 'base64', (err,data,) => {
-								//read file content
-								
-								filedata = fs.readFileSync(imghost+texthash+".txt", 'utf8',async(err,data,) => {})
-								//console.log(filedata);
 
-									//console.log(filedata); 
-									var datatocheck = "";
-									//while(filedata.indexOf("\n") != -1){
-										//filedata = filedata.replace("\n"," ");
-									//}
-									datatocheck = filedata.toLowerCase();
-									//console.log("111"+foundX);
-									var wordscheck = ["/","{","}","*","#","@","tiên sư","\\x",
-									"buồi",
-									"lồn",
-									"bím",
-									"cặc",
-									"đụ",
-									"địt",
-									"mẹ mày",
-									"tổ cha",
-									"thằng điên",
-									"con điên",
-									"con đĩ",
-									"dái",
-									"mất dạy",
-									"đảng",
-									"chính phủ",
-									"chính quyền",
-									"bác hồ",
-									"cụ hồ",
-									"thằng hồ",
-									"con",
-									"con thần kinh",
-									"thần kinh",
-									"lừa đảo",
-									"liên hệ",
-									"chuyên cung",
-									"cu",
-									"con chó",
-									"đồ chó",
-									"thằng chó",
-									"thằng lợn",
-									"gà",
-									"lũ đười ươi",
-									"đả đảo",
-									"trời ơi đất hỡi",
-									"ăn hại",
-									"09",
-									"http",
-									".com",
-									".net",
-									".info",
-									".io",
-									".org",
-									".vn",
-									".biz",
-									".jp",
-									".us",
-									".uk",
-									"cướp",
-									"giết",
-									"hiếp",
-									"chịch",
-									"phang",
-									"phản đối",
-									"nhà nước",
-									"dân chủ",
-									"quyền",
-									"tự do",
-									"hãm",
-									"mày",
-									"tao",
-									"nhục",
-									"cứt",
-									"tù",
-									"đái",
-									"nồn",
-									"ỉa",
-									"chim tao",
-									"mọi rợ",
-									"hack"
-									];
-									var wordArrlength = wordscheck.length;
-									var foundword=[];
-									var countFound = 0;
-									while(wordArrlength--) {
-										if (datatocheck.indexOf(wordscheck[wordArrlength])!=-1) {
-											//found bad word
-											foundword.push(wordscheck[wordArrlength]);
-											foundX = true
-											console.log("222"+foundX);
-											resolve(foundX)
-											break;
-										}
-									}
-								//});
-							})	
-						})
-						.then(async(foundX2)=>{
-							console.log("333"+foundX2)
-							if(foundX2){
-								return {result: '1',message: `Content that violates network rules & Vietnamese law, violates fine customs and traditions.!\n-------------------------\nChoose another one!`}
-							}else{
-								//console.log(filedata);
-								//if (/^[a-z0-9.,"?]+$/.test(filedata)) {
 
-									return await newnft("nftdb","_shared/"+texthash+".txt",1,base64Data,token,idobject,"")
-								//}
-								//else
-									//return {result: '1',message: `Nội dung không cho phép ký tự đặc biệt!\n`}
-							}
-						})
+				// if TEXT file
+				if(type == 1){
+
+					var base64Data = fileid.replace(/^data:text\/plain;base64,/, "");
+					var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+					var texthash = '';
+					let rep = '';
+					for(i=0; i < 20; i++ )
+						texthash += charset.charAt(Math.floor(Math.random() * charset.length));
+
+					var filedata = "";
+					var foundword=[];
+					var foundwordWE="";
+					var foundBadWord = false;
+					console.log(base64Data.length);
+					//console.log(base64Data.substring(0,56))
+					if((base64Data.length < 30) || (base64Data.length > 2000000) ){
+						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là TEXT và kích thước <2mb."}
 					}
+					//else if(fileerr != 'txt' || fileerr != 'txt'){ return {result:'1', message:"Tệp tin format không đúng format TEXT. Cần file TXT, kích cỡ dung lượng <2mb."} }
+					else{
+						var datatocheck = "";
+						//write file
+						var foundX = false;
+						
+							//console.log(base64Data);
+							return new Promise((resolve, reject) => {
+								require('fs').writeFile(imghost+texthash+".txt", base64Data, 'base64', (err,data,) => {
+									//read file content
+									
+									filedata = fs.readFileSync(imghost+texthash+".txt", 'utf8',async(err,data,) => {})
+									//console.log(filedata);
+
+										//console.log(filedata); 
+										
+										//while(filedata.indexOf("\n") != -1){
+											//filedata = filedata.replace("\n"," ");
+										//}
+										datatocheck = filedata.toLowerCase();
+										//console.log(datatocheck);
+										//console.log("111"+foundX);
+										var wordscheck = ["/","{","}","*","#","@","tiên sư","\\x",
+										"buồi",
+										"lồn",
+										"bím",
+										"cặc",
+										"đụ",
+										"địt",
+										"mẹ mày",
+										"tổ cha",
+										"thằng điên",
+										"con điên",
+										"con đĩ",
+										"dái",
+										"mất dạy",
+										"đảng",
+										"chính phủ",
+										"chính quyền",
+										"bác hồ",
+										"cụ hồ",
+										"thằng hồ",
+										"con",
+										"con thần kinh",
+										"thần kinh",
+										"lừa đảo",
+										"liên hệ",
+										"chuyên cung",
+										"cu",
+										"con chó",
+										"đồ chó",
+										"thằng chó",
+										"thằng lợn",
+										"gà",
+										"lũ đười ươi",
+										"đả đảo",
+										"trời ơi đất hỡi",
+										"ăn hại",
+										"09",
+										"http",
+										".com",
+										".net",
+										".info",
+										".io",
+										".org",
+										".vn",
+										".biz",
+										".jp",
+										".us",
+										".uk",
+										"cướp",
+										"giết",
+										"hiếp",
+										"chịch",
+										"phang",
+										"phản đối",
+										"nhà nước",
+										"dân chủ",
+										"quyền",
+										"tự do",
+										"hãm",
+										"mày",
+										"tao",
+										"nhục",
+										"cứt",
+										"tù",
+										"đái",
+										"nồn",
+										"ỉa",
+										"chim tao",
+										"mọi rợ",
+										"hack"
+										];
+										var wordArrlength = wordscheck.length;
+										
+										var countFound = 0;
+										while(wordArrlength--) {
+											if (datatocheck.indexOf(wordscheck[wordArrlength])!=-1) {
+												//found bad word
+												foundword.push(wordscheck[wordArrlength]);
+												foundwordWE = wordscheck[wordArrlength];
+												foundX = true
+												console.log("FOUND..."+wordscheck[wordArrlength]);
+												resolve(foundX)
+												break;
+											}
+										}
+									//});
+								})	
+							})
+							.then(async(foundX2)=>{
+								console.log("333"+foundX2)
+								if(foundX2){
+									return {result: '1',message: `Nội dung vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục.!\n-------------------------\n`+foundwordWE
+									+`\n-------------------------\nChọn một tệp khác!`};
+									
+								}else{
+									console.log(datatocheck); 
+									//console.log(filedata);
+									//if (/^[a-z0-9.,"?]+$/.test(filedata)) {
+
+										return await newnft("nftdb",seed,"_shared/"+texthash+".txt",1,base64Data,token,idobject,"")
+									//}
+									//else
+										//return {result: '1',message: `Nội dung không cho phép ký tự đặc biệt!\n`}
+								}
+							})
+						}
 				}	
 				}else return {result: '1',message: `Người dùng OraiChain không tồn tại!`}
 			}else return {result: '1',message: `Người dùng không tồn tại!`}
