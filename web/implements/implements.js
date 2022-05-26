@@ -732,7 +732,7 @@ var nftsendimg= async (imgid,token,idobject) => {
 			//validate user is existed
 			if(okdocter){
 				console.log("-----new nft image----------------------")
-				const imghost = "../_shared/";
+				const imghost = path.join(__dirname+"/../_shared/");
 				const imghostshare = imghost; //"/home/kj/Documents/_projects/wormtelehealth/wt_master/_shared/";
 				//const imghost = imghostshare;
 				var base64Data = imgid.replace(/^data:image\/jpeg;base64,/, "");
@@ -745,7 +745,7 @@ var nftsendimg= async (imgid,token,idobject) => {
 				var fileerr = '';
 
 				//console.log(base64Data);
-				console.log(base64Data.substring(0,56))
+				console.log(base64Data.substring(0,23))
 				if((imgid.length < 10000) || (imgid.length > 2000000) ){
 					return {result:'1', message:"File is invalid image. Format should be jpg/png, resolution of 1024, size of <2mb."}
 				}
@@ -837,7 +837,7 @@ var nftfilesend= async (fileid,token, type,idobject) => {
 			//validate user is existed
 			if(okdocter){
 				//console.log(fileid)
-				const imghost = "../_shared/";
+				const imghost = path.join(__dirname+"/../_shared/");
 				const imghostshare = imghost; //"/home/kj/Documents/_projects/wormtelehealth/wt_master/_shared/";
 				//const imghost = imghostshare;
 				var base64Data = fileid.replace(/^data:image\/jpeg;base64,/, "");

@@ -686,6 +686,7 @@ function posthttp(url, jsonvar, currentpostVar){
 		//console.log(currentpostVar);
 		if(response.rep.result == "0"){
 			stoploading();
+
 			//nft type 0
 			var repstr = "";
 			if(currentpostVar == 1){
@@ -697,7 +698,8 @@ function posthttp(url, jsonvar, currentpostVar){
 				//console.log(repstr);
 				getnft();
 				get3nft();
-				alert(response.rep.message + "\n--------------\n" + repstr)
+				if(response.rep.hit.length == 0) alert(response.rep.message);
+				else alert(response.rep.message + "\n--------------\n" + repstr)
 			}	
 			//get all nft
 			else if(currentpostVar == 3){
