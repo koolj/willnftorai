@@ -7,7 +7,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-	valgoogle,newnft,getnftid,get3nft,nftsendimg
+	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft
 } = require('../implements/implements')
 //const { itestredis } = require('../database/models/coremap');
 var path    = require("path");
@@ -185,6 +185,29 @@ router.post('/searchES', async (req, res) =>{
 			})
 		}
 	})
+	router.post('/getnft', async (req, res) =>{
+		let {token} = req.body
+		try {
+				//get ip
+				clientIp = requestIp.getClientIp(req); 
+				reqip = clientIp.toString().replace(":fff:","");
+				reqip = reqip.replace(":ffff:","");
+				reqip = reqip.replace(":","");
+				let idobject = {
+					ip: reqip,
+					act: "get all nft"
+				}
+				let rep = await getnft(token,idobject)
+	
+				res.json({rep})
+			} catch(error) {
+				console.log(error)
+				res.json({
+				result: '1',
+				message: `Could not get nft: Internal Error!`
+				})
+			}
+	});
 /*	
 router.post('/blockqry', async (req, res) =>{
 	let {token} = req.body
@@ -248,29 +271,7 @@ router.post('/nftfilesend', async (req, res) =>{
 
 })
 
-router.post('/getnft', async (req, res) =>{
-	let {token} = req.body
-	try {
-			//get ip
-			clientIp = requestIp.getClientIp(req); 
-			reqip = clientIp.toString().replace(":fff:","");
-			reqip = reqip.replace(":ffff:","");
-			reqip = reqip.replace(":","");
-			let idobject = {
-				ip: reqip,
-				act: "get all nft"
-			}
-			let rep = await getnft(token,idobject)
 
-			res.json({rep})
-		} catch(error) {
-			console.log(error)
-			res.json({
-			result: '1',
-			message: `Could not get nft: Internal Error!`
-			})
-		}
-});
 
 
 

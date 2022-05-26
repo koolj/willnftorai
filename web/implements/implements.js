@@ -519,10 +519,25 @@ var searchesnftid= async (id,idobject) => {
 }
 
 const Cosmos = require("@oraichain/cosmosjs").default;
-
 const lcdUrl = "https://testnet-lcd.orai.io";
 const chainId = "Oraichain-testnet";
+const cosmos = new Cosmos(lcdUrl, chainId);
+cosmos.setBech32MainPrefix('orai');
 
+var checkOraichainValid= async (seed) =>{
+	//check Oraichain Account
+	var mnemoStat = false;
+	const mnemonic = seed;
+	console.log("====================== ORAICHAIN ========================");
+	var addrOrai= "";
+	try{
+		addrOrai = cosmos.getAddress(mnemonic)
+		mnemoStat = true
+		return mnemoStat
+	}catch(e){
+		return mnemoStat
+	} 
+}
 
 var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
     try {
@@ -532,23 +547,9 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 			let okdocter = await toUserfromTok(token);
 			//validate user is existed
 			if(okdocter){
-
-				//console.log(db,seed,text,type,b64,token,idobject,chatbot);
-
-				const mnemonic = seed;
-				const toAddr = "orai1x6xl5kls4xkmkv3rst5tndmxtqt0u8dxhnw7cg";
-				const amount = 10;
-				const fees = 100;
-
-				const message = Cosmos.message;
-				const cosmos = new Cosmos(lcdUrl, chainId);
-				cosmos.setBech32MainPrefix('orai');
-				const childKey = cosmos.getChildKey(mnemonic);
-				const address = cosmos.getAddress(mnemonic);
-				console.log("=========================== ORAI CHAIN =======================");
-				console.log(childKey);
-				console.log(address);
-				console.log("==============================================================");
+				let okorair = await checkOraichainValid(seed);
+				console.log(okorair);
+				if(okorair){
 
 
 				chatbot = "http://localhost:5005/webhooks/rest/webhook";
@@ -575,16 +576,16 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 									}
 								}	
 								else
-									return {result: '1',message: `Content that violates network rules & Vietnamese law, violates fine customs and traditions! Please choose another one!`}
+									return {result: '1',message: `Nội dung vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục! Vui lòng chọn nội dung khác!`}
 							}
 							else
-								return {result: '1',message: `Content is not allowed special characters!\n`}
+								return {result: '1',message: `Nội dung không được phép ký tự đặc biệt!\n`}
 						}	
 						else
-							return {result: '1',message: `Data is too long, >50 char�for NFT! Try <50 chars!`}
+							return {result: '1',message: `Dữ liệu quá dài! Hãy thử <50 ký tự!`}
 					}	
 					else
-						return {result: '1',message: `Data is too short for NFT! Try >10 chars`}
+						return {result: '1',message: `Dữ liệu quá ngắn đối với NFT! Hãy thử> 10 ký tự`}
 				}
 				//nft 1,2,3
 				else if((type == 1) || (type == 2) || (type == 3) || (type == 4)){
@@ -610,6 +611,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 					return {result: '0'}
 				}
 				*/
+				}else return {result: '1',message: `Người dùng OraiChain không tồn tại!`}
 			}else return {result: '1',message: `Người dùng không tồn tại!`}
 		}else return {result: '1',message: `Phiên làm việc không được xác nhận.\nBạn cần đăng nhập lại để sử dụng!`}
     } catch(error) {
@@ -668,16 +670,16 @@ var get3nft= async (token,idobject) => {
 						if(resp1.data.rows.length > 0)
 							return {result: '0', message:resp1.data.rows}
 						else
-							return {result: '1',message: "Nothing found!"}	
+							return {result: '1',message: "Không tìm thấy thứ gì!"}	
 					
 				});
 
 			}	
 			else
-				return {result: '1',message: `User is not existed!`}
+				return {result: '1',message: `Người dùng không tồn tại!`}
 		}
 		else
-			return {result: '1',message: `Invalid session!`}
+			return {result: '1',message: `Phiên không hợp lệ!`}
     } catch(error) {
 		return {result: '1',message: `Error: ${error}`}
     }
@@ -731,6 +733,8 @@ var nftsendimg= async (imgid,token,idobject) => {
 			let okdocter = await toUserfromTok(token);
 			//validate user is existed
 			if(okdocter){
+				let okorair = await checkOraichainValid(seed);
+				if(okorair){
 				console.log("-----new nft image----------------------")
 				const imghost = path.join(__dirname+"/../_shared/");
 				const imghostshare = imghost; //"/home/kj/Documents/_projects/wormtelehealth/wt_master/_shared/";
@@ -747,7 +751,7 @@ var nftsendimg= async (imgid,token,idobject) => {
 				//console.log(base64Data);
 				console.log(base64Data.substring(0,23))
 				if((imgid.length < 10000) || (imgid.length > 2000000) ){
-					return {result:'1', message:"File is invalid image. Format should be jpg/png, resolution of 1024, size of <2mb."}
+					return {result:'1', message:"Tệp là hình ảnh không hợp lệ. Định dạng phải là jpg / png, độ phân giải 1024, kích thước <2mb."}
 				}
 				//else if(fileerr != 'jpg' || fileerr != 'jpg'){ return {result:'1', message:"Tệp tin ảnh size không đúng format JPEG/PNG. Cần ảnh jpg/png, kích cỡ 1024, dung lượng <2mb."} }
 				else{
@@ -804,7 +808,7 @@ var nftsendimg= async (imgid,token,idobject) => {
 								if(response.data.final_decision != "OK"){
 									console.log("----found violated -----"+resmark*100+"------------------")
 
-									return {result:'1', message: "Found violates network rules & Vietnamese law, violates fine customs and traditions: "+resmark*100+"%!\nPlease choose another one!"}
+									return {result:'1', message: "Phát hiện vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục: "+resmark*100+"%!\nVui lòng chọn data khác!"}
 								}else{
 									//save to db
 									//let newfntvar = await newnft("nftdb","_shared/"+texthash+".jpg",4,base64Data,token,idobject) 
@@ -819,9 +823,9 @@ var nftsendimg= async (imgid,token,idobject) => {
 						}						
 					}	
 			
-				
-			}else return {result: '1',message: `User is not existed!`}
-		}else return {result: '1',message: `Invalid session!`}
+				}else return {result: '1',message: `Người dùng OraiChain không tồn tại!`}
+			}else return {result: '1',message: `Người dùng không tồn tại!`}
+		}else return {result: '1',message: `Phiên không hợp lệ!`}
     } catch(error) {
         return {result: '1',message: `Error: ${error}`}
     }

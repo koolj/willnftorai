@@ -39,6 +39,11 @@ Apr 28, 2021.
   <link rel="stylesheet" href="https://d1a3f4spazzrp4.cloudfront.net/kepler.gl/uber-fonts/4.0.0/superfine.css">
   
   <style>
+    .required-field::before {
+      content: "*";
+      color: red;
+      float: right;
+    }
     .modal {
     display:    none;
     position:   fixed;
@@ -267,7 +272,7 @@ Apr 28, 2021.
                   <div class="card-body">
 
                     <div class="d-flex justify-content-left">
-                      <input type="password" class="form-control" id="acctseed" style="width:450px" autocomplete="on" placeholder="Your OraiChain account seed" name="name"></input>
+                      <input type="password" class="form-control" id="acctseed" style="width:450px" autocomplete="on" placeholder="Your OraiChain account seed" name="name"></input>&nbsp;&nbsp; (<t class="required-field"></t>required)
                     </div>
                     <br>
                     <div class="d-flex justify-content-left">
@@ -298,7 +303,7 @@ Apr 28, 2021.
                     &nbsp;&nbsp;
                     <div  id="divinputvb">
                     <div class="d-flex justify-content-left" style="padding-bottom: 6px">
-                      <input type="email" class="form-control" id="nfttext" style="width:450px" autocomplete="on" placeholder="(Cho kiểu NFT text ngắn): Nhập câu chữ text cho loại NFT câu chữ ngắn" name="email"></input>
+                      <input type="email" class="form-control" id="nfttext" style="width:450px" autocomplete="on" placeholder="(Cho kiểu NFT text ngắn): Nhập câu chữ text cho loại NFT câu chữ ngắn" name="email"></input>&nbsp;&nbsp; (<t class="required-field"></t>required)
                     </div>
                     </div>
                     <div  id="divfileimg">
@@ -306,11 +311,11 @@ Apr 28, 2021.
                         <a>Tải tập tin lên</a>
                         &nbsp;&nbsp;
                         <input type="file" name="img[]" class="file" accept="image/*">
-                        <input type="text" class="form-control" style="width:150px" disabled placeholder="Ảnh..." id="file">
+                        <input type="text" class="form-control" style="width:150px" disabled placeholder="Ảnh..." id="file">&nbsp;&nbsp; (<t class="required-field"></t>required)
                       </div>
                     </div>
                     <div  id="divfiletext">
-                      <input type="file" id="filetext" name="files" />
+                      <input type="file" id="filetext" name="files" />&nbsp;&nbsp; (<t class="required-field"></t>required)
                       <br/>
                     </div>
 

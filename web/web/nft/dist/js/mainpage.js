@@ -5,7 +5,7 @@ Apr 28, 2021.
 
 let sockhost = '';
 let roothost = '';
-
+let rooturl = "http://localhost:8077/";
 var apiroot = "http://localhost:8077/api";
 function gethttpapi(url, dataget){
 	var settings = {
@@ -730,9 +730,10 @@ function posthttp(url, jsonvar, currentpostVar){
 							createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
 						}
 						else if (doc.type == 4){
+							//console.log(doc.imglink);
 							htmlvari = `
 							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+doc.imglink+`" target="_blank">
+								<a href="`+rooturl+doc.imglink+`" target="_blank">
 									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+`></canvas>
 									<nft>`+nfturl+`</nft>
 									<nft>Giá: `+nftprice+`k</nft>
@@ -774,9 +775,10 @@ function posthttp(url, jsonvar, currentpostVar){
 							$("#last3nft").append(htmlvari);	
 							createqrcode(doc.doc.url+"xxx2",apiroot+`/getnftid?nftid=`+doc.doc._id);
 						}else if (doc.doc.type == 4){
+							//console.log(doc.doc.imglink);
 							htmlvari = `
 							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+doc.doc.imglink+`" target="_blank">
+								<a href="`+rooturl+doc.doc.imglink+`" target="_blank">
 									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.doc.url+`xxx2></canvas>
 									<nft>`+nfturl+`</nft>
 									<nft>Giá: `+nftprice+`k</nft>
@@ -1181,8 +1183,11 @@ function viewMedExam(){
 		chart4.render();
 	
 		//get all nft
-		//getnft();
-		//get3nft();
+		setTimeout(()=>{
+			getnft();
+			get3nft();
+		},3000)
+
 		/*
 		var url = apiroot+"/getlast200XElive";
 		var jsonvar =  `{"token\":\"` 
@@ -1191,6 +1196,7 @@ function viewMedExam(){
 		currentpost = 3; //get all data xe
 		posthttp(url, jsonvar, currentpost);
 		*/
+
 	}	
 }
 //bacsi
@@ -1422,10 +1428,10 @@ var currentUsername = "";
 $(document).ready(function () {
 	//startloading();
 
+	//get current nfts
+	//getnft();
+	//get3nft();
 
-	//divfileimg
-	//divinputvb
-	//divfiletext
 	$("#divfileimg").hide();
 	$("#divinputvb").show();
 	$("#divfiletext").hide();
