@@ -337,6 +337,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 				"nftid":texthash,
 				"rawdata":b64
 			}
+
 		const request_config = {
 			url: searchURL,
 			method: "POST",
@@ -352,6 +353,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 					if(err)
 						return {result: '1',message: err}
 					else{
+						//console.log(resp1.data);
 						//to block
 						var currunixtime = Math.floor(new Date().getTime() / 1000);
 						rawdataB64 = Buffer.from(rawdata).toString('base64');
@@ -381,44 +383,45 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 
 						return await axios(configIPFS)
 							.then(async(response)=>{
-							console.log(JSON.stringify(response.data));
+							//console.log(JSON.stringify(response.data));
 							ipfsFileUrl = "http://localhost:8080/ipfs/" + response.data.Hash;
 							
 							
 							//to blockchain
-							let createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
+							var createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
 
 							//to db
-							console.log("Block hash created: "+createblockqryres);
+							//console.log("Block hash created: "+createblockqryres);
 							if(createblockqryres.length > 1){
-								if((type == 0) )
-									return await dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
-										//console.log({result: '0',message: "Thêm bản ghi #"+ createblockqryres.substring(0,5) +"...# thành công!",txt:createblockqryres});
-										//console.log({result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres});
+								//console.log("----- go here " + type);
+								if((type == 0) ){
+									return dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
 										return {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres}	
 									}).catch(function (error) {
-										console.log(error);
+										return {result: '1',message: error}
 									});
-								else if((type == 4) || (type == 1) || (type == 2) || (type == 3))	
-									console.log("UPFS url created: "+ipfsFileUrl);	
-									return await dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
-										//console.log({result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres});
-										return {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres}	
+								}else if((type == 4) || (type == 1) || (type == 2) || (type == 3)){
+									//console.log("----- go here6");
+									return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
+										let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
+										console.log("-------------------- here 8 + " + resFinal);	
+										return 	resFinal;
 									}).catch((error)=> {
-										console.log(error);
+										return {result: '1',message: error}
 									});
+								}	
 							}else return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
 
 
 						})
 						.catch(function (error) {
-							console.log(error);
+							return {result: '1',message: error}
 						});
 
 				
 					}				
 				}).catch((error)=> {
-					console.log(error);
+					return {result: '1',message: error}
 				});
 			//}else return {result: '1',message: `Database không tồn tại!`}
 
@@ -469,9 +472,9 @@ var searchesnft= async (db,val1,token,idobject) => {
 								return {result: '1',message: err}
 							else	
 								if(resp1.data.hits.hits.length > 0)
-									return {result: '0',message: 'Found duplicated NFT! Choose another one!',hit:resp1.data.hits.hits}
+									return {result: '0',message: 'Đã tìm thấy NFT trùng lặp! Hãy chọn một NFT khác!',hit:resp1.data.hits.hits, stat: false}
 								else
-									return {result: '1',message: "Nothing found!"}	
+									return {result: '1',message: "Nothing found!", stat: true}	
 							
 						});
 
@@ -554,6 +557,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 				console.log(okorair);
 				if(okorair){
 
+				//console.log("----- go here3");
 
 				chatbot = "http://localhost:5005/webhooks/rest/webhook";
 				//nft 0
@@ -561,28 +565,45 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 					if(text.length >= 8){
 						if(text.length < 50){
 							if (!(/[`'!@#$%^&'*()_+\-=\[\]{};':'"\\|,.<>\/?'~]/.test(text))) {
-								let validTextvar = await validText(text,chatbot);
-								if(validTextvar){
-									console.log("-------check dup---------------------")
-									console.log(idobject.ip+"----"+text +"-----------" +type);
-									let research = await searchesnft(db,text,token,idobject);
-									if(research.result == "0"){
-										console.log("-------found duplicated---------------------")
-										console.log(research.hit);
-										return {result: '0',message: research.message,hit:research.hit}
-									}
-									else{
-										console.log("-------no duplicated---------------------")
-										await toesnft(db,text,type,okdocter,b64,token,idobject)
-										.then((research2) => {
-											return {result: '0',message: research2.message ,txt:research2.txt}
+								return await validText(text,chatbot)
+								.then(async(validTextvar) => {
+									if(validTextvar){
+										console.log("-------check dup---------------------")
+										console.log(idobject.ip+"----"+text +"-----------" +type);
+										return await searchesnft(db,text,token,idobject)
+										.then(async(research) => {
+											console.log(research)
+											//console.log("----- go here4");
+											if(research.stat){
+												
+												console.log("-------found duplicated---------------------")
+												console.log(research.hit);
+												return {result: '0',message: research.message,hit:research.hit}
+											}
+											else{
+												console.log("-------no duplicated---------------------")
+												return await toesnft(db,text,type,okdocter,b64,token,idobject)
+												.then(async(research2) => {
+													console.log("-------------------- here 81 + " + research2);
+													return {result: '0',message: research2.message ,txt:research2.txt}
+												})
+												.catch((error)=>{ 
+													return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+												})
+												//console.log(research2);
+												
+											}
 										})
-										//console.log(research2);
-										
-									}
-								}	
-								else
-									return {result: '1',message: `Nội dung vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục! Vui lòng chọn nội dung khác!`}
+										.catch((error)=>{ 
+											return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+										})
+									}	
+									else
+										return {result: '1',message: `Nội dung vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục! Vui lòng chọn nội dung khác!`}
+								})	
+								.catch((error)=>{ 
+									return {result: '1',message: error}
+								})
 							}
 							else
 								return {result: '1',message: `Nội dung không được phép ký tự đặc biệt!\n`}
@@ -596,18 +617,20 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 				//nft 1,2,3
 				else if((type == 1) || (type == 2) || (type == 3) || (type == 4)){
 					console.log(idobject.ip+"----"+text.substr(0,35) +"-----------" +type);
-					let research = await searchesnft(db,b64,token,idobject);
-					console.log(research);
-					if(research.result == "0"){
-						//console.log("------------------------------------------------------")
-						//console.log(research.hit);
-						return {result: '1',message: research.message,hit:research.hit}
-					}
-					else{
-						let research2 = await toesnft(db,text,type,okdocter,b64,token,idobject);
-						console.log(research2);
-						return research2
-					}
+					return await searchesnft(db,b64,token,idobject)
+					.then(async(research2) => {
+						//console.log(research2)
+						
+						if(!research2.stat){
+							//console.log("------------------------------------------------------")
+							
+							return {result: '1',message: research2.message,hit:research2.hit}
+						}
+						else{
+							//console.log("=============" + text);
+							return await toesnft(db,text,type,okdocter,b64,token,idobject);
+						}
+					})
 				}	
 				/*
 				//nft 4 
@@ -780,11 +803,12 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 						let savefile = await require('fs').writeFile(imghost+texthash+".jpg", base64Data, 'base64', async(err,data,) => {})
 									
 						//check same image
-						let research = await searchesnft("",base64Data,token,idobject);
+						await searchesnft("",base64Data,token,idobject)
 						//console.log(research);
-						if(research.result == "0"){
+						.then(async(research) => {
+						if(!research.stat){
 							console.log("----found dup nft img -----------------------");
-							//console.log(research.hit);
+							console.log(research);
 							return {result: '1',message: research.message,hit:research.hit}
 						}
 						else{
@@ -828,10 +852,11 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 								}
 							})
 							.catch((error)=>{ 
-								return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+								return {result: '1',message: error}
 							})
 
 						}						
+						}) //search nft
 					}	
 			
 				}else return {result: '1',message: `Người dùng OraiChain không tồn tại!`}
@@ -976,9 +1001,13 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 										var wordArrlength = wordscheck.length;
 										
 										var countFound = 0;
+
+										console.log("----- go here 1");
 										while(wordArrlength--) {
+											
 											if (datatocheck.indexOf(wordscheck[wordArrlength])!=-1) {
 												//found bad word
+												console.log("----- go here " + wordArrlength);
 												foundword.push(wordscheck[wordArrlength]);
 												foundwordWE = wordscheck[wordArrlength];
 												foundX = true
@@ -986,26 +1015,40 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 												resolve(foundX)
 												break;
 											}
+											if(wordArrlength == 0) resolve(foundX)
 										}
+										
+
 									//});
 								})	
 							})
 							.then(async(foundX2)=>{
 								console.log("333"+foundX2)
+								//console.log("----- go here 2");
 								if(foundX2){
+									//console.log("----- go here");
 									return {result: '1',message: `Nội dung vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục.!\n-------------------------\n`+foundwordWE
 									+`\n-------------------------\nChọn một tệp khác!`};
 									
 								}else{
-									console.log(datatocheck); 
+									//console.log("----- go here 2");
 									//console.log(filedata);
 									//if (/^[a-z0-9.,"?]+$/.test(filedata)) {
 
 										return await newnft("nftdb",seed,"_shared/"+texthash+".txt",1,base64Data,token,idobject,"")
+										.then(async(foundX2)=>{
+											//console.log("-------------------- here 82 + " + foundX2);
+											return foundX2
+										})
+										.catch((error)=>{ 
+											return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+										})
 									//}
 									//else
 										//return {result: '1',message: `Nội dung không cho phép ký tự đặc biệt!\n`}
 								}
+							}).catch((error)=>{ 
+								return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
 							})
 						}
 				}	
