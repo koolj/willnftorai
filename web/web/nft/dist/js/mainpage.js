@@ -848,7 +848,8 @@ function posthttp(url, jsonvar, currentpostVar){
 			currentpostVar = 19;
 			alert(response.rep.message);
 			
-		}
+		};
+		stoploading();
 	});
 
 }
@@ -1836,6 +1837,17 @@ $(document).ready(function () {
 		reader.readAsDataURL(this.files[0]);
 	});
 
+	function getBase64(file) {
+		return new Promise((resolve, reject) => {
+		  const reader = new FileReader();
+		  reader.readAsDataURL(file);
+		  reader.onload = () => resolve(reader.result);
+		  reader.onerror = error => reject(error);
+		});
+	  }
+	  
+
+
 	$("#btntaonft").click(function(e){
 		if(currentGtoken != "") {
 			//nft type 0
@@ -1859,20 +1871,53 @@ $(document).ready(function () {
 				currentpost = 1; //nft type 0
 				posthttp(url, jsonvar, currentpost);
 			}
-			else if(currentnfttype == 1)  textval = "";
+			else if(currentnfttype == 1) {
+				//const canvasdata = $("#filetext").prop('src');
+				var file = document.querySelector('#filetext').files[0];
+				getBase64(file).then((data)=>{
+				  	console.log(data.substr(0,50)+"...");
+				  	//console.log(canvasdata.length);
+					if ((data.length < 30) || (data.length > 2100000) ){   
+						alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
+						stoploading();
+					}else{    
+							$('#loadingx').show();
+							return fetch(apiroot+'/nftfilesend', {
+								method: 'POST',
+								headers: { 'Content-type': 'application/json' },
+								body: JSON.stringify({ fileid: data, seed:$('#acctseed').val()  , token: currentGtoken, type:1})					
+							})
+							.then(res => res.json())
+							.then(data => {
+									stoploading();
+									//alert(JSON.stringify(data))
+									getnft();
+									get3nft();
+									//console.log(data.rep);
+									if(data.rep.result == "0")
+										alert("Tạo NFT filetext thành công!");
+									else
+										alert(data.rep.message);
+							})
+					}	
+				});
+
+
+			}
 			else if(currentnfttype == 2)  textval = ""; 
 			else if(currentnfttype == 3)  textval = ""; 
 			else if(currentnfttype == 4)  {
 				const canvasdata = $("#preview").prop('src');
 				console.log(canvasdata.length);
-				if ((canvasdata.length < 30000) || (canvasdata.length > 2000000) ){   
+				if ((canvasdata.length < 300) || (canvasdata.length > 2000000) ){   
 					alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
+					stoploading();
 				}else{    
 						$('#loadingx').show();
 						return fetch(apiroot+'/nftsendimg', {
 							method: 'POST',
 							headers: { 'Content-type': 'application/json' },
-							body: JSON.stringify({ imgid: canvasdata, token: currentGtoken})					
+							body: JSON.stringify({ imgid: canvasdata, seed:$('#acctseed').val()  ,token: currentGtoken})					
 						})
 						.then(res => res.json())
 						.then(data => {

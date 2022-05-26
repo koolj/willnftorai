@@ -7,7 +7,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft
+	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft,nftfilesend
 } = require('../implements/implements')
 //const { itestredis } = require('../database/models/coremap');
 var path    = require("path");
@@ -156,7 +156,7 @@ router.post('/searchES', async (req, res) =>{
 			}
 	});
 	router.post('/nftsendimg', async (req, res) =>{
-		let {imgid, token} = req.body
+		let {imgid,seed, token} = req.body
 	  //      console.log(req.body)
 		try {
 			//get ip
@@ -171,7 +171,7 @@ router.post('/searchES', async (req, res) =>{
 	
 			//console.log(imgid);
 					
-			let rep = await nftsendimg(imgid,token,idobject)
+			let rep = await nftsendimg(imgid,seed,token,idobject)
 			//console.log('--vinxray---------------');
 			//console.log(rep)
 			res.json({
@@ -208,6 +208,36 @@ router.post('/searchES', async (req, res) =>{
 				})
 			}
 	});
+	router.post('/nftfilesend', async (req, res) =>{
+		let {fileid,seed, token, type} = req.body
+	//console.log(req.body)
+		try {
+			//get ip
+			clientIp = requestIp.getClientIp(req); 
+			reqip = clientIp.toString().replace(":fff:","");
+			reqip = reqip.replace(":ffff:","");
+			reqip = reqip.replace(":","");
+			let idobject = {
+				ip: reqip,
+				act: "send file"
+			}
+	
+			//console.log(base64data);
+			let rep = await nftfilesend(fileid,seed,token, type,idobject)
+			//console.log('--checkfile---------------');
+			//console.log(rep)
+			res.json({
+					rep
+				})
+		} catch(error) {
+			console.log(error)
+			res.json({
+				result: '1',
+				message: `Could not send nft image: Internal Error!`
+			})
+		}
+	
+	})
 /*	
 router.post('/blockqry', async (req, res) =>{
 	let {token} = req.body

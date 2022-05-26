@@ -725,7 +725,7 @@ var getnftid= async (nftid,token,idobject) => {
 		return {result: '1',message: `Error: ${error}`}
     }
 }
-var nftsendimg= async (imgid,token,idobject) => {
+var nftsendimg= async (imgid,seed,token,idobject) => {
     try {
 				//validate token expire
 		let oktoken = await checkYESTokExp(token);
@@ -832,7 +832,7 @@ var nftsendimg= async (imgid,token,idobject) => {
 }
 
 
-var nftfilesend= async (fileid,token, type,idobject) => {
+var nftfilesend= async (fileid,seed,token, type,idobject) => {
     try {
 		//validate token expire
 		let oktoken = await checkYESTokExp(token);
@@ -840,11 +840,14 @@ var nftfilesend= async (fileid,token, type,idobject) => {
 			let okdocter = await toUserfromTok(token);
 			//validate user is existed
 			if(okdocter){
+				let okorair = await checkOraichainValid(seed);
+				if(okorair){
 				//console.log(fileid)
 				const imghost = path.join(__dirname+"/../_shared/");
 				const imghostshare = imghost; //"/home/kj/Documents/_projects/wormtelehealth/wt_master/_shared/";
 				//const imghost = imghostshare;
-				var base64Data = fileid.replace(/^data:image\/jpeg;base64,/, "");
+				//data:text/plain;base64
+				var base64Data = fileid.replace(/^data:text\/plain;base64,/, "");
 				var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 				var texthash = '';
 				let rep = '';
@@ -853,10 +856,10 @@ var nftfilesend= async (fileid,token, type,idobject) => {
 
 				var filedata = "";
 				var foundBadWord = false;
-				//console.log(base64Data);
+				console.log(base64Data.length);
 				//console.log(base64Data.substring(0,56))
-				if((fileid.length < 30) || (fileid.length > 2000000) ){
-					return {result:'1', message:"File is invalid! Be sure file is�TEXT and size of <2mb."}
+				if((base64Data.length < 30) || (base64Data.length > 2000000) ){
+					return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là TEXT và kích thước <2mb."}
 				}
 				//else if(fileerr != 'txt' || fileerr != 'txt'){ return {result:'1', message:"Tệp tin format không đúng format TEXT. Cần file TXT, kích cỡ dung lượng <2mb."} }
 				else{
@@ -864,6 +867,7 @@ var nftfilesend= async (fileid,token, type,idobject) => {
 					//write file
 					var foundX = false;
 					if(type == 1){
+						//console.log(base64Data);
 						return new Promise((resolve, reject) => {
 							require('fs').writeFile(imghost+texthash+".txt", base64Data, 'base64', (err,data,) => {
 								//read file content
@@ -980,9 +984,10 @@ var nftfilesend= async (fileid,token, type,idobject) => {
 							}
 						})
 					}
-				}				
-			}else return {result: '1',message: `User is not existed!`}
-		}else return {result: '1',message: `Invalid session!`}
+				}	
+				}else return {result: '1',message: `Người dùng OraiChain không tồn tại!`}
+			}else return {result: '1',message: `Người dùng không tồn tại!`}
+		}else return {result: '1',message: `Phiên không hợp lệ!`}
     } catch(error) {
         return {result: '1',message: `Error: ${error}`}
     }
