@@ -730,10 +730,11 @@ function posthttp(url, jsonvar, currentpostVar){
 							createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
 						}
 						else if (doc.type == 4){
+							//rooturl+doc.imglink
 							//console.log(doc.imglink);
 							htmlvari = `
 							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+rooturl+doc.imglink+`" target="_blank">
+								<a href="`+doc.url+`" target="_blank">
 									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+`></canvas>
 									<nft>`+nfturl+`</nft>
 									<nft>Giá: `+nftprice+`k</nft>
@@ -742,7 +743,7 @@ function posthttp(url, jsonvar, currentpostVar){
 							</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							`;
 							$("#listnft").append(htmlvari);	
-							createqrcode(doc.url,sockhost+doc.imglink);
+							createqrcode(doc.url,doc.url);
 						}
 					}
 				})
@@ -778,7 +779,7 @@ function posthttp(url, jsonvar, currentpostVar){
 							//console.log(doc.doc.imglink);
 							htmlvari = `
 							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+rooturl+doc.doc.imglink+`" target="_blank">
+								<a href="`+doc.doc.url+`" target="_blank">
 									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.doc.url+`xxx2></canvas>
 									<nft>`+nfturl+`</nft>
 									<nft>Giá: `+nftprice+`k</nft>
@@ -787,7 +788,8 @@ function posthttp(url, jsonvar, currentpostVar){
 							</div>&nbsp;&nbsp;&nbsp;&nbsp;
 							`;
 							$("#last3nft").append(htmlvari);	
-							createqrcode(doc.doc.url+"xxx2",sockhost+doc.doc.imglink);
+							//sockhost+doc.doc.imglink
+							createqrcode(doc.doc.url+"xxx2",doc.doc.url);
 						}	
 					}
 				})
@@ -848,7 +850,8 @@ function posthttp(url, jsonvar, currentpostVar){
 			currentpostVar = 19;
 			alert(response.rep.message);
 			
-		}
+		};
+		stoploading();
 	});
 
 }
@@ -1183,8 +1186,11 @@ function viewMedExam(){
 		chart4.render();
 	
 		//get all nft
-		getnft();
-		get3nft();
+		setTimeout(()=>{
+			getnft();
+			get3nft();
+		},3000)
+
 		/*
 		var url = apiroot+"/getlast200XElive";
 		var jsonvar =  `{"token\":\"` 
@@ -1193,7 +1199,7 @@ function viewMedExam(){
 		currentpost = 3; //get all data xe
 		posthttp(url, jsonvar, currentpost);
 		*/
-		
+
 	}	
 }
 //bacsi
@@ -1797,7 +1803,7 @@ $(document).ready(function () {
 				+ currentGtoken 
 				+ `"}`;
 
-				console.log(jsonvar);
+				//console.log(jsonvar);
 				currentpost = 1; //nft type 0
 				posthttp(url, jsonvar, currentpost);
 				//getnft();
@@ -1833,6 +1839,17 @@ $(document).ready(function () {
 		reader.readAsDataURL(this.files[0]);
 	});
 
+	function getBase64(file) {
+		return new Promise((resolve, reject) => {
+		  const reader = new FileReader();
+		  reader.readAsDataURL(file);
+		  reader.onload = () => resolve(reader.result);
+		  reader.onerror = error => reject(error);
+		});
+	  }
+	  
+
+
 	$("#btntaonft").click(function(e){
 		if(currentGtoken != "") {
 			//nft type 0
@@ -1852,37 +1869,66 @@ $(document).ready(function () {
 				+ `","token":"` 
 				+ currentGtoken 
 				+ `"}`;
-				console.log(jsonvar);
+				//console.log(jsonvar);
 				currentpost = 1; //nft type 0
 				posthttp(url, jsonvar, currentpost);
 			}
-			else if(currentnfttype == 1)  textval = "";
+			else if(currentnfttype == 1) {
+				//const canvasdata = $("#filetext").prop('src');
+				var file = document.querySelector('#filetext').files[0];
+				getBase64(file).then((data)=>{
+				  	console.log(data.substr(0,50)+"...");
+				  	//console.log(canvasdata.length);
+					if ((data.length < 30) || (data.length > 2100000) ){   
+						alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
+						stoploading();
+					}else{    
+						startloading();
+						return fetch(apiroot+'/nftfilesend', {
+							method: 'POST',
+							headers: { 'Content-type': 'application/json' },
+							body: JSON.stringify({ fileid: data, seed:$('#acctseed').val()  , token: currentGtoken, type:1})					
+						})
+						.then(res => res.json())
+						.then((data2) => {
+							console.log(data2);
+							stoploading();
+							//alert(JSON.stringify(data))
+							getnft();
+							get3nft();
+							
+							alert(data2.rep.message);
+						})
+					}	
+				});
+
+
+			}
 			else if(currentnfttype == 2)  textval = ""; 
 			else if(currentnfttype == 3)  textval = ""; 
 			else if(currentnfttype == 4)  {
 				const canvasdata = $("#preview").prop('src');
 				console.log(canvasdata.length);
-				if ((canvasdata.length < 30000) || (canvasdata.length > 2000000) ){   
+				if ((canvasdata.length < 300) || (canvasdata.length > 2000000) ){   
 					alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
+					stoploading();
 				}else{    
-						$('#loadingx').show();
-						return fetch(apiroot+'/nftsendimg', {
-							method: 'POST',
-							headers: { 'Content-type': 'application/json' },
-							body: JSON.stringify({ imgid: canvasdata, token: currentGtoken})					
-						})
-						.then(res => res.json())
-						.then(data => {
-								stoploading();
-								//alert(JSON.stringify(data))
-								getnft();
-								get3nft();
-								//console.log(data.rep);
-								if(data.rep.result == "0")
-									alert("Tạo NFT image thành công!");
-								else
-									alert(data.rep.message);
-						})
+					startloading();
+					return fetch(apiroot+'/nftsendimg', {
+						method: 'POST',
+						headers: { 'Content-type': 'application/json' },
+						body: JSON.stringify({ imgid: canvasdata, seed:$('#acctseed').val()  ,token: currentGtoken})					
+					})
+					.then(res => res.json())
+					.then((data2) => {
+						console.log(data2);
+						stoploading();
+						//alert(JSON.stringify(data))
+						getnft();
+						get3nft();
+						
+						alert(data2.rep.message);
+					})
 				}					
 			}	
 

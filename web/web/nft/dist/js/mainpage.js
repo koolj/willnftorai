@@ -1883,24 +1883,22 @@ $(document).ready(function () {
 						alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
 						stoploading();
 					}else{    
-							$('#loadingx').show();
-							return fetch(apiroot+'/nftfilesend', {
-								method: 'POST',
-								headers: { 'Content-type': 'application/json' },
-								body: JSON.stringify({ fileid: data, seed:$('#acctseed').val()  , token: currentGtoken, type:1})					
-							})
-							.then(res => res.json())
-							.then(data => {
-									stoploading();
-									//alert(JSON.stringify(data))
-									getnft();
-									get3nft();
-									//console.log(data.rep);
-									if(data.rep.result == "0")
-										alert("Tạo NFT filetext thành công!");
-									else
-										alert(data.rep.message);
-							})
+						startloading();
+						return fetch(apiroot+'/nftfilesend', {
+							method: 'POST',
+							headers: { 'Content-type': 'application/json' },
+							body: JSON.stringify({ fileid: data, seed:$('#acctseed').val()  , token: currentGtoken, type:1})					
+						})
+						.then(res => res.json())
+						.then((data2) => {
+							console.log(data2);
+							stoploading();
+							//alert(JSON.stringify(data))
+							getnft();
+							get3nft();
+							
+							alert(data2.rep.message);
+						})
 					}	
 				});
 
@@ -1915,24 +1913,22 @@ $(document).ready(function () {
 					alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
 					stoploading();
 				}else{    
-						$('#loadingx').show();
-						return fetch(apiroot+'/nftsendimg', {
-							method: 'POST',
-							headers: { 'Content-type': 'application/json' },
-							body: JSON.stringify({ imgid: canvasdata, seed:$('#acctseed').val()  ,token: currentGtoken})					
-						})
-						.then(res => res.json())
-						.then(data => {
-								stoploading();
-								//alert(JSON.stringify(data))
-								getnft();
-								get3nft();
-								//console.log(data.rep);
-								if(data.rep.result == "0")
-									alert("Tạo NFT image thành công!");
-								else
-									alert(data.rep.message);
-						})
+					startloading();
+					return fetch(apiroot+'/nftsendimg', {
+						method: 'POST',
+						headers: { 'Content-type': 'application/json' },
+						body: JSON.stringify({ imgid: canvasdata, seed:$('#acctseed').val()  ,token: currentGtoken})					
+					})
+					.then(res => res.json())
+					.then((data2) => {
+						console.log(data2);
+						stoploading();
+						//alert(JSON.stringify(data))
+						getnft();
+						get3nft();
+						
+						alert(data2.rep.message);
+					})
 				}					
 			}	
 

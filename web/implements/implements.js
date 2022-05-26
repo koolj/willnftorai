@@ -314,42 +314,6 @@ var searchES= async (fe1,val1,fe2,val2,fe3,val3) => {
 }
 
 
-var saveSTOREDOCimg= async (imgbase64,imgname,txt) => {
-    try {
-		console.log(imgbase64.substring(0,65)+"...")
-		console.log(txt)
-		//let tokstat = await checkTok(token)
-		//console.log(tokstat)
-		//if(tokstat){
-
-
-			//await readIMG(imgpath+imgname).then(async(dataimg) => {								
-				var base64Data = imgbase64.replace(/^data:image\/jpeg;base64,/, "");
-				//console.log(base64Data)
-	
-				//save image
-				let googres = await require("fs").writeFile("/media/kj/MyData/vhs_dc/parking/clip/_img_xera/_storedoc/"+imgname, base64Data, 'base64', async(err, data) => { 
-					console.log(err);
-					console.log(data);
-				})
-
-				//post data to ES
-				let toESfunc = await toES("a1","b1","c1","l1","p1","ct2","t6","news","sociaty","dailynews","hr","vhs",txt,["dịch","covid"],"abc.jpg",1,"doc_wext37223",233,"abc_cover.jpg");
-
-				exec(`play done.mp3`, (error, stdout, stderr) => {
-					console.log(`..playing mp3: done!${stdout}`);
-				});
-				return {result: '0',message: 'Store img #'+imgname+'#  done!'}
-			//})
-				
-
-		//}else
-			//return {result: '1',message:'Bạn không đủ quyền để sử dụng chức năng này!'}
-
-    } catch(error) {
-        throw error
-    }
-}
 
 var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
     try {
@@ -415,12 +379,12 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 							data : data
 						};
 
-						axios(configIPFS)
+						return await axios(configIPFS)
 							.then(async(response)=>{
 							console.log(JSON.stringify(response.data));
 							ipfsFileUrl = "http://localhost:8080/ipfs/" + response.data.Hash;
 							
-							console.log("UPFS url created: "+ipfsFileUrl);
+							
 							//to blockchain
 							let createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
 
@@ -430,13 +394,19 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 								if((type == 0) )
 									return await dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
 										//console.log({result: '0',message: "Thêm bản ghi #"+ createblockqryres.substring(0,5) +"...# thành công!",txt:createblockqryres});
-
-										return {result: '0',message: "Created NFT #"+ createblockqryres +"...# successfully!",txt:createblockqryres}	
-									})
-								else if((type == 4) || (type == 1) || (type == 2) || (type == 3))		
-									return await dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
-										return {result: '0',message: "Create NFT #"+ createblockqryres +"...# successfully!",txt:createblockqryres}	
-									})	
+										//console.log({result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres});
+										return {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres}	
+									}).catch(function (error) {
+										console.log(error);
+									});
+								else if((type == 4) || (type == 1) || (type == 2) || (type == 3))	
+									console.log("UPFS url created: "+ipfsFileUrl);	
+									return await dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
+										//console.log({result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres});
+										return {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres}	
+									}).catch((error)=> {
+										console.log(error);
+									});
 							}else return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
 
 
@@ -447,7 +417,9 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 
 				
 					}				
-				});	
+				}).catch((error)=> {
+					console.log(error);
+				});
 			//}else return {result: '1',message: `Database không tồn tại!`}
 
     } catch(error) {
@@ -601,9 +573,12 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 									}
 									else{
 										console.log("-------no duplicated---------------------")
-										let research2 = await toesnft(db,text,type,okdocter,b64,token,idobject);
+										await toesnft(db,text,type,okdocter,b64,token,idobject)
+										.then((research2) => {
+											return {result: '0',message: research2.message ,txt:research2.txt}
+										})
 										//console.log(research2);
-										return {result: '0',message: research2.message ,txt:research2.txt}
+										
 									}
 								}	
 								else
@@ -814,7 +789,7 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 						}
 						else{
 					
-							console.log("----found no dup  -----------------------")
+							//console.log("----found no dup  -----------------------")
 
 							//check gore/porn
 							const axios = require('axios')
@@ -845,11 +820,16 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 									//let newfntvar = await newnft("nftdb","_shared/"+texthash+".jpg",4,base64Data,token,idobject) 
 									//return {result:'0', message: newfntvar}
 									console.log("----found NO violated -----------------------")
-									let research2 = await toesnft("nftdb","_shared/"+texthash+".jpg",4,okdocter,base64Data,token,idobject);
-									return research2
+									return await toesnft("nftdb","_shared/"+texthash+".jpg",4,okdocter,base64Data,token,idobject)
+									.then((response) => {
+										return response
+									})
+									
 								}
 							})
-							.catch(error => console.log(error.message))
+							.catch((error)=>{ 
+								return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+							})
 
 						}						
 					}	
