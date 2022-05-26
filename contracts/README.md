@@ -1,4 +1,4 @@
-# build some blockchain contracts: cw_erc20, cw721, comnpile & deploy to OraiChain testnet
+# build some blockchain contracts: cw_erc20, cw721, compile & deploy to OraiChain testnet
 ```
 //accounts address
 orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
