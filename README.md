@@ -145,7 +145,19 @@ cd <git folder>/web
 npm i
 npm start
 
-//After building dapp & components, access dapp via
+//ports prepare
+```
+8077/nft for frontend
+5984 for database
+5005 for rasa
+5002 for sound
+5000 for image
+8080 for ipfs nft url
+5001 for ipfs api
+9002 for elasticsearch
+```
+
+//after building dapp & components, access dapp via
 http://localhost:8077/nft/
 ```
 ### build some blockchain contracts: cw_erc20, cw721, compile & deploy to OraiChain testnet

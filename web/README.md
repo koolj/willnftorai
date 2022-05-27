@@ -5,6 +5,7 @@ npm i
 npm start
 
 //ports prepare
+```
 8077/nft for frontend
 5984 for database
 5005 for rasa
@@ -13,7 +14,7 @@ npm start
 8080 for ipfs nft url
 5001 for ipfs api
 9002 for elasticsearch
-
+```
 //after building dapp & components, access dapp via
 http://localhost:8077/nft/
 ```
