@@ -388,22 +388,14 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 							//console.log("Block hash created: "+createblockqryres);
 							if(createblockqryres.length > 1){
 								console.log("----- go here " + type);
-								//if((type == 0) ){
-									//return dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
-										//return {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres}	
-									//}).catch(function (error) {
-										//return {result: '1',message: error}
-									//});
-								//}else if((type == 4) || (type == 1) || (type == 2) || (type == 3)){
-									//console.log("----- go here6");
-									return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
-										let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
-										//console.log("-------------------- here 8 + " + resFinal);	
-										return 	resFinal;
-									}).catch((error)=> {
-										return {result: '1',message: error}
-									});
-								//}	
+								return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
+									let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
+									//console.log("-------------------- here 8 + " + resFinal);	
+									return 	resFinal;
+								}).catch((error)=> {
+									return {result: '1',message: error}
+								});
+
 							}else return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
 
 
