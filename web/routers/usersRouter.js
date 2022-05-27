@@ -73,7 +73,7 @@ router.post('/newnft', async (req, res) =>{
 			chatbot="";
 			await newnft(db,seed,text,type,b64,token,idobject,chatbot)
 			.then((rep)=>{
-				console.log("---------------" + rep);
+				console.log("-------------CHAR--" + JSON.stringify(rep));
 				res.json({
 					rep
 				})
@@ -104,7 +104,7 @@ router.post('/nftsendimg', async (req, res) =>{
 				
 		await nftsendimg(imgid,seed,token,idobject)
 		.then((rep)=>{
-			console.log("---------------" + rep);
+			console.log("------------IMG---" + rep);
 			res.json({
 				rep
 			})
@@ -135,7 +135,7 @@ router.post('/nftfilesend', async (req, res) =>{
 		//console.log(base64data);
 		await nftfilesend(fileid,seed,token, type,idobject)
 		.then((rep)=>{
-			//console.log("-------------------- here 9 + " + rep);
+			console.log("----------------TEXT,AUD,VID---- " + rep);
 			res.json({
 				rep
 			})

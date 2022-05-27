@@ -392,10 +392,12 @@ var currentmedexam = "";
 
 function viewNFTS(obj,type){
 	var nfturl = "";
+	if(type == 2) obj = obj.doc;
+	console.log("=================== "+type+" =================");
+	console.log(obj);
 	obj.forEach(doc => {	
-		if(type == 2) doc = doc.doc;
-		console.log("=================== "+type+" =================");
-		console.log(doc);
+		//if(type == 2) doc = doc.doc;
+
 		//console.log("---------" + doc.url);
 		if(doc._id){
 			nfturl = doc.owner;
@@ -406,7 +408,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/sound.png"></canvas>
+						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/q.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -414,7 +416,7 @@ function viewNFTS(obj,type){
 				</div>&nbsp;&nbsp;&nbsp;&nbsp;
 				`;
 				$("#listnft").append(htmlvari);	
-				createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
+				//createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
 			}
 			else if (doc.type == 1){
 				//rooturl+doc.imglink
@@ -422,7 +424,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/doc.png"></canvas>
+						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/doc.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -438,7 +440,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/sound.png"></canvas>
+						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/sound.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -454,7 +456,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/video.png"></canvas>
+						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/video.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -470,7 +472,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="`+doc.url+`"></canvas>
+						<canvas class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="`+doc.url+`"></canvas>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -510,13 +512,16 @@ function posthttp(url, jsonvar, currentpostVar){
 			if(currentpostVar == 1){
 				stoploading();
 				currentpost = 0;
-				response.rep.hit.forEach(element => {
-					repstr = repstr + "Tỷ lệ khớp " + element._score.toString().substr(0,5) + " với NFT id: " + element._id.toString().substr(0,8)+"..."+"\n";
-				});
+
+				if(response.rep.hit){
+					response.rep.hit.forEach(element => {
+						repstr = repstr + "Tỷ lệ khớp " + element._score.toString().substr(0,5) + " với NFT id: " + element._id.toString().substr(0,8)+"..."+"\n";
+					});
+				}
 				//console.log(repstr);
 				getnft();
 				get3nft();
-				if(response.rep.hit.length == 0) alert(response.rep.message);
+				if(!response.rep.hit) alert(response.rep.message);
 				else alert(response.rep.message + "\n--------------\n" + repstr)
 			}	
 			//get all nft
@@ -867,6 +872,8 @@ function viewMedExam(){
 		chart4.render();
 	
 		//get all nft
+		$("#listnft").empty();
+		$("#last3nft").empty();
 		setTimeout(()=>{
 			getnft();
 			get3nft();
@@ -1256,6 +1263,8 @@ $(document).ready(function () {
 				+ $('#nfttext').val() 
 				+ `","type":"` 
 				+ currentnfttype
+				+ `","b64":"` 
+				+ `","":"` 
 				+ `","token":"` 
 				+ currentGtoken 
 				+ `"}`;
