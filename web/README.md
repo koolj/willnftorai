@@ -1,5 +1,4 @@
-
-# build frontend
+# build frontend, hosted by nodejs backend
 ```
 cd <git folder>/web
 npm i
@@ -85,6 +84,9 @@ cd ipfs-cluster-ctl
 http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 
 ```
+
+# build other oracle apis
+
 ### setup api detect image
 ```
 //view readme
