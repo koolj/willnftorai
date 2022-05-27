@@ -391,12 +391,10 @@ var currentsymp = "";
 var currentmedexam = "";
 
 function viewNFTS(obj,type){
-	$("#listnft").empty();
-	
-	$("#last3nft").empty();
 	var nfturl = "";
 	obj.forEach(doc => {	
 		if(type == 2) doc = doc.doc;
+		console.log("=================== "+type+" =================");
 		console.log(doc);
 		//console.log("---------" + doc.url);
 		if(doc._id){
@@ -408,7 +406,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/sound.png"></canvas>
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/sound.png"></canvas>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -424,7 +422,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/doc.png"></canvas>
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/doc.png"></canvas>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -440,7 +438,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/sound.png"></canvas>
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/sound.png"></canvas>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -456,7 +454,7 @@ function viewNFTS(obj,type){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/video.png"></canvas>
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="./img/video.png"></canvas>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -525,12 +523,14 @@ function posthttp(url, jsonvar, currentpostVar){
 			else if(currentpostVar == 3){
 				stoploading();
 				currentpost = 0;
+				$("#listnft").empty();
 				viewNFTS(response.rep.message,0)
 			}	
 			//get last 3
 			else if(currentpostVar == 5){
 				stoploading();
 				currentpost = 0;
+				$("#last3nft").empty();
 				viewNFTS(response.rep.message,2)
 
 			}	
