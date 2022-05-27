@@ -40,7 +40,7 @@ https://docs.docker.com/compose/gettingstarted/
 ```
 sudo docker run -d --name couchdb -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=123 couchdb
 
-//then creat 3 db: nftlog, nftu, nftasset
+//then create dbs: nftlog, nftu, nftasset, nftlog
 ```
 ### get api and payment via Momo wallet
 ```
