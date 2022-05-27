@@ -388,13 +388,13 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 							//console.log("Block hash created: "+createblockqryres);
 							if(createblockqryres.length > 1){
 								console.log("----- go here " + type);
-								if((type == 0) ){
-									return dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
-										return {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres}	
-									}).catch(function (error) {
-										return {result: '1',message: error}
-									});
-								}else if((type == 4) || (type == 1) || (type == 2) || (type == 3)){
+								//if((type == 0) ){
+									//return dbnftasset.insert({_id: texthash, url:texthash, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body) => {
+										//return {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres}	
+									//}).catch(function (error) {
+										//return {result: '1',message: error}
+									//});
+								//}else if((type == 4) || (type == 1) || (type == 2) || (type == 3)){
 									//console.log("----- go here6");
 									return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
 										let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
@@ -403,7 +403,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 									}).catch((error)=> {
 										return {result: '1',message: error}
 									});
-								}	
+								//}	
 							}else return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
 
 
@@ -587,15 +587,15 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 											else{
 												console.log("-------no duplicated---------------------")
 												return new Promise((resolve, reject) => {
-													require('fs').writeFile(imghost+texthash+".txt", text, 'base64', async(err,data,) => {
+													require('fs').writeFile(imghost+texthash+".txt", text, 'utf8', async(err,data,) => {
 														//read file content
-														filedata = fs.readFileSync(imghost+texthash+".txt", '',async(err,data2,) => {
+														filedata = fs.readFileSync(imghost+texthash+".txt", 'utf8',async(err,data2,) => {
 															
 														});
 														resolve(filedata);
 													})	
 												}).then(async(filedata) => {
-													return await toesnft(db,imghost+texthash+".txt",0,okdocter,"",token,idobject)
+													return await toesnft(db,imghost+texthash+".txt",0,okdocter,text,token,idobject)
 													.then(async(research2) => {
 														//console.log("-------------------- here 81 + " + research2);
 														return {result: '0',message: research2.message ,txt:research2.txt}
