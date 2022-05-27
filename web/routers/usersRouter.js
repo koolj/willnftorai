@@ -162,8 +162,13 @@ router.post('/searchES', async (req, res) =>{
 				ip: reqip,
 				act: "search nft"
 			}
-			let rep = await searchesnftid(id,idobject)
-			res.json({rep})
+			await searchesnftid(id,idobject)
+			.then((rep)=>{
+				//console.log("-------------------- here 9 + " + rep);
+				res.json({
+					rep
+				})
+			})
 		} catch(error) {
 			console.log(error)
 			res.json({
@@ -186,10 +191,13 @@ router.post('/searchES', async (req, res) =>{
 					ip: reqip,
 					act: "get nft with id"
 				}
-				let rep = await getnftid(nftid,idobject)
-				res.render("view_nft34.html", {stream:rep.message});
-	
-				res.json({rep})
+				await getnftid(nftid,idobject)
+				.then((rep)=>{
+					//console.log("-------------------- here 9 + " + rep);
+					res.json({
+						rep
+					})
+				})
 			} catch(error) {
 				console.log(error)
 				res.json({
@@ -212,8 +220,13 @@ router.post('/searchES', async (req, res) =>{
 					ip: reqip,
 					act: "get nft with id"
 				}
-				let rep = await get3nft(token,idobject)
-				res.json({rep})
+				await get3nft(token,idobject)
+				.then((rep)=>{
+					//console.log("-------------------- here 9 + " + rep);
+					res.json({
+						rep
+					})
+				})
 			} catch(error) {
 				console.log(error)
 				res.json({

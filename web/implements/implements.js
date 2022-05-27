@@ -664,7 +664,7 @@ var getnft= async (token,idobject) => {
 				return await dbnftasset.find(q).then(async(body) => {
 					//console.log(body.docs);
 					if(body.docs.length > 0) return {result: '0', message:body.docs}
-					else return  {result: '1', message:'Nothing found!'}
+					else return  {result: '1', message:'Không tìm thấy!'}
 				})
 
 			}	
@@ -699,7 +699,7 @@ var get3nft= async (token,idobject) => {
 						if(resp1.data.rows.length > 0)
 							return {result: '0', message:resp1.data.rows}
 						else
-							return {result: '1',message: "Không tìm thấy thứ gì!"}	
+							return {result: '1',message: "Không tìm thấy!"}	
 					
 				});
 
