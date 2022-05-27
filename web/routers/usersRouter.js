@@ -71,8 +71,13 @@ router.post('/newnft', async (req, res) =>{
 				act: "newnft"
 			}
 			chatbot="";
-			let rep = await newnft(db,seed,text,type,b64,token,idobject,chatbot)
-			res.json({rep})
+			await newnft(db,seed,text,type,b64,token,idobject,chatbot)
+			.then((rep)=>{
+				console.log("---------------" + rep);
+				res.json({
+					rep
+				})
+			})
 		} catch(error) {
 			console.log(error)
 			res.json({

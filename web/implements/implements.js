@@ -574,7 +574,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 										.then(async(research) => {
 											console.log(research)
 											//console.log("----- go here4");
-											if(research.stat){
+											if(!research.stat){
 												
 												console.log("-------found duplicated---------------------")
 												console.log(research.hit);
@@ -1066,12 +1066,15 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là mp3/audio và kích thước <2mb."}
 					}
 					else{
-						//return new Promise((resolve, reject) => {
-							return require('fs').writeFile(imghost+texthash+".mp3", base64Data, 'base64', async(err,data,) => {
+						return new Promise((resolve, reject) => {
+							require('fs').writeFile(imghost+texthash+".mp3", base64Data, 'base64', async(err,data,) => {
 								//read file content
-								filedata = fs.readFileSync(imghost+texthash+".mp3", '',async(err,data,) => {})
-
-
+								filedata = fs.readFileSync(imghost+texthash+".mp3", '',async(err,data2,) => {
+									
+								});
+								resolve(data);
+							})	
+						}).then(async(donwReadFile)=>{
 								return await searchesnft("",base64Data,token,idobject)
 								//console.log(research);
 								.then(async(research) => {
@@ -1083,7 +1086,7 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 									}
 									else{
 
-										return await newnft("nftdb",seed,"_shared/"+texthash+".mp3",1,base64Data,token,idobject,"")
+										return await newnft("nftdb",seed,"_shared/"+texthash+".mp3",2,base64Data,token,idobject,"")
 										.then(async(foundX2)=>{
 											//console.log("-------------------- here 82 + " + foundX2);
 											return foundX2
@@ -1094,10 +1097,10 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 									}
 								})//done search
 
-							}).catch((error)=>{ 
-								return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
-							})	
-						//})//end promise		
+		
+						}).catch((error)=>{ 
+							return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+						})	
 					}
 				}else if(type == 3){
 					console.log(fileid.substr(0,35));
@@ -1108,11 +1111,13 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là mp4/video và kích thước <2mb."}
 					}
 					else{
-						//return new Promise((resolve, reject) => {
-							return require('fs').writeFile(imghost+texthash+".mp4", base64Data, 'base64', async(err,data,) => {
+						return new Promise((resolve, reject) => {
+							require('fs').writeFile(imghost+texthash+".mp4", base64Data, 'base64', async(err,data,) => {
 								//read file content
-								filedata = fs.readFileSync(imghost+texthash+".mp4", '',async(err,data,) => {})
-
+								filedata = fs.readFileSync(imghost+texthash+".mp4", '',async(err,data2,) => {});
+								resolve(data);
+							})	
+						}).then(async(donwReadFile)=>{
 								return await searchesnft("",base64Data,token,idobject)
 								//console.log(research);
 								.then(async(research) => {
@@ -1123,7 +1128,7 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 										return {result: '1',message: research.message,hit:research.hit}
 									}
 									else{
-										return await newnft("nftdb",seed,"_shared/"+texthash+".mp4",1,base64Data,token,idobject,"")
+										return await newnft("nftdb",seed,"_shared/"+texthash+".mp4",3,base64Data,token,idobject,"")
 										.then(async(foundX2)=>{
 											//console.log("-------------------- here 82 + " + foundX2);
 											return foundX2
@@ -1134,10 +1139,10 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 									}
 								})
 
-							}).catch((error)=>{ 
-								return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
-							})	
-						//})//end promise		
+						}).catch((error)=>{ 
+							return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+						})	
+
 					}
 				}
 				

@@ -35,38 +35,19 @@ function gethttpapi(url, dataget){
 };
 //gethttpapi(apiroot + "/apilink?api=wth",{});
 
-var table3 ='';
-var table4 ='';
-var table5 ='';
-var table5wiki = '';
-var table6congvan = '';
+
+var dataPoints = [];
 function isOdd(num) { return num % 2;}
 
 function disAll(){
 	$('#loginview').hide();
-	$('#DiagnosisView').hide();
 	$('#MedExamView').hide();
-	$('#dashboardview').hide();
-	$('#helpview').hide();
-	$('#LookPlantView').hide();
-	$('#ManageMedView').hide();
-	$('#AdminView').hide();
-	
-	$('#linklogout').hide();
 	$('#linklogin').show();
 }
 function disAlllogged(){
 	$('#loginview').hide();
-	$('#DiagnosisView').hide();
-	$('#MedExamView').hide();
-	$('#dashboardview').hide();
-	$('#helpview').hide();
-	$('#LookPlantView').hide();
-	$('#ManageMedView').hide();
-	$('#AdminView').hide();
-
+	$('#MedExamView').show();
 	$('#linklogin').hide();
-	$('#linklogout').show();
 }
 
 function displaySideNav(){
@@ -366,241 +347,6 @@ function loginview(){
 };
 loginview();
 
-//cardmagshow();
-
-function viewhelp(){
-	var htmlVar=`         
-	<div class="content-header">
-	<div class="container-fluid">
-	  <div class="row mb-2">
-		  <div class="col-sm-6">
-			  <h1 class="m-0 text-dark">Guideline</h1>
-			</div><!-- /.col -->
-			<div class="col-sm-6">
-			  <ol class="breadcrumb float-sm-right">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item active">User Guide</li>
-			  </ol>
-			</div><!-- /.col -->
-	  </div><!-- /.row -->
-	</div><!-- /.container-fluid -->
-</div>
-  <!-- /.content-header -->
-  `
-	$("#helpview").empty();
-	$("#helpview").append(htmlVar);
-};
-//viewhelp();
-
-function viewMonitorAPI(){
-	if((currentGtoken != "") && ((currentrule == 1) || (currentrule == 0)) || (currentrule == 3)){
-		//startloading();
-		$('#ManageMedView').show();
-
-		//view charts
-		var chart2 = new CanvasJS.Chart("chartContainer52", {
-			animationEnabled: true,
-			theme: "light2",
-			width:450,
-			height:300,
-			data: [{        
-				type: "line",
-					indexLabelFontSize: 12,
-				dataPoints: [
-				{ y: 6 },
-				{ y: 17},
-				{ y: 34, indexLabel: "\u2191 highest",markerColor: "red", markerType: "triangle" },
-				{ y: 21 },
-				{ y: 17 },
-				{ y: 22 },
-				{ y: 18 },
-				{ y: 5 },
-				{ y: 10 , indexLabel: "\u2193 lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
-				{ y: 8 },
-				{ y: 12 },
-				{ y: 10 }
-				]
-			}]
-		});
-		chart2.render();
-		var chart = new CanvasJS.Chart("chartContainer41", {
-		theme: "light2", // "light1", "light2", "dark1", "dark2"
-		exportEnabled: false,
-		width:450,
-		height:300,
-		animationEnabled: true,
-		data: [{
-			type: "pie",
-			startAngle: 25,
-			toolTipContent: "<b>{label}</b>: {y}%",
-			showInLegend: "true",
-			legendText: "{label}",
-			indexLabelFontSize: 12,
-			indexLabel: "{label} - {y}%",
-			dataPoints: [
-			{ y: 51.08, label: "nft001" },
-			{ y: 27.34, label: "nft002" },
-			{ y: 10.62, label: "nft003" },
-			{ y: 5.02, label: "nft004" },
-			{ y: 4.07, label: "nft005" },
-			{ y: 1.22, label: "nft006" },
-			{ y: 0.44, label: "nft007" }
-			]
-		}]
-		});
-		chart.render();
-				
-		/*
-		var url = apiroot+"/getlast200XElive";
-		var jsonvar =  `{"token\":\"` 
-		+ currentGtoken 
-		+ `\"}`;
-		currentpost = 3; //get all data xe
-		posthttp(url, jsonvar, currentpost);
-		*/
-	}	
-	
-};
-function viewAdmin(){
-	if((currentGtoken != "") && ((currentrule == 0)) ){
-		//startloading();
-		$('#AdminView').show();
-		/*
-		var url = apiroot+"/getlast200XElive";
-		var jsonvar =  `{"token\":\"` 
-		+ currentGtoken 
-		+ `\"}`;
-		currentpost = 3; //get all data xe
-		posthttp(url, jsonvar, currentpost);
-		*/
-	}	
-	
-};
-//viewMonitorAPI();
-/*
-var table7 ='';
-var table8 ='';
-var table6bs ='';
-table6bs = $('#table6').DataTable( {
-	"scrollY":        "800px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	dom: 'Bfrtip',
-	buttons: [
-		'copy', 'csv', 'excel', 'pdf', 'print'
-	]
-} );
-
-table7 = $('#table7').DataTable( {
-	"scrollY":        "800px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	dom: 'Bfrtip',
-	buttons: [
-		'copy', 'csv', 'excel', 'pdf', 'print'
-	]
-} );
-
-//chan benh
-table8 = $('#table8').DataTable( {
-	"scrollY":        "500px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	dom: 'Bfrtip',
-	buttons: [
-		'copy', 'csv', 'excel', 'pdf', 'print'
-	]
-} );
-table9 = $('#table9').DataTable( {
-	"scrollY":        "500px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	"searching": false,
-	"columnDefs": [
-        {
-            className:"ptk",targets: [4],
-            "render": function ( data, type, row ) {
-				if(data == '1')
-                	return '<img src="./img/up.png" style="width: 22%; height: auto;" class="img-thumbnail">'
-				else	
-					return '<img src="./img/down.png" style="width: 22%; height: auto;" class="img-thumbnail">'
-				return data
-            }
-        }  
-    ]
-} );
-table12 = $('#table12').DataTable( {
-	"scrollY":        "500px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	"searching": false
-} );
-table13 = $('#table13').DataTable( {
-	"scrollY":        "500px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	"searching": false
-} );
-
-//kham benh
-table10 = $('#table10').DataTable( {
-	"scrollY":        "500px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	dom: 'Bfrtip',
-	buttons: [
-		'copy', 'csv', 'excel', 'pdf', 'print'
-	]
-} );
-table11 = $('#table11').DataTable( {
-	"scrollY":        "500px",
-	"scrollCollapse": true,
-	"paging":         true,
-	"pageLength": 30,
-	"lengthChange": false,
-	"searching": false
-} );
-
-
-function viewDigidoc(){
-	if((currentGtoken != "") && ((currentrule == 1) || (currentrule == 0) || (currentrule == 3)) ){
-		//startloading();
-		$('#LookPlantView').show();
-		
-		var url = apiroot+"/getlast200XElive";
-		var jsonvar =  `{"token\":\"` 
-		+ currentGtoken 
-		+ `\"}`;
-		currentpost = 3; //get all data xe
-		posthttp(url, jsonvar, currentpost);
-		
-	}	
-};
-//viewDigidoc();
-*/
-
-function viewDashboard(){
-	//viewDash();
-	$('#dashboardview').show();
-	//first, get all count people
-	currentget = 1
-	//gethttp(apiroot+"/allcount",{})
-	stoploading();
-}
 
 function viewLogin(){
 	//startloading();
@@ -643,29 +389,103 @@ var objXeSys = [];
 var htmlvari = ``;
 var currentsymp = "";
 var currentmedexam = "";
-function bsXoakhung(idkhung){
-	var x = confirm("Bạn chắc chắn muốn thực thi?");
-	if (x){
-		var url = apiroot+"/delSche";
-		var jsonvar =  "{\"idsche\":\""
-		+ idkhung 
-		+ "\",\"token\":\""
-		+ currentGtoken 
-		+ "\"}";
-		//alert(jsonvar);
-		currentpost = 6; //xoa khung time
-		posthttp(url, jsonvar, currentpost);
-	}		  
+
+function viewNFTS(obj,type){
+	$("#listnft").empty();
+	
+	$("#last3nft").empty();
+	var nfturl = "";
+	obj.forEach(doc => {	
+		if(type == 2) doc = doc.doc;
+		console.log(doc);
+		//console.log("---------" + doc.url);
+		if(doc._id){
+			nfturl = doc.owner;
+			nftprice = parseInt(doc.price)/1000;
+			nfturl = nfturl.substring(0,3)+"***"+nfturl.substring(nfturl.length-3,nfturl.length);
+			//nft 0
+			if(doc.type == 0){
+				htmlvari = `
+				<div class="position-relative mb-4" style="padding: 5px;" >
+					<a href="`+doc.url+`" target="_blank">
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/sound.png"></canvas>
+						<nft>`+nfturl+`</nft>
+						<nft>Giá: `+nftprice+`k</nft>
+						<nft>Xem: `+doc.view+`</nft>
+					</a>
+				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+				`;
+				$("#listnft").append(htmlvari);	
+				createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
+			}
+			else if (doc.type == 1){
+				//rooturl+doc.imglink
+				//console.log(doc.imglink);
+				htmlvari = `
+				<div class="position-relative mb-4" style="padding: 5px;" >
+					<a href="`+doc.url+`" target="_blank">
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/doc.png"></canvas>
+						<nft>`+nfturl+`</nft>
+						<nft>Giá: `+nftprice+`k</nft>
+						<nft>Xem: `+doc.view+`</nft>
+					</a>
+				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+				`;
+				$("#listnft").append(htmlvari);	
+				//createqrcode(doc.url,doc.url);
+			}
+			else if (doc.type == 2){
+				//rooturl+doc.imglink
+				//console.log(doc.imglink);
+				htmlvari = `
+				<div class="position-relative mb-4" style="padding: 5px;" >
+					<a href="`+doc.url+`" target="_blank">
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/sound.png"></canvas>
+						<nft>`+nfturl+`</nft>
+						<nft>Giá: `+nftprice+`k</nft>
+						<nft>Xem: `+doc.view+`</nft>
+					</a>
+				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+				`;
+				$("#listnft").append(htmlvari);	
+				//createqrcode(doc.url,doc.url);
+			}
+			else if (doc.type == 3){
+				//rooturl+doc.imglink
+				//console.log(doc.imglink);
+				htmlvari = `
+				<div class="position-relative mb-4" style="padding: 5px;" >
+					<a href="`+doc.url+`" target="_blank">
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="/img/video.png"></canvas>
+						<nft>`+nfturl+`</nft>
+						<nft>Giá: `+nftprice+`k</nft>
+						<nft>Xem: `+doc.view+`</nft>
+					</a>
+				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+				`;
+				$("#listnft").append(htmlvari);	
+				//createqrcode(doc.url,doc.url);
+			}
+			else if (doc.type == 4){
+				//rooturl+doc.imglink
+				//console.log(doc.imglink);
+				htmlvari = `
+				<div class="position-relative mb-4" style="padding: 5px;" >
+					<a href="`+doc.url+`" target="_blank">
+						<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+` src="`+doc.url+`"></canvas>
+						<nft>`+nfturl+`</nft>
+						<nft>Giá: `+nftprice+`k</nft>
+						<nft>Xem: `+doc.view+`</nft>
+					</a>
+				</div>&nbsp;&nbsp;&nbsp;&nbsp;
+				`;
+				$("#listnft").append(htmlvari);	
+				//createqrcode(doc.url,doc.url);
+			}
+		}
+	})
 }
-function getDayNum(data){
-	var now = new Date(data);
-	var start = new Date(now.getFullYear(), 0, 0);
-	var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-	var oneDay = 1000 * 60 * 60 * 24;
-	var day = Math.floor(diff / oneDay);
-	//console.log('Day of year: ' + day);
-	return day
-}
+
 function posthttp(url, jsonvar, currentpostVar){
 	//$("#loadingx").show();
 	startloading();
@@ -705,94 +525,13 @@ function posthttp(url, jsonvar, currentpostVar){
 			else if(currentpostVar == 3){
 				stoploading();
 				currentpost = 0;
-				//console.log("------------------------------");
-				$("#listnft").empty();
-				var nfturl = "";
-				response.rep.message.forEach(doc => {
-					//console.log("---------" + doc.url);
-					if(doc._id){
-						nfturl = doc.owner;
-						nftprice = parseInt(doc.price)/1000;
-						nfturl = nfturl.substring(0,3)+"***"+nfturl.substring(nfturl.length-3,nfturl.length);
-						//nft 0
-						if(doc.type == 0){
-							htmlvari = `
-							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+apiroot+`/getnftid?nftid=`+doc._id+`" target="_blank">
-									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+`></canvas>
-									<nft>`+nfturl+`</nft>
-									<nft>Giá: `+nftprice+`k</nft>
-									<nft>Xem: `+doc.view+`</nft>
-								</a>
-							</div>&nbsp;&nbsp;&nbsp;&nbsp;
-							`;
-							$("#listnft").append(htmlvari);	
-							createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
-						}
-						else if (doc.type == 4){
-							//rooturl+doc.imglink
-							//console.log(doc.imglink);
-							htmlvari = `
-							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+doc.url+`" target="_blank">
-									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.url+`></canvas>
-									<nft>`+nfturl+`</nft>
-									<nft>Giá: `+nftprice+`k</nft>
-									<nft>Xem: `+doc.view+`</nft>
-								</a>
-							</div>&nbsp;&nbsp;&nbsp;&nbsp;
-							`;
-							$("#listnft").append(htmlvari);	
-							createqrcode(doc.url,doc.url);
-						}
-					}
-				})
-
+				viewNFTS(response.rep.message,0)
 			}	
 			//get last 3
 			else if(currentpostVar == 5){
 				stoploading();
 				currentpost = 0;
-				//console.log("------------------------------");
-				$("#last3nft").empty();
-				var nfturl = "";
-				response.rep.message.forEach(doc => {
-					//console.log(doc);
-					if(doc.doc._id){
-						nfturl = doc.doc.owner;
-						nftprice = parseInt(doc.doc.price)/1000;
-						nfturl = nfturl.substring(0,3)+"***"+nfturl.substring(nfturl.length-3,nfturl.length);
-						if(doc.doc.type == 0){
-							htmlvari = `
-							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+apiroot+`/getnftid?nftid=`+doc.doc._id+`" target="_blank">
-									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.doc.url+`xxx2></canvas>
-									<nft>`+nfturl+`</nft>
-									<nft>Giá: `+nftprice+`k</nft>
-									<nft>Xem: `+doc.doc.view+`</nft>
-								</a>
-							</div>&nbsp;&nbsp;&nbsp;&nbsp;
-							`;
-							$("#last3nft").append(htmlvari);	
-							createqrcode(doc.doc.url+"xxx2",apiroot+`/getnftid?nftid=`+doc.doc._id);
-						}else if (doc.doc.type == 4){
-							//console.log(doc.doc.imglink);
-							htmlvari = `
-							<div class="position-relative mb-4" style="padding: 5px;" >
-								<a href="`+doc.doc.url+`" target="_blank">
-									<canvas class="img-thumbnail" style="padding: 0.2px" id=`+doc.doc.url+`xxx2></canvas>
-									<nft>`+nfturl+`</nft>
-									<nft>Giá: `+nftprice+`k</nft>
-									<nft>Xem: `+doc.doc.view+`</nft>
-								</a>
-							</div>&nbsp;&nbsp;&nbsp;&nbsp;
-							`;
-							$("#last3nft").append(htmlvari);	
-							//sockhost+doc.doc.imglink
-							createqrcode(doc.doc.url+"xxx2",doc.doc.url);
-						}	
-					}
-				})
+				viewNFTS(response.rep.message,2)
 
 			}	
 			//get nft with id
@@ -1002,65 +741,7 @@ function viewLoggedin(rule){
 	stoploading();
 	closeNav();
 }
-//benh nhan
-var selText = "";
-var dataArr = [];
-var dataPoints = [];
-function chartExchange(){
-	if((currentGtoken != "") && ((currentrule == 1) || (currentrule == 0) || (currentrule == 3)) ){
-			
-		$.get("https://canvasjs.com/data/gallery/javascript/netflix-stock-price.csv",getDataPointsFromCSV);
-		//console.log(dataPoints);
-		var chart5 = new CanvasJS.Chart("chartContainer31", {
-			animationEnabled: true,
-			theme: "light2", // "light1", "light2", "dark1", "dark2"
-			subtitles: [{
-				text: "Trung bình tuần"
-			}],
-			axisX: {
-				interval: 1,
-				valueFormatString: "MMM"
-			},
-			axisY: {
-				prefix: "$",
-				title: "Giá"
-			},
-			toolTip: {
-				content: "Date: {x}<br /><strong>Price:</strong><br />Open: {y[0]}, Close: {y[3]}<br />High: {y[1]}, Low: {y[2]}"
-			},
-			height:420,
-			data: [{
-				indexLabelFontSize: 12,
-				type: "candlestick",
-				yValueFormatString: "$##0.00",
-				dataPoints: dataPoints
-			}]
-		});
-		function getDataPointsFromCSV(csv) {
-			var csvLines = points = [];
-			csvLines = csv.split(/[\r?\n|\r|\n]+/);
-			for (var i = 0; i < csvLines.length; i++) {
-				if (csvLines[i].length > 0) {
-					points = csvLines[i].split(",");
-					dataPoints.push({
-						x: new Date(
-							parseInt(points[0].split("-")[0]),
-							parseInt(points[0].split("-")[1]),
-							parseInt(points[0].split("-")[2])
-						),
-						y: [
-							parseFloat(points[1]),
-							parseFloat(points[2]),
-							parseFloat(points[3]),
-							parseFloat(points[4])
-						]
-					});
-				}
-			}
-			chart5.render();
-		}
-	}	
-}
+
 //fill item
 function getnft(){
 	var htmlvarnftitem="";
@@ -1202,52 +883,6 @@ function viewMedExam(){
 
 	}	
 }
-//bacsi
-function loadSymp(){
-	//fill symptoms
-	if(currentGtoken != ""){
-		var url = apiroot+"/listSymp";
-		var jsonvar =  `{"token\":\"` 
-		+ currentGtoken 
-		+ `\"}`;
-		currentpost = 5; //tao khung time
-		posthttp(url, jsonvar, currentpost);
-	}
-}
-function loadSche(){
-	//fill symptoms
-	if(currentGtoken != ""){
-		var url = apiroot+"/listSche";
-		var jsonvar =  `{"token\":\"` 
-		+ currentGtoken 
-		+ `\"}`;
-		currentpost = 4; //tao khung time
-		posthttp(url, jsonvar, currentpost);
-	}
-}
-function viewDiagnosis(){
-	if((currentGtoken != "") && ((currentrule == 1) || (currentrule == 0) || (currentrule == 3)) ){
-		//startloading();
-		$('#DiagnosisView').show();
-		//view lich chan benh
-		//drawLichchanbenh(dataArr);
-
-		//view data
-		loadSymp();
-		loadSche();
-
-		//view chart
-		chartExchange();
-		/*
-		var url = apiroot+"/getlast200XElive";
-		var jsonvar =  `{"token\":\"` 
-		+ currentGtoken 
-		+ `\"}`;
-		currentpost = 3; //get all data xe
-		posthttp(url, jsonvar, currentpost);
-		*/
-	}	
-}
 
 function validateGaccount(uid,token,crule,firebase){
 	startloading();
@@ -1270,100 +905,6 @@ function validateGaccount(uid,token,crule,firebase){
 	return posthttp(url, jsonvar, currentpost);	
 }
 
-/*
-function addSymbols(e){
-	var suffixes = ["", "K", "M", "B"];
-	var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
-	if(order > suffixes.length - 1)
-		order = suffixes.length - 1;
-	var suffix = suffixes[order];
-	return CanvasJS.formatNumber(e.value / Math.pow(1000, order)) + suffix;
-}
-
-
-function calculateSMA(dps, count){
-	var avg = function(dps){
-		var sum = 0, count = 0, val;
-		for (var i = 0; i < dps.length; i++) {
-		val = dps[i].y[3]; sum += val; count++;
-		}
-		return sum / count;
-	};
-	var result = [], val;
-	count = count || 5;
-	for (var i=0; i < count; i++)
-		result.push({ x: dps[i].x , y: null});
-	for (var i=count - 1, len=dps.length; i < len; i++){
-		val = avg(dps.slice(i - count + 1, i));
-		if (isNaN(val))
-		result.push({ x: dps[i].x, y: null});
-		else
-		result.push({ x: dps[i].x, y: val});
-	}
-	return result;
-}
-
-
-
-
-function calculateEMA(dps,count) {
-	var k = 2/(count + 1);
-	var emaDps = [{x: dps[0].x, y: dps[0].y.length ? dps[0].y[3] : dps[0].y}];
-	for (var i = 1; i < dps.length; i++) {
-		emaDps.push({x: dps[i].x, y: (dps[i].y.length ? dps[i].y[3] : dps[i].y) * k + emaDps[i - 1].y * (1 - k)});
-	}
-	return emaDps;
-}
-*/
-
-//store image data
-var canvasdata ='';
-imgdoc = new Image(); 
-//imgdoc.crossOrigin = "*";
-//imgdoc.src = 'https://192.168.1.129:8080/';
-function recapIMG(){
-	$("#idcanvassource").show()
-	canvas = document.getElementById("idcanvassource");
-	ctx = canvas.getContext('2d');
-
-	//imgdoc.crossOrigin = "*";
-	//imgdoc.src = 'https://192.168.1.129:8080/';
-	imgdoc = document.querySelector("#iddocsource");
-	ctx.drawImage(imgdoc, 0,0, canvas.width, canvas.height);
-
-	//const captcha = document.querySelector('#g-recaptcha-response').value;
-	canvasdata = canvas.toDataURL('image/jpeg', 1);
-	//console.log(canvasdata)
-}
-function uploadIMG(){
-	//save snapshot to s3
-	//$("#savesnaps3").click(function(e){
-		//e.preventDefault(); 
-		canvas = document.querySelector("#idcanvassource");
-		ctx = canvas.getContext('2d');
-
-		imgdoc.crossOrigin = "*";
-		//imgdoc.src = 'https://192.168.1.129:8080/';
-		//imgdoc = document.querySelector("#iddocsource");
-		ctx.drawImage(imgdoc, 0,0, canvas.width, canvas.height);
-	
-		//const captcha = document.querySelector('#g-recaptcha-response').value;
-		canvasdata = canvas.toDataURL('image/jpeg', 1.0);
-
-		return fetch(apiroot+'/doccanvas', {
-			method: 'POST',
-			headers: { 'Content-type': 'application/json' },
-			body: JSON.stringify({ canvasdata})
-		})
-		.then(res => res.json())
-		.then(data => {
-				alert(data.message); 
-					
-
-		}); 
-	//});
-	
-}
 function createLocalValue(item,data) {
 	localStorage.setItem(item, data); 
 } 
@@ -1462,40 +1003,6 @@ $(document).ready(function () {
 	else if (currentrule == 0)
 		$("#adminfunc").show();
 
-/*		
-	var radioValue1 = $("input[id='bnopt']:checked").val();
-	var radioValue2 =$("input[id='bsopt']:checked").val();
-	$("#bnopt").on('click', function(e) {
-		//currentrule = 3;
-		createLocalValue("bnopt",3);
-		createLocalValue("defrule",3);
-		currentrule = getLocalValue("bnopt");
-		$("#bsopt").prop("checked", false);
-		$("#bnopt").prop("checked", true);
-		radioValue1 = $("input[id='bnopt']:checked").val();
-		radioValue2 = $("input[id='bsopt']:checked").val();
-		if(radioValue1){
-			//console.log("Benh nhan " + radioValue1);
-			console.log("U " + currentrule);
-		}	
-		//alert("Benh nhan");
-	});
-	$("#bsopt").on('click', function(e) {
-		//alert("Bac si");
-		//currentrule = 2;
-		createLocalValue("bsopt",2);
-		createLocalValue("defrule",2);
-		currentrule = getLocalValue("bsopt");
-		$("#bsopt").prop("checked", true);
-		$("#bnopt").prop("checked", false);
-		radioValue1 = $("input[id='bnopt']:checked").val();
-		radioValue2 = $("input[id='bsopt']:checked").val();
-		if(radioValue2){
-			//console.log("Bac si " + radioValue2);
-			console.log("U " + currentrule);
-		}	
-	});
-*/
 	//get SMS
 	$("#btngetsms").on('click', function(e) {
 		//$("#loadingx").show();
@@ -1658,7 +1165,7 @@ $(document).ready(function () {
 			disAlllogged();
 			
 			if((currentrule == 0)){
-				viewAdmin();
+				//viewAdmin();
 			}else{
 				alert("Bạn không đủ quyền để truy cập!");
 				viewLoggedin(currentrule);
@@ -1681,7 +1188,7 @@ $(document).ready(function () {
 			disAlllogged();
 			
 			if((currentrule == 0) || (currentrule == 1)){
-				viewDashboard();
+				//viewDashboard();
 			}else{
 				alert("Bạn không đủ quyền để truy cập!");
 				viewLoggedin(currentrule);
@@ -1706,56 +1213,6 @@ $(document).ready(function () {
 		closeNav();
 	});
 
-	//scan doc
-	$("#docnew").hide();
-	$("#hidecreatebtn").hide();
-
-	//scan doc, save image
-	$("#savedocbtn").click(function(e){
-		uploadIMG();
-	});
-	$("#recapdocbtn").click(function(e){
-		$("#idcanvassource").show();
-		$("#savedocbtn").show()
-		recapIMG();
-
-	});
-	$("#dropsearch1ham a").on('click', function(e) {
-		e.preventDefault(); // cancel the link behaviour
-		var selText = $(this).text();
-		$("#dropsearchHam").text(selText);
-	});
-
-
-	//scan doc, show doc new
-	$("#hidecreatebtn").hide();
-	$("#savedocbtn").hide();
-	$("#recapdocbtn").hide();
-	
-	$("#createbtn").on('click', function(e) {
-		if((currentGtoken != "") && ((currentrule == 0) || (currentrule == 1)) ){
-			$("#docnew").show();
-			$("#idcanvassource").show();
-			
-			$("#hidecreatebtn").show();
-			$("#createbtn").hide();
-			$("#savedocbtn").hide();
-			$("#recapdocbtn").show();
-		}else{
-			alert("Bạn không đủ quyền để truy cập!");
-		}
-	});
-	$("#hidecreatebtn").on('click', function(e) {
-		$("#docnew").hide();
-		//$("#idcanvassource").hide();
-		$("#createbtn").show();
-		$("#hidecreatebtn").hide();
-		//$("#savedocbtn").hide()
-		//$("#recapdocbtn").hide();
-	});
-
-	//scan doc, hide image
-	$("#idcanvassource").hide()
 
 	$('#table6').on('click', 'tr', function () {
         var data = table6bs.row( this ).data();
