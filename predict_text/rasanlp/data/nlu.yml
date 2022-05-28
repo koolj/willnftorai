@@ -4,12 +4,37 @@ nlu:
 - intent: badwords
   examples: |
     - mất dạy
-    - thằng điên
-    - con đĩ
-    - mẹ mày
+    - thằng 
+    - đĩ
+    - rồ
+    - dại
+    - mày
     - con chó
-    - ăn hại
+    - con mẹ mày
+    - con bà
+    - kệ bố
+    - con mẹ
+    - tổ cha
+    - tiên sư
+    - cứt
+    - đái
+    - ỉa
+    - điên
     - chính quyền
+    - chủ tịch
+    - quyền
+    - địt 
+    - đụ
+    - cu
+    - cặc
+    - buồi
+    - lồn
+    - bím
+    - trym
+    - chim
+    - dt
+    - điện thoại
+    - liên lạc
 - intent: greet
   examples: |
     - hey
