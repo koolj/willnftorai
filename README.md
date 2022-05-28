@@ -184,11 +184,11 @@ https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0df
 
 
 # document intro to Hakathon Orai 2022
-![Link here](https://drive.google.com/file/d/1tf8QPI0NKZU7gPTheyKE_cvhrZMVMXXV/view?usp=sharing)
+[Link here](https://drive.google.com/file/d/1tf8QPI0NKZU7gPTheyKE_cvhrZMVMXXV/view?usp=sharing)
 
 
 # video clip intro
-![Link here](https://drive.google.com/drive/folders/1qVdXkSDOQFMaeciy1Befm9Is83dGOJs4?usp=sharing)
+[Link here](https://drive.google.com/drive/folders/1qVdXkSDOQFMaeciy1Befm9Is83dGOJs4?usp=sharing)
 
 # the team
-![BookWorm](https://drive.google.com/file/d/1R-5JAnI37gZPZRZZaMh353DFzJt__p4V/view?usp=sharing)
+[BookWorm](https://drive.google.com/file/d/1R-5JAnI37gZPZRZZaMh353DFzJt__p4V/view?usp=sharing)
