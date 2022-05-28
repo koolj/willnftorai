@@ -26,6 +26,7 @@ function readIMG(data) {
 
 const FileType = require('file-type');
 const readChunk = require('read-chunk');
+const { off } = require('process');
 
 //check google login
 var valgoogle= async (userid,googletoken,role,appid,idobject,fb) => {
@@ -319,6 +320,8 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
     try {
 		var searchURL = esUrl + "/nft/_doc?pretty";
 		const headers = {}
+		if(type == 0 || type ==1) divideAmm = 10
+		else divideAmm = 550
 		var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 		var texthash = '';
 		for(i=0; i < 20; i++ )
@@ -329,34 +332,134 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 		sttGroup = "";
 		splitRemainer = "";
 		b64 = b64.toString();
-		splitTime = math.floor(b64.length/10);
-		if(math.mod(b64.length,10) > 0)
-			splitRemainer = b64.substring(splitTime * 10,b64.length);
-		for(i=0; i <= splitTime - 1; i++ ){
-			sttGroup = sttGroup + b64.substring(splitTime * i, splitTime * (i+1))  + " ";
-		}
-		if(splitRemainer > 0) sttGroup = sttGroup + " " + splitRemainer;
-
+		
+		
 		var ipfsFileUrl = "";
-		myObj = {
-			"imglink": rawdata,
-			"nftid":texthash,
-			"rawdata":sttGroup
-		}
 
-		const request_config = {
-			url: searchURL,
-			method: "POST",
-			headers:headers,
-			data: myObj
-		};
-		console.log("-----------------------------");
-		console.log(splitRemainer);
-		console.log(splitTime);
-			//if(db == "nftdb"){
-				//add to db
+		console.log("--------------TO ES---------------");
+				return new Promise((resolve, reject) => {
+						axiosReq=[];
+						sttGroupArr = [];
+						sttGroupArr = b64.match(/.{1,divideAmm}/g);
+			
+						//for(i=0; i < sttGroupArr.length; i++ ){
+						var i = 0;
+						var found = 0;
+						let searchESin = setInterval(()=>{
+							i++;
+							sttGroup = sttGroupArr[i] + " ";
+							myObj = {
+								"imglink": rawdata,
+								"nftid":texthash,
+								"rawdata":sttGroup
+							};
+							request_config = {
+								url: searchURL,
+								method: "POST",
+								headers:headers,
+								data: myObj
+							};
+							axios(request_config).then((resp1) => {
+								if(resp1){
+									found++;
+									console.log("Inserting..." + (i/sttGroupArr.length*100) + " %..");
+								}	
+							}).catch((error)=>{
+								console.log(error.data);
+								reject();
+							});
+							if(i == sttGroupArr.length){
+								clearInterval(searchESin);
+								resolve(found);
+							}
+						},10)
+									
+					
+/*					
+					axiosReq=[];
+					sttGroupArr = [];
+					sttGroupArr = b64.match(/.{1,50}/g);
+					for(i=0; i < sttGroupArr.length; i++ ){
+						sttGroup = sttGroupArr[i] + " ";
+						//console.log(sttGroup);
+						myObj = {
+							"imglink": rawdata,
+							"nftid":texthash,
+							"rawdata":sttGroup
+						};
+						request_config = {
+							url: searchURL,
+							method: "POST",
+							headers:headers,
+							data: myObj
+						};
+						axiosReq.push(axios(request_config));
+					}
 
-				//add to ES
+					axios.all(axiosReq)
+					.then((data) => {
+						// output of req.
+						console.log(data.data);
+						resolve(data.data);
+					}).catch((error)=>{
+						console.log(error);
+						resolve({result: '1',message: error.data});
+					});
+*/
+
+				}).then(async(doneRes)=>{
+					console.log(doneRes);
+					//to ipfs
+					var FormData = require('form-data');
+					var fs = require('fs');
+					var data = new FormData();
+					data.append('path', fs.createReadStream(rawdata));
+
+					var configIPFS = {
+						method: 'post',
+						url: 'http://localhost:5001/api/v0/add',
+						headers: { 
+							...data.getHeaders()
+						},
+						data : data
+					};
+
+					return await axios(configIPFS)
+						.then(async(response)=>{
+						//console.log(JSON.stringify(response.data));
+						ipfsFileUrl = "http://localhost:8080/ipfs/" + response.data.Hash;
+						
+						
+						//to blockchain
+						var createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
+
+						//to db
+						//console.log("Block hash created: "+createblockqryres);
+						if(createblockqryres.length > 1){
+							console.log("----- go here " + type);
+							return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
+								let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
+								//console.log("-------------------- here 8 + " + resFinal);	
+								return 	resFinal;
+							}).catch((error)=> {
+								return {result: '1',message: error.data}
+							});
+
+						}else return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+
+
+					})
+					.catch((error)=>{
+						console.log("----IPFS--" + JSON.stringify(error.data));
+						return {result: '1',message: error}
+					});
+
+				}).catch((error)=>{
+					console.log(error);
+					return {result: '1',message: error}
+				});
+
+/*
 				return await axios(request_config)
 				.then(async(resp1,err) => {
 					if(err)
@@ -417,6 +520,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 					console.log("----ES--" + JSON.stringify(error.data));
 					return {result: '1',message: error}
 				});
+*/				
 			//}else return {result: '1',message: `Database không tồn tại!`}
 
     } catch(error) {
@@ -424,12 +528,71 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
     }
 }
 
-var searchesnft= async (db,val1,token,idobject) => {
+var searchesnft= async (db,val1,token,type) => {
     try {
-		//console.log(val1)
 		var searchURL = esUrl + "/nft/_search?pretty";
 		const headers = {};
+		if(type == 0 || type ==1) divideAmm = 10
+		else divideAmm = 550
+		console.log("--------------CHECK & SEARCH ES---------------");
+		return new Promise((resolve, reject) => {
+			axiosReq=[];
+			sttGroupArr = [];
+			sttGroupArr = val1.match(/.{1,divideAmm}/g);
 
+			//for(i=0; i < sttGroupArr.length; i++ ){
+			var i = 0;
+			var found = 0;
+			searchESin = setInterval(()=>{
+				i++;
+				sttGroup = sttGroupArr[i] + " ";
+				keysearch ={
+					"query": {
+						"query_string": {
+						  "query": sttGroup,
+						  "default_field": "rawdata"
+						}
+					  }
+				};
+				request_config = {
+					url:searchURL,
+					method: 'GET',
+					headers:headers,
+					data:keysearch
+				};
+				axios(request_config).then((resp1) => {
+					console.log("Checking..." + i + " %..");
+					if(resp1.data.hits.hits.length > 0){
+						found++;
+						
+						rate = (found/50)*100;
+						console.log("Checking..." + rate + "%..");
+						
+						if(found > 50){
+							clearInterval(searchESin);
+							
+							resolve(found);
+						} 
+					}
+				})
+				if(i == sttGroupArr.length){
+					clearInterval(searchESin);
+					resolve(found);
+					//return {result: '0',message:"", stat: false}
+				}
+			},12)
+
+		}).then(async(doneRes)=>{
+			console.log(doneRes);
+			if(doneRes < 50) return {result: '0',message:"", stat: true}
+			else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
+		}).catch((error)=>{
+			console.log(error);
+			return {result: '1',message: error, stat: false}
+		});
+
+/*
+		//console.log(val1)
 			//if(db == "nftdb"){
 				if(val1.toString().trim().length < 10){
 					return {result: '0',message: 'Dữ liệu không đủ dài để tạo NFT! Phải> 10 ký tự'}
@@ -478,7 +641,7 @@ var searchesnft= async (db,val1,token,idobject) => {
 								console.log(resp1.data.hits.hits);
 								if(resp1.data.hits.hits.length > 0){
 									
-									return {result: '0',message: 'Đã tìm thấy NFT trùng lặp #'+ resp1.data.hits.hits[0]._id.substr(0,8) +'...#! Hãy chọn một NFT khác!',hit:resp1.data.hits.hits, stat: false}
+									return {result: '0',message: 'Tìm thấy NFT trùng lặp #'+ resp1.data.hits.hits[0]._id.substr(0,8) +'...#! Hãy chọn một NFT khác!',hit:resp1.data.hits.hits, stat: false}
 								}	
 								else
 									return {result: '1',message: "Nothing found!", stat: true}	
@@ -494,7 +657,7 @@ var searchesnft= async (db,val1,token,idobject) => {
 			//}	
 			//else
 				//return {result: '1',message: `Database không tồn tại!`}
-
+*/
     } catch(error) {
         return {result: '1',message: `Error: ${error}`}
     }
@@ -581,14 +744,14 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 				//nft 0
 				if(type == 0 ){
 					if(text.length >= 8){
-						if(text.length < 50){
+						if(text.length < 100){
 							if (!(/[`'!@#$%^&'*()_+\-=\[\]{};':'"\\|,.<>\/?'~]/.test(text))) {
 								return await validText(text,chatbot)
 								.then(async(validTextvar) => {
 									if(validTextvar){
 										console.log("-------check dup---------------------")
 										//console.log(idobject.ip+"----"+text +"-----------" +type);
-										return await searchesnft(db,text,token,idobject)
+										return await searchesnft(db,text,token,type)
 										.then(async(research) => {
 											console.log(research)
 											//console.log("----- go here4");
@@ -647,7 +810,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 				//nft 1,2,3
 				else if((type == 1) || (type == 2) || (type == 3) || (type == 4)){
 					//console.log(idobject.ip+"----"+text.substr(0,35) +"-----------" +type);
-					return await searchesnft(db,b64,token,idobject)
+					return await searchesnft(db,b64,token,type)
 					.then(async(research2) => {
 						//console.log(research2)
 						
@@ -818,7 +981,7 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 						let savefile = await require('fs').writeFile(imghost+texthash+".jpg", base64Data, 'base64', async(err,data,) => {})
 									
 						//check same image
-						return await searchesnft("",base64Data,token,idobject)
+						return await searchesnft("",base64Data,token,type)
 						//console.log(research);
 						.then(async(research) => {
 							if(!research.stat){
@@ -1143,8 +1306,6 @@ var validText= async (message,chatbot) => {
 		}
 		)
 		.then(async(resp1) => {
-			console.log(resp1.data[0].text)
-			console.log(resp1.data[0].text)
 			if(resp1.data[0].text.indexOf("bad") != -1)
 				return false
 			else
