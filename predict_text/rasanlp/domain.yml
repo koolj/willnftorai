@@ -3,6 +3,7 @@ version: "3.1"
 intents:
   - greet
   - badwords
+  - okwords
   - goodbye
   - affirm
   - deny
@@ -11,6 +12,9 @@ intents:
   - bot_challenge
 
 responses:
+  utter_ok:
+  - text: "ok"
+
   utter_bad:
   - text: "bad"
 

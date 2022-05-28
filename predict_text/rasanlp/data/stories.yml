@@ -6,8 +6,21 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+
+- story: happy path 2
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: happy path 3
+  steps:
+  - intent: affirm
+  - action: utter_did_that_help
+
+- story: happy path 4
+  steps:
+  - intent: okwords
+  - action: utter_ok
 
 - story: sad path 1
   steps:

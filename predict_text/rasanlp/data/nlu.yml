@@ -1,28 +1,38 @@
 version: "3.1"
 
 nlu:
+- intent: okwords
+  examples: |
+    - trời
+    - xanh
+    - mây
+    - trắng
+    - nắng
+    - chuyên
+    - tôi
+    - lãnh
+    - đó
+    - phát
+    - nước
+    - em
+    - anh
 - intent: badwords
   examples: |
-    - mất dạy
+    - gọi số
+    - phang
+    - hiếp
+    - bán
+    - mua
+    - mất
     - thằng 
     - đĩ
     - rồ
     - dại
     - mày
-    - con chó
-    - con mẹ mày
-    - con bà
-    - kệ bố
-    - con mẹ
-    - tổ cha
-    - tiên sư
     - cứt
     - đái
     - ỉa
     - điên
-    - chính quyền
-    - chủ tịch
-    - quyền
     - địt 
     - đụ
     - cu
@@ -32,9 +42,6 @@ nlu:
     - bím
     - trym
     - chim
-    - dt
-    - điện thoại
-    - liên lạc
 - intent: greet
   examples: |
     - hey
