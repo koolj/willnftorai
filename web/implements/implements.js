@@ -320,8 +320,6 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
     try {
 		var searchURL = esUrl + "/nft/_doc?pretty";
 		const headers = {}
-		if(type == 0 || type ==1) divideAmm = 10
-		else divideAmm = 550
 		var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 		var texthash = '';
 		for(i=0; i < 20; i++ )
@@ -340,7 +338,8 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 				return new Promise((resolve, reject) => {
 						axiosReq=[];
 						sttGroupArr = [];
-						sttGroupArr = b64.match(/.{1,divideAmm}/g);
+						if(type == 0 || type ==1) sttGroupArr = b64.match(/.{1,10}/g);
+						else sttGroupArr = b64.match(/.{1,550}/g);
 			
 						//for(i=0; i < sttGroupArr.length; i++ ){
 						var i = 0;
@@ -532,14 +531,19 @@ var searchesnft= async (db,val1,token,type) => {
     try {
 		var searchURL = esUrl + "/nft/_search?pretty";
 		const headers = {};
-		if(type == 0 || type ==1) divideAmm = 10
-		else divideAmm = 550
+
+		var strArr = 0;
 		console.log("--------------CHECK & SEARCH ES---------------");
 		return new Promise((resolve, reject) => {
+			console.log("Checking...");
 			axiosReq=[];
 			sttGroupArr = [];
-			sttGroupArr = val1.match(/.{1,divideAmm}/g);
 
+			if(type == 0 || type ==1) sttGroupArr = val1.match(/.{1,10}/g);
+			else sttGroupArr = val1.match(/.{1,550}/g);
+
+			strArr = sttGroupArr.length;
+			console.log(sttGroupArr);
 			//for(i=0; i < sttGroupArr.length; i++ ){
 			var i = 0;
 			var found = 0;
@@ -561,12 +565,12 @@ var searchesnft= async (db,val1,token,type) => {
 					data:keysearch
 				};
 				axios(request_config).then((resp1) => {
-					console.log("Checking..." + i + " %..");
+					//console.log("Checking..." + i + " %..");
 					if(resp1.data.hits.hits.length > 0){
 						found++;
 						
 						rate = (found/50)*100;
-						console.log("Checking..." + rate + "%..");
+						//console.log("Checking..." + rate + "%..");
 						
 						if(found > 50){
 							clearInterval(searchESin);
@@ -584,8 +588,13 @@ var searchesnft= async (db,val1,token,type) => {
 
 		}).then(async(doneRes)=>{
 			console.log(doneRes);
-			if(doneRes < 50) return {result: '0',message:"", stat: true}
-			else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
+			console.log(strArr);
+			if(type ==0 || type ==1)
+				if(doneRes < 2) return {result: '0',message:"", stat: true}
+				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
+			else
+				if(doneRes < 50) return {result: '0',message:"", stat: true}
+				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
 		}).catch((error)=>{
 			console.log(error);
 			return {result: '1',message: error, stat: false}
