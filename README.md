@@ -81,6 +81,7 @@ https://developers.momo.vn/v3/docs/payment/api/wallet/onetime
 ```
 ### run docker elasticsearch
 ```
+//upgrade docker-compose to v 1.26
 //git clone & and run docker
 git clone https://github.com/deviantony/docker-elk 
 
@@ -97,6 +98,8 @@ http.cors.allow-headers: X-Requested-With,Content-Type,Content-Length,Authorizat
 
 //up run docker
 docker-compose up -d elasticsearch kibana
+
+//on elasticsearch, create index of "nft"
 
 ```
 
