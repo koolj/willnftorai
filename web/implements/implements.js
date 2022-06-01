@@ -372,39 +372,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 								resolve(found);
 							}
 						},10)
-									
-					
-/*					
-					axiosReq=[];
-					sttGroupArr = [];
-					sttGroupArr = b64.match(/.{1,50}/g);
-					for(i=0; i < sttGroupArr.length; i++ ){
-						sttGroup = sttGroupArr[i] + " ";
-						//console.log(sttGroup);
-						myObj = {
-							"imglink": rawdata,
-							"nftid":texthash,
-							"rawdata":sttGroup
-						};
-						request_config = {
-							url: searchURL,
-							method: "POST",
-							headers:headers,
-							data: myObj
-						};
-						axiosReq.push(axios(request_config));
-					}
 
-					axios.all(axiosReq)
-					.then((data) => {
-						// output of req.
-						console.log(data.data);
-						resolve(data.data);
-					}).catch((error)=>{
-						console.log(error);
-						resolve({result: '1',message: error.data});
-					});
-*/
 
 				}).then(async(doneRes)=>{
 					console.log(doneRes);
@@ -458,69 +426,6 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 					return {result: '1',message: error}
 				});
 
-/*
-				return await axios(request_config)
-				.then(async(resp1,err) => {
-					if(err)
-						return {result: '1',message: err}
-					else{
-						//console.log(resp1.data);
-
-						//to block
-
-						//to ipfs
-						var FormData = require('form-data');
-						var fs = require('fs');
-						var data = new FormData();
-						data.append('path', fs.createReadStream(rawdata));
-
-						var configIPFS = {
-							method: 'post',
-							url: 'http://localhost:5001/api/v0/add',
-							headers: { 
-							  ...data.getHeaders()
-							},
-							data : data
-						};
-
-						return await axios(configIPFS)
-							.then(async(response)=>{
-							//console.log(JSON.stringify(response.data));
-							ipfsFileUrl = "http://localhost:8080/ipfs/" + response.data.Hash;
-							
-							
-							//to blockchain
-							var createblockqryres = "12"; //await createblockqry(token,blockobj,idobject)
-
-							//to db
-							//console.log("Block hash created: "+createblockqryres);
-							if(createblockqryres.length > 1){
-								console.log("----- go here " + type);
-								return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
-									let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
-									//console.log("-------------------- here 8 + " + resFinal);	
-									return 	resFinal;
-								}).catch((error)=> {
-									return {result: '1',message: error.data}
-								});
-
-							}else return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
-
-
-						})
-						.catch((error)=>{
-							console.log("----IPFS--" + JSON.stringify(error.data));
-							return {result: '1',message: error}
-						});
-
-				
-					}				
-				}).catch((error)=> {
-					console.log("----ES--" + JSON.stringify(error.data));
-					return {result: '1',message: error}
-				});
-*/				
-			//}else return {result: '1',message: `Database không tồn tại!`}
 
     } catch(error) {
 		return {result: '1',message: `Error: ${error}`}
@@ -589,84 +494,18 @@ var searchesnft= async (db,val1,token,type) => {
 		}).then(async(doneRes)=>{
 			console.log(doneRes);
 			console.log(strArr);
+			let sameChances = doneRes/strArr * 100;
+			console.log(sameChances);
 			if(type ==0 || type ==1)
-				if(doneRes < 2) return {result: '0',message:"", stat: true}
-				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
+				if(sameChances < 50) return {result: '0',message:"", stat: true}
+				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' %! Hãy chọn một NFT khác!', stat: false}
 			else
-				if(doneRes < 50) return {result: '0',message:"", stat: true}
-				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
+				if(doneRes > 50) return {result: '0',message:"", stat: true}
+				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' %! Hãy chọn một NFT khác!', stat: false}
 		}).catch((error)=>{
 			console.log(error);
 			return {result: '1',message: error, stat: false}
 		});
-
-/*
-		//console.log(val1)
-			//if(db == "nftdb"){
-				if(val1.toString().trim().length < 10){
-					return {result: '0',message: 'Dữ liệu không đủ dài để tạo NFT! Phải> 10 ký tự'}
-				}			
-				else{
-					//split data
-					splitQry = "";
-					sttGroup = "";
-					splitRemainer = "";
-					b64 = val1.toString();
-					splitTime = math.floor(b64.length/10);
-					if(splitTime > 10) splitTime = 10
-					if(math.mod(b64.length,10) > 0)
-						splitRemainer = b64.substring(splitTime * 10,b64.length);
-					for(i=0; i <= splitTime -1; i++ ){
-						sttGroup = sttGroup + b64.substring(splitTime * i, splitTime * (i+1)) + " ";
-					}
-					splitQry = sttGroup;
-
-					keysearch ={"query": {
-						"match_phrase": {
-						  "message": splitQry
-						}
-					  }
-					};
-					keysearch2 ={
-						"query": {
-							"query_string": {
-							  "query": splitQry,
-							  "default_field": "rawdata"
-							}
-						  }
-					}	
-					
-					return await axios({url:searchURL,
-						method: 'GET',
-						headers:headers,
-						data:keysearch2
-						})
-						.then(async(resp1,err) => {
-							if(err){
-								console.log(err);
-								return {result: '1',message: err}
-
-							}else{	
-								console.log(resp1.data.hits.hits);
-								if(resp1.data.hits.hits.length > 0){
-									
-									return {result: '0',message: 'Tìm thấy NFT trùng lặp #'+ resp1.data.hits.hits[0]._id.substr(0,8) +'...#! Hãy chọn một NFT khác!',hit:resp1.data.hits.hits, stat: false}
-								}	
-								else
-									return {result: '1',message: "Nothing found!", stat: true}	
-							}		
-							
-						}).catch((error)=>{ 
-							console.log(error.data);
-							return {result: '1',message: error, stat: false}
-						})
-					
-
-				}
-			//}	
-			//else
-				//return {result: '1',message: `Database không tồn tại!`}
-*/
     } catch(error) {
         return {result: '1',message: `Error: ${error}`}
     }
