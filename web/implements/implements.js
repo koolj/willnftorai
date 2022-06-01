@@ -500,8 +500,8 @@ var searchesnft= async (db,val1,token,type) => {
 				if(sameChances < 50) return {result: '0',message:"", stat: true}
 				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' %! Hãy chọn một NFT khác!', stat: false}
 			else
-				if(doneRes > 50) return {result: '0',message:"", stat: true}
-				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' %! Hãy chọn một NFT khác!', stat: false}
+				if(doneRes < 50) return {result: '0',message:"", stat: true}
+				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
 		}).catch((error)=>{
 			console.log(error);
 			return {result: '1',message: error, stat: false}
