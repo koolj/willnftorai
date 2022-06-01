@@ -1,10 +1,16 @@
 # guideline
 
+//prepare
+```
+pip3 install flask_restful
+pip install opencv-python
+pip3 install imutils
+```
 //install python & flask: https://flask.palletsprojects.com/en/2.1.x/installation/
 
 //set FLASK
 ```
-export FLASK_APP=imgdetect_svr
+export FLASK_APP=imsearch_svr
 ```
 //run
 ```

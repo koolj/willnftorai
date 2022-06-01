@@ -50,7 +50,7 @@ app = Flask(__name__)
 api = Api(app)
 class Quotes(Resource):
     def get(self):
-        return 'Dathoc.Net says: Hi!'
+        return 'BookWorm says: Hi!'
 
 api.add_resource(Quotes, '/')
 
@@ -66,4 +66,4 @@ def vc0():
     returnval2 = checkimg(imgurl)
     return returnval2
 if __name__ == '__main__':
-    app.run(debug=True,port=5001)
+    app.run(debug=True,port=5000)
