@@ -375,7 +375,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 
 
 				}).then(async(doneRes)=>{
-					console.log(doneRes);
+					//console.log(doneRes);
 					//to ipfs
 					var FormData = require('form-data');
 					var fs = require('fs');
@@ -403,7 +403,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 						//to db
 						//console.log("Block hash created: "+createblockqryres);
 						if(createblockqryres.length > 1){
-							console.log("----- go here " + type);
+							//console.log("----- go here " + type);
 							return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
 								let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
 								//console.log("-------------------- here 8 + " + resFinal);	
@@ -436,6 +436,9 @@ var searchesnft= async (db,val1,token,type) => {
     try {
 		var searchURL = esUrl + "/nft/_search?pretty";
 		const headers = {};
+		var strArrLength = 0;
+		var foundId = "";
+		var found = 0;
 
 		var strArr = 0;
 		console.log("--------------CHECK & SEARCH ES---------------");
@@ -447,11 +450,11 @@ var searchesnft= async (db,val1,token,type) => {
 			if(type == 0 || type ==1) sttGroupArr = val1.match(/.{1,10}/g);
 			else sttGroupArr = val1.match(/.{1,550}/g);
 
-			strArr = sttGroupArr.length;
-			console.log(sttGroupArr);
+			strArrLength = sttGroupArr.length;
+			//console.log(sttGroupArr);
 			//for(i=0; i < sttGroupArr.length; i++ ){
-			var i = 0;
-			var found = 0;
+			var i = 0;			
+			
 			searchESin = setInterval(()=>{
 				i++;
 				sttGroup = sttGroupArr[i] + " ";
@@ -473,15 +476,11 @@ var searchesnft= async (db,val1,token,type) => {
 					//console.log("Checking..." + i + " %..");
 					if(resp1.data.hits.hits.length > 0){
 						found++;
-						
+						foundId = resp1.data.hits.hits[0]._id;
 						rate = (found/50)*100;
 						//console.log("Checking..." + rate + "%..");
 						
-						if(found > 50){
-							clearInterval(searchESin);
-							
-							resolve(found);
-						} 
+						//if(found > 50){clearInterval(searchESin);//resolve(found);} 
 					}
 				})
 				if(i == sttGroupArr.length){
@@ -491,17 +490,14 @@ var searchesnft= async (db,val1,token,type) => {
 				}
 			},12)
 
-		}).then(async(doneRes)=>{
-			console.log(doneRes);
-			console.log(strArr);
-			let sameChances = doneRes/strArr * 100;
-			console.log(sameChances);
-			if(type ==0 || type ==1)
-				if(sameChances < 50) return {result: '0',message:"", stat: true}
-				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' %! Hãy chọn một NFT khác!', stat: false}
-			else
-				if(doneRes < 50) return {result: '0',message:"", stat: true}
-				else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ doneRes +' điểm! Hãy chọn một NFT khác!', stat: false}
+		}).then(async(foundSame)=>{
+			console.log(foundSame);
+			console.log(strArrLength);
+			let sameChances = foundSame/strArrLength * 100;
+			console.log(sameChances + " ... %");
+
+			if(sameChances < 49) return {result: '0',message:"", stat: true}
+			else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ foundSame +' %!\n----------------\n'+foundId+'\n----------------\nHãy chọn một NFT khác!', stat: false, foundId: foundId}
 		}).catch((error)=>{
 			console.log(error);
 			return {result: '1',message: error, stat: false}
@@ -820,74 +816,71 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 				if((imgid.length < 10000) || (imgid.length > 2000000) ){
 					return {result:'1', message:"Tệp là hình ảnh không hợp lệ. Định dạng phải là jpg / png, độ phân giải 1024, kích thước <2mb."}
 				}
-				//else if(fileerr != 'jpg' || fileerr != 'jpg'){ return {result:'1', message:"Tệp tin ảnh size không đúng format JPEG/PNG. Cần ảnh jpg/png, kích cỡ 1024, dung lượng <2mb."} }
 				else{
 
 					//check same image
 					
-						//write file
-						let savefile = await require('fs').writeFile(imghost+texthash+".jpg", base64Data, 'base64', async(err,data,) => {})
+					//write file
+					let savefile = await require('fs').writeFile(imghost+texthash+".jpg", base64Data, 'base64', async(err,data,) => {})
+								
+				
+					//console.log("----found no dup  -----------------------")
+
+					//check gore/porn
+					const axios = require('axios')
+					const fs = require('fs');
+					const FormData = require('form-data');
+					var picpurifyUrl = 'https://www.picpurify.com/analyse/1.1';
+					var imagePath = imghost+texthash+".jpg"
+					
+					const form = new FormData();
+					form.append('file_image', fs.createReadStream(imagePath));
+					form.append('API_KEY', '85tZFFbYXewXhleliKXLrsKgXIMzCZC6');
+					form.append('task','porn_moderation,drug_moderation,gore_moderation,weapon_moderation,obscene_gesture_moderation,suggestive_nudity_moderation,hate_sign_moderation');
+					form.append('origin_id',"xxxxxxxxx");
+					form.append('reference_id',"yyyyyyyy");
+					
+					return await axios.post(picpurifyUrl, form, { headers: form.getHeaders() })
+					.then(async(response) => {
+						console.log(response.data.confidence_score_decision)
+						console.log(response.data.final_decision)
+						console.log("----check violation, porn... -----------------------")
+						var resmark = response.data.confidence_score_decision.toFixed(2);
+						if(response.data.final_decision != "OK"){
+							console.log("----found violated -----"+resmark*100+"------------------")
+
+							return {result:'1', message: "Phát hiện vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục: "+resmark*100+"%!\nVui lòng chọn data khác!"}
+						}else{
+							console.log("----found NO violated -----------------------");
+							//check same image
+							return await searchesnft("",base64Data,token,4)
+							//console.log(research);
+							.then(async(research) => {
+								if(!research.stat){
+									console.log("----found dup nft img -----------------------");
+									console.log(research);
+									return {result: '1',message: research.message,foundid: research.foundId}
+								}
+								else{
+
+									return await toesnft("nftdb","_shared/"+texthash+".jpg",4,okdocter,base64Data,token,idobject)
+									.then((response2) => {
+										//console.log(response2);
+										return response2;
+									})
 									
-						//check same image
-						return await searchesnft("",base64Data,token,type)
-						//console.log(research);
-						.then(async(research) => {
-							if(!research.stat){
-								console.log("----found dup nft img -----------------------");
-								console.log(research);
-								return {result: '1',message: research.message,hit:research.hit}
-							}
-							else{
-						
-								//console.log("----found no dup  -----------------------")
+								}
+							})//search nft
+							.catch((error)=>{ 
+								return {result: '1',message: error}
+							})
 
-								//check gore/porn
-								const axios = require('axios')
-								const fs = require('fs');
-								const FormData = require('form-data');
-								var picpurifyUrl = 'https://www.picpurify.com/analyse/1.1';
-								var imagePath = imghost+texthash+".jpg"
-								
-								const form = new FormData();
-								form.append('file_image', fs.createReadStream(imagePath));
-								form.append('API_KEY', '85tZFFbYXewXhleliKXLrsKgXIMzCZC6');
-								form.append('task','porn_moderation,drug_moderation,gore_moderation,weapon_moderation,obscene_gesture_moderation,suggestive_nudity_moderation,hate_sign_moderation');
-								form.append('origin_id',"xxxxxxxxx");
-								form.append('reference_id',"yyyyyyyy");
-								
-								return await axios.post(picpurifyUrl, form, { headers: form.getHeaders() })
-								.then(async(response) => {
-									console.log(response.data.confidence_score_decision)
-									console.log(response.data.final_decision)
-									console.log("----check violation, porn... -----------------------")
-									var resmark = response.data.confidence_score_decision.toFixed(2);
-									if(response.data.final_decision != "OK"){
-										console.log("----found violated -----"+resmark*100+"------------------")
-
-										return {result:'1', message: "Phát hiện vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục: "+resmark*100+"%!\nVui lòng chọn data khác!"}
-									}else{
-										//save to db
-										//let newfntvar = await newnft("nftdb","_shared/"+texthash+".jpg",4,base64Data,token,idobject) 
-										//return {result:'0', message: newfntvar}
-										console.log("----found NO violated -----------------------")
-										return await toesnft("nftdb","_shared/"+texthash+".jpg",4,okdocter,base64Data,token,idobject)
-										.then((response2) => {
-											//console.log(response2);
-											return response2;
-										})
-										
-									}
-								})
-								.catch((error)=>{ 
-									return {result: '1',message: error}
-								})
-
-							}						
-						}) //search nft
-						.catch((error)=>{ 
-							return {result: '1',message: error}
-						})
-					}	
+						}						
+					})//check violate 
+					.catch((error)=>{ 
+						return {result: '1',message: error}
+					})
+				}	
 			
 				}else return {result: '1',message: `Người dùng OraiChain không tồn tại!`}
 			}else return {result: '1',message: `Người dùng không tồn tại!`}

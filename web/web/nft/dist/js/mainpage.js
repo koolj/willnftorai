@@ -390,13 +390,13 @@ var htmlvari = ``;
 var currentsymp = "";
 var currentmedexam = "";
 
-function viewNFTS(obj,type){
+function viewNFTS(obj,type,endhtml){
 	var nfturl = "";
-	if(type == 2) obj = obj.doc;
+	if(type == 2) objv = obj.doc;
 	console.log("=================== "+type+" =================");
-	console.log(obj);
+	console.log(objv);
 	obj.forEach(doc => {	
-		//if(type == 2) doc = doc.doc;
+		if(type == 2) doc = doc.doc;
 
 		//console.log("---------" + doc.url);
 		if(doc._id){
@@ -415,7 +415,7 @@ function viewNFTS(obj,type){
 					</a>
 				</div>&nbsp;&nbsp;&nbsp;&nbsp;
 				`;
-				$("#listnft").append(htmlvari);	
+				$(endhtml).append(htmlvari);	
 				//createqrcode(doc.url,apiroot+`/getnftid?nftid=`+doc._id);
 			}
 			else if (doc.type == 1){
@@ -431,7 +431,7 @@ function viewNFTS(obj,type){
 					</a>
 				</div>&nbsp;&nbsp;&nbsp;&nbsp;
 				`;
-				$("#listnft").append(htmlvari);	
+				$(endhtml).append(htmlvari);	
 				//createqrcode(doc.url,doc.url);
 			}
 			else if (doc.type == 2){
@@ -447,7 +447,7 @@ function viewNFTS(obj,type){
 					</a>
 				</div>&nbsp;&nbsp;&nbsp;&nbsp;
 				`;
-				$("#listnft").append(htmlvari);	
+				$(endhtml).append(htmlvari);	
 				//createqrcode(doc.url,doc.url);
 			}
 			else if (doc.type == 3){
@@ -463,7 +463,7 @@ function viewNFTS(obj,type){
 					</a>
 				</div>&nbsp;&nbsp;&nbsp;&nbsp;
 				`;
-				$("#listnft").append(htmlvari);	
+				$(endhtml).append(htmlvari);	
 				//createqrcode(doc.url,doc.url);
 			}
 			else if (doc.type == 4){
@@ -479,7 +479,7 @@ function viewNFTS(obj,type){
 					</a>
 				</div>&nbsp;&nbsp;&nbsp;&nbsp;
 				`;
-				$("#listnft").append(htmlvari);	
+				$(endhtml).append(htmlvari);	
 				//createqrcode(doc.url,doc.url);
 			}
 		}
@@ -519,6 +519,8 @@ function posthttp(url, jsonvar, currentpostVar){
 					});
 				}
 				//console.log(repstr);
+				$("#dectID").empty()
+				if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
 				getnft();
 				get3nft();
 				if(!response.rep.hit) alert(response.rep.message);
@@ -529,14 +531,14 @@ function posthttp(url, jsonvar, currentpostVar){
 				stoploading();
 				currentpost = 0;
 				$("#listnft").empty();
-				viewNFTS(response.rep.message,0)
+				viewNFTS(response.rep.message,0,"#listnft")
 			}	
 			//get last 3
 			else if(currentpostVar == 5){
 				stoploading();
 				currentpost = 0;
 				$("#last3nft").empty();
-				viewNFTS(response.rep.message,2)
+				viewNFTS(response.rep.message,2,"#last3nft")
 
 			}	
 			//get nft with id
@@ -989,6 +991,55 @@ $(document).ready(function () {
 
 	firebase.auth().languageCode = 'en';
 	var provider = new firebase.auth.GoogleAuthProvider();
+	
+	//check authen Google
+	firebase.auth()
+	.getRedirectResult()
+	.then((result) => {
+	  console.log('---------------------------GO HERE---');
+	  console.log(result);
+	  if (result.credential) {
+	  //stoploading();
+	  //console.log(result.credential);
+	  ///** @type {firebase.auth.OAuthCredential} */
+	  var credential = result.credential;
+	  // The signed-in user info.
+	  //console.log(currGmailuser);
+	  //alert(currGmailuser.email);
+	  // This gives you a Google Access Token. You can use it to access the Google API.
+	  currentUsername = result.user.email;
+	  currentGtoken = credential.accessToken;
+	  console.log(currentrule);
+	  validateGaccount(currentUsername,currentGtoken, currentrule, firebase);
+	  $("#hiid").empty();
+	  variCurrentUsername = currentUsername.substr(0,3) + "***" + currentUsername.substr(currentUsername.length - 3, currentUsername.length);
+	  $("#hiid").append("Xin chào " + variCurrentUsername + " &nbsp; &nbsp;");
+	  $('#linklogout').show();
+	  $('#linklogin').hide();
+	  viewMedExam();
+	  // ...
+	  
+	  }
+	}).catch((error) => {
+	  stoploading();
+	  // Handle Errors here.
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+	  console("Có lỗi: " + errorMessage);
+	  // The email of the user's account used.
+	  //var email = error.email;
+	  // The firebase.auth.AuthCredential type that was used.
+	  //var credential = error.credential;
+	  // ...
+	});
+	
+	$("#btnlogingoogle").on('click', function(e) {
+	  console.log('---------------------------GO HERE---');
+	  closeNav();
+	  firebase.auth().signInWithRedirect(provider);
+	  //loginGoogle();
+	});
+
 
 	$("#hiid").empty();
 	$("#hiid").append("Xin chào bạn đến với WillNFT!" + " &nbsp;&nbsp;")
@@ -1060,45 +1111,6 @@ $(document).ready(function () {
 		searchES($('#searchkeyR142').val());;
 	});
 
-	//check authen Google
-	firebase.auth()
-	.getRedirectResult()
-	.then((result) => {
-	  if (result.credential) {
-		//stoploading();
-		//console.log(result.credential);
-		///** @type {firebase.auth.OAuthCredential} */
-		var credential = result.credential;
-		// The signed-in user info.
-		//console.log(currGmailuser);
-		//alert(currGmailuser.email);
-		// This gives you a Google Access Token. You can use it to access the Google API.
-		currentUsername = result.user.email;
-		currentGtoken = credential.accessToken;
-		console.log(currentrule);
-		validateGaccount(currentUsername,currentGtoken, currentrule, firebase);
-		$("#hiid").empty();
-		variCurrentUsername = currentUsername.substr(0,3) + "***" + currentUsername.substr(currentUsername.length - 3, currentUsername.length);
-		$("#hiid").append("Xin chào " + variCurrentUsername + " &nbsp; &nbsp;");
-		$('#linklogout').show();
-		$('#linklogin').hide();
-		viewMedExam();
-		// ...
-		
-	  }
-
-	}).catch((error) => {
-	  stoploading();
-	  // Handle Errors here.
-	  var errorCode = error.code;
-	  var errorMessage = error.message;
-	  console("Có lỗi: " + errorMessage);
-	  // The email of the user's account used.
-	  //var email = error.email;
-	  // The firebase.auth.AuthCredential type that was used.
-	  //var credential = error.credential;
-	  // ...
-	});
 
 	//login with CODE from SMS
 	$('#pwd').on('keypress', function(e) {
@@ -1119,11 +1131,6 @@ $(document).ready(function () {
 		codeSMS(codevar);
 	});
 
-	$("#btnlogingoogle").on('click', function(e) {
-		closeNav();
-		firebase.auth().signInWithRedirect(provider);
-		//loginGoogle();
-	});
 
 
 	$('#linklogin').show();
@@ -1362,7 +1369,8 @@ $(document).ready(function () {
 							//alert(JSON.stringify(data))
 							getnft();
 							get3nft();
-							
+							$("#dectID").empty()
+							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
 							alert(data2.rep.message);
 						})
 					}	
@@ -1392,7 +1400,8 @@ $(document).ready(function () {
 							//alert(JSON.stringify(data))
 							getnft();
 							get3nft();
-							
+							$("#dectID").empty()
+							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
 							alert(data2.rep.message);
 						})
 					}	
@@ -1420,7 +1429,8 @@ $(document).ready(function () {
 							//alert(JSON.stringify(data))
 							getnft();
 							get3nft();
-							
+							$("#dectID").empty()
+							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
 							alert(data2.rep.message);
 						})
 					}	
@@ -1446,7 +1456,10 @@ $(document).ready(function () {
 						//alert(JSON.stringify(data))
 						getnft();
 						get3nft();
-						
+						console.log(data2.rep.foundid);
+						//dectID
+						$("#dectID").empty()
+						if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
 						alert(data2.rep.message);
 					})
 				}					

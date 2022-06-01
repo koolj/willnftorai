@@ -104,7 +104,7 @@ router.post('/nftsendimg', async (req, res) =>{
 				
 		await nftsendimg(imgid,seed,token,idobject)
 		.then((rep)=>{
-			console.log("------------IMG---" + rep);
+			console.log("------------IMG---" +  + JSON.stringify(rep));
 			res.json({
 				rep
 			})
@@ -135,7 +135,7 @@ router.post('/nftfilesend', async (req, res) =>{
 		//console.log(base64data);
 		await nftfilesend(fileid,seed,token, type,idobject)
 		.then((rep)=>{
-			console.log("----------------TEXT,AUD,VID---- " + rep);
+			console.log("----------------TEXT,AUD,VID---- " +  + JSON.stringify(rep));
 			res.json({
 				rep
 			})
