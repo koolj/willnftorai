@@ -14,7 +14,7 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
 2. User must authen via firebase (with Google email)
 3. Do mint nft with data of audio/text/image files. This phase, system support ~2mb  audio/text/image files.
 4. Then system will validate nft data is valid and unique
-    - System normalizes data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp (with [vn_spacy lib](https://gitlab.com/trungtv/vi_spacy)); validate image/images from videos with model (like picpurify.com) via yolov5
+    - System normalizes data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp (with [vn_spacy lib](https://gitlab.com/trungtv/vi_spacy)); validate image/images from videos with model (like [picpurify.com](https://picpurify.com)) via yolov5
     - Define text/doc uniqueness via: nearest distance from extracted chars/phrases features
     - Define audio/audio from video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with [librosa](https://librosa.org/doc/latest/index.html) library
     - Define image/images from video uniqueness via: smallest Euclidean [chisquare](https://en.wikipedia.org/wiki/Chi-squared_distribution) distance from extracted feature 128-bin color histogram of 5 regions of image
@@ -64,7 +64,7 @@ http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 - Authentication: Google firebase
 - Interact with blockchain: OraiChain (testnet)
 - IPFS: nft data storage, port 8080
-- API for AI bot validates image nft: elastichsearch, yolo, pytorch + flask, port 5000, picpurify.com + api analyse v1.1
+- API for AI bot validates image nft: elastichsearch, yolo, pytorch + flask, port 5000, [picpurify.com](https://picpurify.com) + api analyse v1.1
 - API for AI bot validates text nft: elastichsearch, rasa, bart simpletransformer, python + flask, port 5001 & 5005
 - API for AI bot validates audio/sound nft: elastichsearch, cnn, python + flask, port 5002
 ```
