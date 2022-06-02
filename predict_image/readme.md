@@ -19,3 +19,5 @@ flask run
 //api
 
 http://localhost:5000/vc
+
+//deployment with Spark cluster, follow guideline deployment folder
