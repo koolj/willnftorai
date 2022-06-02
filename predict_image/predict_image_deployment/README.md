@@ -43,8 +43,8 @@ services:
 ```
 ## Running docker, build job, submit job, view job status
 ```
-//Download spark-3.2.0-bin-hadoop3.2.tgz (~300mb at https://archive.apache.org/dist/spark/spark-3.2.0/), then put it in the base folder
-//Build base
+//download spark-3.2.0-bin-hadoop3.2.tgz (~300mb at https://archive.apache.org/dist/spark/spark-3.2.0/), then put it in the base folder
+//build base
 git clone <this>
 cd dathoc-spark
 sudo chmod +x build.sh
