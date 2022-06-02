@@ -191,6 +191,10 @@ https://testnet-faucet.web.app/
 //ex, my accounts address
 orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
 
+//install Rust, vscode
+https://www.rust-lang.org/tools/install
+https://code.visualstudio.com/download
+
 //build contract
 //git https://github.com/oraichain/oraiwasm
 //go to oraiwasm/package/plus/ow20, then build and deploy
