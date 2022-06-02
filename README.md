@@ -18,7 +18,7 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
 6. Define text/doc uniqueness via: nearest distance from extracted chars/phrases features
 7. Define audio/audio from video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with [librosa](https://librosa.org/doc/latest/index.html) library
 8. Define image/images from video uniqueness via: smallest Euclidean [chisquare](https://en.wikipedia.org/wiki/Chi-squared_distribution) distance from extracted feature 128-bin color histogram of 5 regions of image
-```
+
 ![Design finding uniqueness](https://github.com/koolj/willnftorai/blob/main/web/web/img/uq.png?raw=true)
 
 
