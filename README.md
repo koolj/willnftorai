@@ -10,6 +10,9 @@ As a webbased dApp, WillNFT running on OraiChain (testnet.scan.orai.io), users h
 //do mint nft with data of audio/text/image
 //then system will validate nft data is valid and unique
 ```
+![Design finding uniqueness](https://github.com/koolj/willnftorai/blob/main/web/web/img/uq.png?raw=true)
+
+
 ## transfer a nft
 ```
 //view a nft
