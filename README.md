@@ -27,6 +27,8 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
 1. User views a nft
 2. Add a price
 3. Do transfer function
+    - User should have wallet and address (Oraichain/ [Oraichain testnet](https://testnet.scan.orai.io/) or any other blockchains related)
+    - User should have gas to pay fee transaction: ~10 or 1000 orai
 
 ## view
 Build then access dApp to view and create, buy, sell NFTs
