@@ -54,7 +54,7 @@ class Quotes(Resource):
 
 api.add_resource(Quotes, '/')
 
-@app.route('/vc0', methods=['POST'])
+@app.route('/vc', methods=['POST'])
 
 def vc0():
     data = request.json

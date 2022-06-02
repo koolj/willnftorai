@@ -30,12 +30,12 @@ searcher = Searcher(args["index"])
 results = searcher.search(features)
 
 # display the query
-cv2.imshow("Query", query)
+#cv2.imshow("Query", query)
 # loop over the results
 for (score, resultID) in results:
 	# load the result image and display it
 	#result = cv2.imread(args["result_path"] + "/" + resultID)
 	#cv2.imshow("Result", result)
-	#print(result)
-	print(str(int(score)))
+	print(resultID)
+	print(score)
 	#cv2.waitKey(0)
