@@ -472,7 +472,7 @@ function viewNFTS(obj,type,endhtml){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<canvas class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="`+doc.url+`"></canvas>
+						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="`+doc.url+`"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
