@@ -34,6 +34,9 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
     - User should have wallet and address (Oraichain/ [Oraichain testnet](https://testnet.scan.orai.io/) or any other blockchains related)
     - User should have gas to pay fee transaction: ~10 or 1000 orai
 
+![Design flows](https://github.com/koolj/willnftorai/blob/main/web/web/img/flow.png?raw=true)
+
+
 ## view
 Build then access dApp to view and create, buy, sell NFTs
 
