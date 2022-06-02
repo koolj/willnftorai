@@ -11,13 +11,17 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
 ## mint a nft, check nft file data (image/text/audio) is unique
 
 1. User must have OraiChain wallet & account, pls register https://testnet.scan.orai.io/wallet/
-2. User must authen via firebase (with gmail)
-3. Do mint nft with data of audio/text/image
+2. User must authen via firebase (with Google email)
+3. Do mint nft with data of audio/text/image files. This phase, system support ~2mb  audio/text/image files.
 4. Then system will validate nft data is valid and unique
     - System normalizes data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp (with [vn_spacy lib](https://gitlab.com/trungtv/vi_spacy)); validate image/images from videos with model (like picpurify.com) via yolov5
     - Define text/doc uniqueness via: nearest distance from extracted chars/phrases features
     - Define audio/audio from video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with [librosa](https://librosa.org/doc/latest/index.html) library
     - Define image/images from video uniqueness via: smallest Euclidean [chisquare](https://en.wikipedia.org/wiki/Chi-squared_distribution) distance from extracted feature 128-bin color histogram of 5 regions of image
+5. Next, system extends to support:
+    - Support image file (.jpg, .png) from 2mb to 50mb
+    - Support audio, sound, video file (.mp3, .mp4) from 2mb to 10gb
+    - Support text, doc file (.txt, .doc) from 2mb to 20mb
 
 ![Design finding uniqueness](https://github.com/koolj/willnftorai/blob/main/web/web/img/uq.png?raw=true)
 
