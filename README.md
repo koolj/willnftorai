@@ -14,10 +14,10 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
 //authen via firebase (with gmail)
 //do mint nft with data of audio/text/image
 //then system will validate nft data is valid and unique
-//normalize data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp; validate image/images from videos with model via yolov5
+//normalize data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp (with [vn_spacy lib](https://gitlab.com/trungtv/vi_spacy)); validate image/images from videos with model (like picpurify.com) via yolov5
 //define text/doc uniqueness via: nearest distance from extracted chars/phrases features
-//define audio/audio from video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with librosa library
-//define image/images from video uniqueness via: smallest Euclidean chisquare distance from extracted feature 128-bin color histogram of 5 regions of image
+//define audio/audio from video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with [librosa](https://librosa.org/doc/latest/index.html) library
+//define image/images from video uniqueness via: smallest Euclidean [chisquare](https://en.wikipedia.org/wiki/Chi-squared_distribution) distance from extracted feature 128-bin color histogram of 5 regions of image
 ```
 ![Design finding uniqueness](https://github.com/koolj/willnftorai/blob/main/web/web/img/uq.png?raw=true)
 
