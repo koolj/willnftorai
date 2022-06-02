@@ -128,15 +128,15 @@ cd ipfs-cluster-ctl
 http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 
 ```
-### setup api detect image
+### setup api detect unique image
 ```
 //view readme
 ```
-### setup api detect text
+### setup api detect unique text
 ```
 //view readme
 ```
-### setup api detect sound
+### setup api detect unique sound
 ```
 //view readme
 ```
