@@ -23,6 +23,7 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
     - Support audio, sound, video file (.mp3, .mp4) from 2mb to 10gb
     - Support text, doc file (.txt, .doc) from 2mb to 20mb
     - Support unique detect model to 100k to 1 millions classic & famous items: literature, poem, paintings, personal & sightseeing identical pictures, movies, media art, music masterpieces, audio tracks...etc.
+    - Support NFT auction play scene with some chosen audiences
 
 ![Design finding uniqueness](https://github.com/koolj/willnftorai/blob/main/web/web/img/uq.png?raw=true)
 
