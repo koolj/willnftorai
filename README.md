@@ -10,7 +10,7 @@ As a webbased dApp, WillNFT running on OraiChain (testnet.scan.orai.io), users h
 //do mint nft with data of audio/text/image
 //then system will validate nft data is valid and unique
 //normalize data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp; validate image/images from videos with model via yolov5
-//define text/doc uniqueness via 
+//define text/doc uniqueness via: nearest distance from extracted chars/phrases features
 //define audio/video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with librosa library
 //define image uniqueness via: smallest Euclidean chisquare distance from extracted feature 128-bin color histogram of 5 regions of image
 ```
