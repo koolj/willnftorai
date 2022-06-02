@@ -9,15 +9,15 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
 
 # main functions
 ## mint a nft, check nft file data (image/text/audio) is unique
-```
-//must have OraiChain wallet & account, pls register https://testnet.scan.orai.io/wallet/
-//authen via firebase (with gmail)
-//do mint nft with data of audio/text/image
-//then system will validate nft data is valid and unique
-//normalize data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp (with [vn_spacy lib](https://gitlab.com/trungtv/vi_spacy)); validate image/images from videos with model (like picpurify.com) via yolov5
-//define text/doc uniqueness via: nearest distance from extracted chars/phrases features
-//define audio/audio from video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with [librosa](https://librosa.org/doc/latest/index.html) library
-//define image/images from video uniqueness via: smallest Euclidean [chisquare](https://en.wikipedia.org/wiki/Chi-squared_distribution) distance from extracted feature 128-bin color histogram of 5 regions of image
+
+1. User must have OraiChain wallet & account, pls register https://testnet.scan.orai.io/wallet/
+2. User must authen via firebase (with gmail)
+3. Do mint nft with data of audio/text/image
+4. Then system will validate nft data is valid and unique
+5. System normalizes data to be in RULES via: validate sound/audio text extraction/text/doc with rasa nlp (with [vn_spacy lib](https://gitlab.com/trungtv/vi_spacy)); validate image/images from videos with model (like picpurify.com) via yolov5
+6. Define text/doc uniqueness via: nearest distance from extracted chars/phrases features
+7. Define audio/audio from video/sound uniqueness via: nearest distance from extracted spectral centroid features of audio with [librosa](https://librosa.org/doc/latest/index.html) library
+8. Define image/images from video uniqueness via: smallest Euclidean [chisquare](https://en.wikipedia.org/wiki/Chi-squared_distribution) distance from extracted feature 128-bin color histogram of 5 regions of image
 ```
 ![Design finding uniqueness](https://github.com/koolj/willnftorai/blob/main/web/web/img/uq.png?raw=true)
 
