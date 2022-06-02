@@ -99,6 +99,7 @@ sudo docker run -d --name couchdb -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_
 ```
 ### get api and payment via Momo wallet
 ```
+//this will be implemented next phase
 //view and create organization test api payment via Momo
 https://developers.momo.vn/v3/docs/payment/api/wallet/onetime
 
