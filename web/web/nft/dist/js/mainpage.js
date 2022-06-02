@@ -520,7 +520,8 @@ function posthttp(url, jsonvar, currentpostVar){
 				}
 				//console.log(repstr);
 				$("#dectID").empty()
-				if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
+				if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid)
+				else if (data2.rep.newid) $("#dectID").append("New NFT id: " + data2.rep.newid+"<br>TXT id: " + data2.rep.txt);
 				getnft();
 				get3nft();
 				if(!response.rep.hit) alert(response.rep.message);
@@ -1370,7 +1371,8 @@ $(document).ready(function () {
 							getnft();
 							get3nft();
 							$("#dectID").empty()
-							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
+							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid)
+							else if (data2.rep.newid)$("#dectID").append("New NFT id: " + data2.rep.newid+"<br>TXT id: " + data2.rep.txt);
 							alert(data2.rep.message);
 						})
 					}	
@@ -1401,7 +1403,8 @@ $(document).ready(function () {
 							getnft();
 							get3nft();
 							$("#dectID").empty()
-							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
+							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid)
+							else if (data2.rep.newid)$("#dectID").append("New NFT id: " + data2.rep.newid+"<br>TXT id: " + data2.rep.txt);
 							alert(data2.rep.message);
 						})
 					}	
@@ -1430,7 +1433,8 @@ $(document).ready(function () {
 							getnft();
 							get3nft();
 							$("#dectID").empty()
-							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
+							if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid)
+							else if (data2.rep.newid)$("#dectID").append("New NFT id: " + data2.rep.newid+"<br>TXT id: " + data2.rep.txt);
 							alert(data2.rep.message);
 						})
 					}	
@@ -1459,7 +1463,8 @@ $(document).ready(function () {
 						console.log(data2.rep.foundid);
 						//dectID
 						$("#dectID").empty()
-						if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid);
+						if(data2.rep.foundid) $("#dectID").append("Found duplicated NFT id: " + data2.rep.foundid)
+						else if (data2.rep.newid)$("#dectID").append("New NFT id: " + data2.rep.newid+"<br>TXT id: " + data2.rep.txt);
 						alert(data2.rep.message);
 					})
 				}					

@@ -371,7 +371,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 								clearInterval(searchESin);
 								resolve(found);
 							}
-						},10)
+						},5)
 
 
 				}).then(async(doneRes)=>{
@@ -405,7 +405,8 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 						if(createblockqryres.length > 1){
 							//console.log("----- go here " + type);
 							return dbnftasset.insert({_id: texthash, url:ipfsFileUrl, owner: owner, view:0,price:50000, type:type,blockhash:createblockqryres,imglink:rawdata,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then(async(body2) => {
-								let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",txt:createblockqryres};
+								//console.log(body2);
+								let resFinal = {result: '0',message: "Tạo NFT #"+ createblockqryres +"...# thành công!",newid:body2.id,txt:createblockqryres};
 								//console.log("-------------------- here 8 + " + resFinal);	
 								return 	resFinal;
 							}).catch((error)=> {
@@ -493,11 +494,11 @@ var searchesnft= async (db,val1,token,type) => {
 		}).then(async(foundSame)=>{
 			console.log(foundSame);
 			console.log(strArrLength);
-			let sameChances = foundSame/strArrLength * 100;
+			let sameChances = Math.round(foundSame/strArrLength * 100);
 			console.log(sameChances + " ... %");
 
 			if(sameChances < 49) return {result: '0',message:"", stat: true}
-			else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ foundSame +' %!\n----------------\n'+foundId+'\n----------------\nHãy chọn một NFT khác!', stat: false, foundId: foundId}
+			else return {result: '1',message: 'Tìm thấy NFT trùng lặp, tỷ lệ trùng khớp >'+ sameChances +' %!\n----------------\n'+foundId+'\n----------------\nHãy chọn một NFT khác!', stat: false, foundId: foundId}
 		}).catch((error)=>{
 			console.log(error);
 			return {result: '1',message: error, stat: false}
