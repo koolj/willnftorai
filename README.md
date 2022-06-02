@@ -2,7 +2,7 @@
 As a webbased dApp, WillNFT running on OraiChain (testnet.scan.orai.io), users here can create NFT digital assets (based on IPFS, cw721) with a self-distinguishing mechanism for digital assets (text, images, audio) to ensure: uniqueness, ownership, and transferability. Users can buy, sell, exchange NFT digital assets with cryptos or via Momo vnd.
 
 ## problem
-Audience/fans could not find suitable way to unique and make copyright owner for that uniqueness of their NFT data  (images, audio/sound, text).
+OraiChain or other blockchain networks' audience/fans could not find suitable way to unique and make copyright owner for that uniqueness of their NFT data  (images, audio/sound, text).
 
 ## solution
 A cluster system to unique the data (images, audio/sound, text) before NFT engineering to OraiChain blockchain network (or any other blockchain network)
