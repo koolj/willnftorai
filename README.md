@@ -23,15 +23,16 @@ A cluster system to unique the data (images, audio/sound, text) before NFT engin
 
 
 ## transfer a nft
-```
-//view a nft
-//add a price
-//do transfer function
-```
+
+1. User views a nft
+2. Add a price
+3. Do transfer function
+
 ## view
 Build then access dApp to view and create, buy, sell NFTs
+
+After building dapp & components, access dapp via
 ```
-//After building dapp & components, access dapp via
 http://localhost:8077/nft/
 ```
 Access OraiChain testnet to view transactions
