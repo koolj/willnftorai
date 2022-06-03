@@ -1,0 +1,8 @@
+# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+train: ruled_img/train  # train images (relative to 'path') 128 images
+val: ruled_img/train  # val images (relative to 'path') 128 images
+#test:  # test images (optional)
+
+# Classes
+nc: 5  # number of classes
+names: ['nude', 'fight', 'hcm', 'protest', 'mona',]  # class names
