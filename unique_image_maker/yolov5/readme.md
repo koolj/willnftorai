@@ -1,4 +1,4 @@
-# guideline yolov5
+# guideline rules detection via yolov5 image detection technology
 
 //not included: dataset for topics: 'nude', 'fight', 'hcm', 'protest', 'mona'
 
@@ -7,7 +7,7 @@
 //get image data from Google
 //using crawl tool https://github.com/koolj/heraforweb, to get images that related to topics: 'nude', 'fight', 'hcm', 'protest', 'mona'
 
-//train custom data
+//train customed data with rtx 2080, 12gb ram.
 ```
 python train.py --img 640 --batch 20 --epochs 60 --data rule.yaml --weights yolov5s.pt
 
