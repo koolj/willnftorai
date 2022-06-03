@@ -9,7 +9,7 @@
 
 //train custom data
 ```
-python train.py --img 640 --batch 10 --epochs 10 --data rule.yaml --weights '' --cfg rule_cfg.yaml
+python train.py --img 640 --batch 20 --epochs 60 --data rule.yaml --weights yolov5s.pt
 
 ```
 //check results, and test detection
