@@ -7,7 +7,7 @@
 //get image data from Google
 //using crawl tool https://github.com/koolj/heraforweb, to get images that related to topics: 'nude', 'fight', 'hcm', 'protest', 'mona'
 
-//train customed data with rtx 2080, 12gb ram.
+//train customed data with rtx 2080 vga card, 12gb ram.
 ```
 python train.py --img 640 --batch 20 --epochs 60 --data rule.yaml --weights yolov5s.pt
 
