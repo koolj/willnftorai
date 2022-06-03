@@ -477,7 +477,7 @@ var searchesnft= async (db,val1,token,type) => {
 					//console.log("Checking..." + i + " %..");
 					if(resp1.data.hits.hits.length > 0){
 						found++;
-						foundId = resp1.data.hits.hits[0]._id;
+						foundId = resp1.data.hits.hits[0]._source.nftid;
 						rate = (found/50)*100;
 						//console.log("Checking..." + rate + "%..");
 						
@@ -494,6 +494,7 @@ var searchesnft= async (db,val1,token,type) => {
 		}).then(async(foundSame)=>{
 			console.log(foundSame);
 			console.log(strArrLength);
+			console.log(foundId);
 			let sameChances = Math.round(foundSame/strArrLength * 100);
 			console.log(sameChances + " ... %");
 
@@ -843,7 +844,7 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 					
 					const form = new FormData();
 					form.append('file_image', fs.createReadStream(imagePath));
-					form.append('API_KEY', '85tZFFbY...');
+					form.append('API_KEY', '85tZFFbYXewXhleliKXLrsKgXIMzCZC6');
 					form.append('task','porn_moderation,drug_moderation,gore_moderation,weapon_moderation,obscene_gesture_moderation,suggestive_nudity_moderation,hate_sign_moderation');
 					form.append('origin_id',"xxxxxxxxx");
 					form.append('reference_id',"yyyyyyyy");
