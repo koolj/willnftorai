@@ -634,7 +634,7 @@ function appearRecaptcha(){
 	appVerifier = window.recaptchaVerifier;
 	stoploading();
 	
-	setTimeout(function(){ stoploading(); }, 2000);
+	setTimeout(function(){ stoploading(); }, 1000);
 }
 function loginSMS(phoneid){
 	
@@ -883,7 +883,7 @@ function viewMedExam(){
 		setTimeout(()=>{
 			getnft();
 			get3nft();
-		},3000)
+		},1000)
 
 		/*
 		var url = apiroot+"/getlast200XElive";
