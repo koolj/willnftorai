@@ -2,7 +2,7 @@ weights: ''
 cfg: rule_cfg.yaml
 data: rule.yaml
 hyp: data/hyps/hyp.scratch-low.yaml
-epochs: 10
+epochs: 50
 batch_size: 10
 imgsz: 640
 rect: false
