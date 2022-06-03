@@ -62,16 +62,14 @@ function displaySideNav(){
 	  </ul>
   
 	  <!-- SEARCH FORM -->
-	  <form class="form-inline ml-3">
-		<div class="input-group input-group-sm">
-		  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-		  <div class="input-group-append">
-			<button class="btn btn-navbar" type="submit">
-			  <i class="fas fa-search"></i>
-			</button>
-		  </div>
-		</div>
-	  </form>
+	  <div class="form-inline ml-3">
+	  <input class="form-control form-control-navbar" id="siteSearchInput" type="search" placeholder="Search" aria-label="Search">
+	  <div class="input-group-append">
+		<button class="btn btn-navbar" id="siteSearchBtn">
+		  <i class="fas fa-search"></i>
+		</button>
+	  </div>
+	</div>
   
 	  <!-- Right navbar links -->
 	  <ul class="navbar-nav ml-auto">
@@ -394,10 +392,10 @@ function viewNFTS(obj,type,endhtml){
 	var nfturl = "";
 	if(type == 2) objv = obj.doc;
 	console.log("=================== "+type+" =================");
-	console.log(objv);
+	console.log(obj);
 	obj.forEach(doc => {	
 		if(type == 2) doc = doc.doc;
-
+		console.log(doc._id);
 		//console.log("---------" + doc.url);
 		if(doc._id){
 			nfturl = doc.owner;
@@ -547,6 +545,11 @@ function posthttp(url, jsonvar, currentpostVar){
 				stoploading();
 				currentpost = 0;
 				//console.log(response.rep);
+				obj=[];
+				doc = response.rep.message;
+				obj.push(doc);
+				$("#listnft").empty();
+				viewNFTS(obj,3,"#listnft")
 				//alert(response.rep.message + "\n--------------\n" + repstr)
 			}	
 			//logout
@@ -965,6 +968,27 @@ function viewInput(num){
 	}
 }
 
+//site search
+function siteSearch(value){
+	if ((value.length < 6)){   
+		stoploading();
+		alert("Từ khoá tìm kiếm cần có giá trị đúng NFTID!");
+	}
+	else{	
+		startloading();
+
+		var url = apiroot+"/getnftid";
+		var jsonvar =  `{"token\":\"` 
+		+ currentGtoken 
+		+ `","nftid":"` 
+		+ value
+		+ `\"}`;
+		currentpost = 4; //site search
+		posthttp(url, jsonvar, currentpost);
+			
+		closeNav();
+	}
+}
 /*
 ====================================================================================================================
 MAIN OPERATION
@@ -1050,6 +1074,23 @@ $(document).ready(function () {
 	//$("#hiid").append("Hi !")
 	//view Login
 	viewLogin();
+
+
+	//site search
+	$('#siteSearchInput').on('keypress', function(e) {
+		//if(appearRecaptcha())
+		if (e.keyCode == 13) {
+			//$("#loadingx").show();
+			startloading();
+			siteSearch($("#siteSearchInput").val());
+	
+		}
+	});
+	$("#siteSearchBtn").on('click', function(e) {
+		//$("#loadingx").show();
+		startloading();
+		siteSearch($("#siteSearchInput").val());
+	});
 
 	//get actor
 	currentrule = getLocalValue("defrule");

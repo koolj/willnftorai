@@ -750,23 +750,27 @@ var get3nft= async (token,idobject) => {
 }
 var getnftid= async (nftid,token,idobject) => {
 	try {
+		
 		//validate token expire
-		//let oktoken = await checkYESTokExp(token);
-		//if(!oktoken){
+		let oktoken = await checkYESTokExp(token);
+		if(!oktoken){
 			//let okdocter = await toUserfromTok(token);
 			//validate user is existed
 			//if(okdocter){
-
+/*
 				const q = {
 					selector: {
 						_id: { "$eq": nftid},
 					},
 					limit:1000000
 				};
-				return await dbnftasset.find(q).then(async(body) => {
-					console.log("---------------------------");
-					console.log(body.docs);
-					if(body.docs.length > 0) {
+*/				
+				return await dbnftasset.get(nftid).then(async(body) => {
+					
+					//console.log(body);
+					if(body) {
+						return {result: '0', message:body}
+						/*
 						//update view
 						var newview =body.docs[0].view + 1
 						await dbnftasset.insert({_id: body.docs[0]._id, _rev:body.docs[0]._rev,url:body.docs[0].url, owner: body.docs[0].owner, view:newview,price:body.docs[0].price, type:body.docs[0].type,timecreated:dateFormat(new Date(), "yyyy-mm-dd h:MM:ss")}).then((body) => {});
@@ -776,22 +780,25 @@ var getnftid= async (nftid,token,idobject) => {
 							let searchesidvar = await searchesnftid(body.docs[0].url);
 							return {result: '0', message:searchesidvar.message}
 						}	
-					}else return  {result: '1', message:'Content has no data!'}
+						*/
+					}
+				}).catch((error)=>{ 
+					return {result: '1',message: "Dữ liệu không tồn tại!"}
 				})
 
 			//}	
 			//else
 				//return {result: '1',message: `Người dùng không tồn tại!`}
-		//}
-		//else
-			//return {result: '1',message: `Phiên làm việc không được xác nhận.\nBạn cần đăng nhập lại để sử dụng!`}
+		}
+		else
+			return {result: '1',message: `Phiên làm việc không được xác nhận.\nBạn cần đăng nhập lại để sử dụng!`}
     } catch(error) {
 		return {result: '1',message: `Error: ${error}`}
     }
 }
 var nftsendimg= async (imgid,seed,token,idobject) => {
     try {
-				//validate token expire
+		//validate token expire
 		let oktoken = await checkYESTokExp(token);
 		if(!oktoken){
 			let okdocter = await toUserfromTok(token);

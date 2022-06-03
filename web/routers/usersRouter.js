@@ -178,9 +178,9 @@ router.post('/searchES', async (req, res) =>{
 		}
 	});
 
-	router.get('/getnftid', async (req, res) =>{
-		//console.log(req)
-		let {nftid} = req.query
+	router.post('/getnftid', async (req, res) =>{	
+		let {token,nftid} = req.body
+		//console.log(nftid)
 		try {
 				//get ip
 				clientIp = requestIp.getClientIp(req); 
@@ -191,7 +191,7 @@ router.post('/searchES', async (req, res) =>{
 					ip: reqip,
 					act: "get nft with id"
 				}
-				await getnftid(nftid,idobject)
+				await getnftid(nftid,token,idobject)
 				.then((rep)=>{
 					//console.log("-------------------- here 9 + " + rep);
 					res.json({
