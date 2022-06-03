@@ -1,9 +1,9 @@
-weights: ''
-cfg: rule_cfg.yaml
+weights: yolov5s.pt
+cfg: ''
 data: rule.yaml
 hyp: data/hyps/hyp.scratch-low.yaml
-epochs: 50
-batch_size: 10
+epochs: 60
+batch_size: 20
 imgsz: 640
 rect: false
 resume: false
@@ -36,4 +36,4 @@ entity: null
 upload_dataset: false
 bbox_interval: -1
 artifact_alias: latest
-save_dir: runs/train/exp2
+save_dir: runs/train/exp3
