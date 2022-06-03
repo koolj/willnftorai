@@ -221,7 +221,7 @@ https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0df
 ```
 
 
-# document intro to Hakathon Orai 2022
+# document intro to Hakathon Oraichain 2022 contest
 [Link here](https://drive.google.com/file/d/1tf8QPI0NKZU7gPTheyKE_cvhrZMVMXXV/view?usp=sharing)
 
 
@@ -230,3 +230,6 @@ https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0df
 
 # the team
 [BookWorm](https://drive.google.com/file/d/1R-5JAnI37gZPZRZZaMh353DFzJt__p4V/view?usp=sharing)
+
+# other projects from BookWorm
+[Other project demos](https://dathoc.net/demo)
