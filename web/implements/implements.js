@@ -843,7 +843,7 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 					
 					const form = new FormData();
 					form.append('file_image', fs.createReadStream(imagePath));
-					form.append('API_KEY', '85tZFFbYXewXhleliKXLrsKgXIMzCZC6');
+					form.append('API_KEY', '85tZFFbY...');
 					form.append('task','porn_moderation,drug_moderation,gore_moderation,weapon_moderation,obscene_gesture_moderation,suggestive_nudity_moderation,hate_sign_moderation');
 					form.append('origin_id',"xxxxxxxxx");
 					form.append('reference_id',"yyyyyyyy");
