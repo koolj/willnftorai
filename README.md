@@ -207,14 +207,18 @@ http://localhost:8077/nft/
 ```
 //build contract
 //git https://github.com/oraichain/oraiwasm
+//go to oraichain/oraiwasm, open with cosmwasm-ide
+//add .env where states the seed of your OraiChain account
 //on vscode, install extension cosmwasm-ide, then update
 sudo apt install binaryen -y
 cargo install sccach
 sudo chmod +x optimize.sh
+
+//go to oraiwasm/package/plus/ow20, then build with cosmwasm-ide and deploy
+//go to oraiwasm/package/plus/oraichain_nft, then build with cosmwasm-ide and deploy
 //add .env where states the seed of your OraiChain account
-//go to oraiwasm/package/plus/ow20, then build and deploy
-//go to oraiwasm/package/plus/oraichain_nft, then build and deploy
-//then build contracts on vscode, then deploy to testnet.scan.orai.io
+//then build contracts on vscode, then with cosmwasm-ide deploy to testnet.scan.orai.io
+
 //then check, account
 https://testnet.scan.orai.io/account/orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
 
