@@ -1,3 +1,4 @@
+
 /*
 Created by anhpt@
 Jan 18, 2021.
@@ -18,7 +19,7 @@ const util = require('util');
 
 const readFile = util.promisify(fs.readFile);
 function getStuff(data) {
-	return readFile('/home/kj/Documents/projects/_master_services/vinpyser/ul/'+data+'_detected.jpg', {encoding: 'base64'});
+	return readFile('/../'+data+'_detected.jpg', {encoding: 'base64'});
 }
 function readIMG(data) {
 	return readFile(data, {encoding: 'base64'});
@@ -605,7 +606,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 												
 												console.log("-------found duplicated---------------------")
 												console.log(research.hit);
-												return {result: '0',message: research.message,hit:research.hit}
+												return {result: '0',message: research.message,hit:research.hit,foundid:research.foundId}
 											}
 											else{
 												console.log("-------no duplicated---------------------")
@@ -661,7 +662,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 						//console.log(research2)
 						
 						if(!research2.stat){
-							return {result: '1',message: research2.message,hit:research2.hit}						}
+							return {result: '1',message: research2.message,hit:research2.hit,foundid:research2.foundId}						}
 						else{
 							//console.log("=============" + text);
 							return await toesnft(db,text,type,okdocter,b64,token,idobject);
