@@ -86,6 +86,23 @@ https://console.firebase.google.com/
 https://docs.docker.com/compose/gettingstarted/
 
 ```
+### get new OraiChain testnet account (if you dont have), setup go, cosmwasm, wasmd, vscode, cosmwasm ide
+```
+//register oraichain testnet account
+https://testnet.scan.orai.io/
+
+//get some airdrop orai coin for testing
+https://testnet-faucet.web.app/
+
+//ex, my accounts address
+orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
+
+//install Rust, vscode, cosmwasm, wasmd, go
+https://www.rust-lang.org/tools/install
+https://code.visualstudio.com/download
+https://docs.cosmwasm.com/docs/1.0/getting-started/installation 
+https://go.dev/doc/install
+```
 ### get html and bootstrap 4 tempalte, and cosmosjs library, to build frontend
 ```
 //follow https://getbootstrap.com/docs/5.0/getting-started/download
@@ -95,7 +112,7 @@ https://docs.docker.com/compose/gettingstarted/
 ```
 sudo docker run -d --name couchdb -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=123 couchdb
 
-//then create dbs: nftlog, nftu, nftasset, nftlog
+//then create dbs: nftexp, nftu, nftasset, nftlog
 ```
 ### get api and payment via Momo wallet
 ```
@@ -188,28 +205,15 @@ http://localhost:8077/nft/
 ```
 ### build some blockchain contracts: cw_erc20, cw721, compile & deploy to OraiChain testnet
 ```
-//register oraichain testnet account
-https://testnet.scan.orai.io/
-
-//get some airdrop orai coin for testing
-https://testnet-faucet.web.app/
-
-//ex, my accounts address
-orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
-
-//install Rust, vscode
-https://www.rust-lang.org/tools/install
-https://code.visualstudio.com/download
-
 //build contract
 //git https://github.com/oraichain/oraiwasm
-//go to oraiwasm/package/plus/ow20, then build and deploy
-//go to oraiwasm/package/plus/oraichain_nft, then build and deploy
 //on vscode, install extension cosmwasm-ide, then update
 sudo apt install binaryen -y
 cargo install sccach
 sudo chmod +x optimize.sh
 //add .env where states the seed of your OraiChain account
+//go to oraiwasm/package/plus/ow20, then build and deploy
+//go to oraiwasm/package/plus/oraichain_nft, then build and deploy
 //then build contracts on vscode, then deploy to testnet.scan.orai.io
 //then check, account
 https://testnet.scan.orai.io/account/orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
