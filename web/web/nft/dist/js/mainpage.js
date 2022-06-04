@@ -1394,8 +1394,8 @@ $(document).ready(function () {
 				getBase64(file).then((data)=>{
 				  	console.log(data.substr(0,50)+"...");
 				  	//console.log(canvasdata.length);
-					if ((data.length < 30) || (data.length > 2100000) ){   
-						alert("Đầu vào cần có tệp tin TEXT, dung lượng <2mb.");
+					if ((data.length < 30) || (data.length > 20100000) ){   
+						alert("Đầu vào cần có tệp tin TEXT, dung lượng <20mb.");
 						stoploading();
 					}else{    
 						startloading();
@@ -1426,8 +1426,8 @@ $(document).ready(function () {
 				getBase64(file).then((data)=>{
 				  	console.log(data.substr(0,50)+"...");
 				  	//console.log(canvasdata.length);
-					if ((data.length < 30) || (data.length > 2100000) ){   
-						alert("Đầu vào cần có tệp tin audio, dung lượng <2mb.");
+					if ((data.length < 30) || (data.length > 20100000) ){   
+						alert("Đầu vào cần có tệp tin audio, dung lượng <20mb.");
 						stoploading();
 					}else{    
 						startloading();
@@ -1456,8 +1456,8 @@ $(document).ready(function () {
 				getBase64(file).then((data)=>{
 				  	console.log(data.substr(0,50)+"...");
 				  	//console.log(canvasdata.length);
-					if ((data.length < 30) || (data.length > 2100000) ){   
-						alert("Đầu vào cần có tệp tin video/mp4, dung lượng <2mb.");
+					if ((data.length < 30) || (data.length > 20100000) ){   
+						alert("Đầu vào cần có tệp tin video/mp4, dung lượng <20mb.");
 						stoploading();
 					}else{    
 						startloading();
@@ -1484,8 +1484,8 @@ $(document).ready(function () {
 			else if(currentnfttype == 4)  {
 				const canvasdata = $("#preview").prop('src');
 				console.log(canvasdata.length);
-				if ((canvasdata.length < 300) || (canvasdata.length > 2000000) ){   
-					alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <2mb.");
+				if ((canvasdata.length < 300) || (canvasdata.length > 20000000) ){   
+					alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <20mb.");
 					stoploading();
 				}else{    
 					startloading();

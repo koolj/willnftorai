@@ -27,8 +27,8 @@ const limiter = rateLimit({
 var cors = require('cors');
 app.use(cors());
 
-app.use(bodyParser.urlencoded({limit: '3mb', extended: true}))
-app.use(bodyParser.json({limit: '3mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: '30mb', extended: true}))
+app.use(bodyParser.json({limit: '30mb', extended: true}))
 
 //Tuỳ biến Router
 //app.use(express.static(__dirname + '/web'));

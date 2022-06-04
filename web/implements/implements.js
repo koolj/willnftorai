@@ -822,8 +822,8 @@ var nftsendimg= async (imgid,seed,token,idobject) => {
 
 				//console.log(base64Data);
 				//console.log(base64Data.substring(1,15))
-				if((imgid.length < 10000) || (imgid.length > 2000000) ){
-					return {result:'1', message:"Tệp là hình ảnh không hợp lệ. Định dạng phải là jpg / png, độ phân giải 1024, kích thước <2mb."}
+				if((imgid.length < 10000) || (imgid.length > 22000000) ){
+					return {result:'1', message:"Tệp là hình ảnh không hợp lệ. Định dạng phải là jpg / png, độ phân giải 1024, kích thước <20mb."}
 				}
 				else{
 
@@ -933,8 +933,8 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 					var foundBadWord = false;
 					console.log(base64Data.length);
 					//console.log(base64Data.substring(0,56))
-					if((base64Data.length < 30) || (base64Data.length > 2000000) || (fileid.indexOf("data:text/plain;base64,") == -1)){
-						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là TEXT và kích thước <2mb."}
+					if((base64Data.length < 30) || (base64Data.length > 22000000) || (fileid.indexOf("data:text/plain;base64,") == -1)){
+						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là TEXT và kích thước <20mb."}
 					}
 					//else if(fileerr != 'txt' || fileerr != 'txt'){ return {result:'1', message:"Tệp tin format không đúng format TEXT. Cần file TXT, kích cỡ dung lượng <2mb."} }
 					else{
@@ -1079,8 +1079,8 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 					
 					var base64Data = fileid.replace(/^data:audio\/mpeg;base64,/, "");
 					//console.log(base64Data.substring(0,56))
-					if((base64Data.length < 30) || (base64Data.length > 2000000) || (fileid.indexOf("data:audio/mpeg;base64,") == -1) ){
-						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là mp3/audio và kích thước <2mb."}
+					if((base64Data.length < 30) || (base64Data.length > 22000000) || (fileid.indexOf("data:audio/mpeg;base64,") == -1) ){
+						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là mp3/audio và kích thước <20mb."}
 					}
 					else{
 						return new Promise((resolve, reject) => {
@@ -1112,8 +1112,8 @@ var nftfilesend= async (fileid,seed,token, type,idobject) => {
 					//data:video/mp4;base64
 					var base64Data = fileid.replace(/^data:video\/mp4;base64,/, "");
 					//console.log(base64Data.substring(0,56))
-					if((base64Data.length < 30) || (base64Data.length > 2000000) || (fileid.indexOf("data:video/mp4;base64,") == -1) ){
-						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là mp4/video và kích thước <2mb."}
+					if((base64Data.length < 30) || (base64Data.length > 22000000) || (fileid.indexOf("data:video/mp4;base64,") == -1) ){
+						return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là mp4/video và kích thước <20mb."}
 					}
 					else{
 						return new Promise((resolve, reject) => {
