@@ -18,9 +18,6 @@ https://go.dev/doc/install
 
 # build some blockchain contracts: cw_erc20, cw721, compile & deploy to OraiChain testnet
 ```
-//accounts address
-orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
-
 //build contract
 //git https://github.com/oraichain/oraiwasm
 //go to oraiwasm/package/plus/ow20, then build and deploy
