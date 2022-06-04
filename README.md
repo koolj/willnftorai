@@ -86,7 +86,7 @@ https://console.firebase.google.com/
 https://docs.docker.com/compose/gettingstarted/
 
 ```
-### get new OraiChain testnet account (if you dont have), setup go, cosmwasm, wasmd, vscode, cosmwasm ide
+### get new OraiChain testnet account (if you dont have), setup go, cosmwasm, wasmd, vscode, cosmwasm-ide
 ```
 //register oraichain testnet account
 https://testnet.scan.orai.io/
