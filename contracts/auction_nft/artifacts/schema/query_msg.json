@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueryMsg",
+  "anyOf": [
+    {
+      "type": "object",
+      "required": [
+        "get_auctions"
+      ],
+      "properties": {
+        "get_auctions": {
+          "type": "object",
+          "required": [
+            "options"
+          ],
+          "properties": {
+            "options": {
+              "$ref": "#/definitions/PagingOptions"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_auctions_by_asker"
+      ],
+      "properties": {
+        "get_auctions_by_asker": {
+          "type": "object",
+          "required": [
+            "asker",
+            "options"
+          ],
+          "properties": {
+            "asker": {
+              "$ref": "#/definitions/HumanAddr"
+            },
+            "options": {
+              "$ref": "#/definitions/PagingOptions"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_auctions_by_bidder"
+      ],
+      "properties": {
+        "get_auctions_by_bidder": {
+          "type": "object",
+          "required": [
+            "options"
+          ],
+          "properties": {
+            "bidder": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/HumanAddr"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "options": {
+              "$ref": "#/definitions/PagingOptions"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_auctions_by_contract"
+      ],
+      "properties": {
+        "get_auctions_by_contract": {
+          "type": "object",
+          "required": [
+            "contract",
+            "options"
+          ],
+          "properties": {
+            "contract": {
+              "$ref": "#/definitions/HumanAddr"
+            },
+            "options": {
+              "$ref": "#/definitions/PagingOptions"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_auction"
+      ],
+      "properties": {
+        "get_auction": {
+          "type": "object",
+          "required": [
+            "auction_id"
+          ],
+          "properties": {
+            "auction_id": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_auction_by_contract_token_id"
+      ],
+      "properties": {
+        "get_auction_by_contract_token_id": {
+          "type": "object",
+          "required": [
+            "contract",
+            "token_id"
+          ],
+          "properties": {
+            "contract": {
+              "$ref": "#/definitions/HumanAddr"
+            },
+            "token_id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "get_contract_info"
+      ],
+      "properties": {
+        "get_contract_info": {
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "HumanAddr": {
+      "type": "string"
+    },
+    "PagingOptions": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint8",
+          "minimum": 0.0
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0.0
+        },
+        "order": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint8",
+          "minimum": 0.0
+        }
+      }
+    }
+  }
+}

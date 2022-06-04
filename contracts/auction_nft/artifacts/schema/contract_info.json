@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContractInfo",
+  "type": "object",
+  "required": [
+    "auction_blocks",
+    "creator",
+    "denom",
+    "fee",
+    "name",
+    "step_price"
+  ],
+  "properties": {
+    "auction_blocks": {
+      "description": "this defines the number of blocks until the end of auction",
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "creator": {
+      "type": "string"
+    },
+    "denom": {
+      "description": "the accepted denom",
+      "type": "string"
+    },
+    "fee": {
+      "description": "permille fee to pay back to Auction contract when a `Token` is being sold.",
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "name": {
+      "type": "string"
+    },
+    "step_price": {
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    }
+  }
+}

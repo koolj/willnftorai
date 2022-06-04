@@ -39,4 +39,7 @@ https://testnet.scan.orai.io/account/orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
 https://testnet.scan.orai.io/smart-contract/orai1gwhauj6vclhelqlllvc7hxlrc77fmasmctcxtc
 //then check, ow721 nft contract
 https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0dfcq2xaz3
+
+//do auction
+https://testnet.scan.orai.io/smart-contract/orai1nym892tcuysqkd5xus3wzmgu9rtewvkja2v5sc
 ```

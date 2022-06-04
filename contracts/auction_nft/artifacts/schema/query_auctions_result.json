@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QueryAuctionsResult",
+  "type": "object",
+  "required": [
+    "asker",
+    "contract_addr",
+    "end",
+    "end_timestamp",
+    "id",
+    "orig_price",
+    "price",
+    "start",
+    "start_timestamp",
+    "step_price",
+    "token_id"
+  ],
+  "properties": {
+    "asker": {
+      "$ref": "#/definitions/HumanAddr"
+    },
+    "bidder": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/HumanAddr"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "buyout_price": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Uint128"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "cancel_fee": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "contract_addr": {
+      "$ref": "#/definitions/HumanAddr"
+    },
+    "end": {
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "end_timestamp": {
+      "$ref": "#/definitions/Uint128"
+    },
+    "id": {
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "orig_price": {
+      "$ref": "#/definitions/Uint128"
+    },
+    "price": {
+      "$ref": "#/definitions/Uint128"
+    },
+    "start": {
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "start_timestamp": {
+      "$ref": "#/definitions/Uint128"
+    },
+    "step_price": {
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "token_id": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "HumanAddr": {
+      "type": "string"
+    },
+    "Uint128": {
+      "type": "string"
+    }
+  }
+}

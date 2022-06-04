@@ -56,6 +56,10 @@ https://testnet.scan.orai.io/smart-contract/orai1gwhauj6vclhelqlllvc7hxlrc77fmas
 
 //ow721 nft contract
 https://testnet.scan.orai.io/smart-contract/orai1xesxn88e7uus008gsn6se379937h0dfcq2xaz3
+
+//do auction
+https://testnet.scan.orai.io/smart-contract/orai1nym892tcuysqkd5xus3wzmgu9rtewvkja2v5sc
+
 //with local ipfs nft data
 http://localhost:8080/ipfs/QmXqWhpF4oz9wqKLWRjMsrnxdDecdzKGj7gSEqTyRVByVY
 ```
