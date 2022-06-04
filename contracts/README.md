@@ -20,12 +20,12 @@ https://go.dev/doc/install
 ```
 //build contract
 //git https://github.com/oraichain/oraiwasm
-//go to oraichain/oraiwasm, open with cosmwasm-ide
 //add .env where states the seed of your OraiChain account
 //on vscode, install extension cosmwasm-ide, then update
 sudo apt install binaryen -y
 cargo install sccach
 sudo chmod +x optimize.sh
+//go to oraichain/oraiwasm, open with cosmwasm-ide
 
 //go to oraiwasm/package/plus/ow20, then build with cosmwasm-ide and deploy
 //go to oraiwasm/package/plus/oraichain_nft, then build with cosmwasm-ide and deploy
