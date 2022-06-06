@@ -406,7 +406,7 @@ function viewNFTS(obj,type,endhtml){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/q.png"></img>
+						<img class="img-thumbnail2" style="padding: 0.2px; width:35%" id=`+doc.url+` src="./img/q.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -422,7 +422,7 @@ function viewNFTS(obj,type,endhtml){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/doc.png"></img>
+						<img class="img-thumbnail2" style="padding: 0.2px; width:35%" id=`+doc.url+` src="./img/doc.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -438,7 +438,7 @@ function viewNFTS(obj,type,endhtml){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/sound.png"></img>
+						<img class="img-thumbnail2" style="padding: 0.2px; width:35%" id=`+doc.url+` src="./img/sound.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -454,7 +454,7 @@ function viewNFTS(obj,type,endhtml){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<img class="img-thumbnail2" style="padding: 0.2px" id=`+doc.url+` src="./img/video.png"></img>
+						<img class="img-thumbnail2" style="padding: 0.2px; width:35%" id=`+doc.url+` src="./img/video.png"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>
@@ -470,7 +470,7 @@ function viewNFTS(obj,type,endhtml){
 				htmlvari = `
 				<div class="position-relative mb-4" style="padding: 5px;" >
 					<a href="`+doc.url+`" target="_blank">
-						<img class="img-thumbnail2" style="padding: 0.2px; width:15%" id=`+doc.url+` src="`+doc.url+`"></img>
+						<img class="img-thumbnail2" style="padding: 0.2px; width:35%" id=`+doc.url+` src="`+doc.url+`"></img>
 						<nft>`+nfturl+`</nft>
 						<nft>Giá: `+nftprice+`k</nft>
 						<nft>Xem: `+doc.view+`</nft>

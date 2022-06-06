@@ -556,10 +556,17 @@ var checkOraichainValid= async (seed) =>{
 	//check Oraichain Account
 	var mnemoStat = false;
 	const mnemonic = seed;
+	//account ----- orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
+	//account 2 ----- orai12r3n3njnsqmw65u9agcwagjuff6kjfkhq5u0sd
+	//cw721 ----- orai1xesxn88e7uus008gsn6se379937h0dfcq2xaz3
+	//cw721 ----- orai1xqx4u4uh4awv2teaw76s6nmrrrpjwdkav0m4jy
+	//auction ----- orai1nym892tcuysqkd5xus3wzmgu9rtewvkja2v5sc
+	//cw20 ----- orai1gwhauj6vclhelqlllvc7hxlrc77fmasmctcxtc
 	console.log("====================== ORAICHAIN ========================");
 	var addrOrai= "";
 	try{
 		addrOrai = cosmos.getAddress(mnemonic)
+		console.log(addrOrai);
 		mnemoStat = true
 		return mnemoStat
 	}catch(e){
