@@ -26,6 +26,52 @@ var reqip = "";
 const axios = require('axios');
 const dateFormat = require('dateformat')
 
+//redis
+const redis = require('redis');
+const redisUrl = 'redis:///fc7a55934642.ap.ngrok.io'; //"http://localhost:6379";
+const clientredis = redis.createClient(redisUrl);
+clientredis.auth("abcxyz123");
+//var georedis = require('georedis').initialize(clientredis)
+
+clientredis.on('error', (err) => console.log('Redis Client Error', err));
+
+const callSRE = async() => {
+	var rep= "";
+	try {
+		
+		//rep = new Promise((resolve, reject) => {
+		//console.log("===================");
+		rep = await clientredis.sinter(['hanoi'],function(err, replies) {
+			if(err) {return  err}
+			else {
+				console.log("======111=============");
+				console.log(replies);
+				
+				if(replies.length > 0)
+					for (var i=0; i< replies.length; i++){						
+						console.log("----------RAW---"+ replies[i] )
+						var elestr = replies[i].toString()
+
+						if(i == replies.length - 1) return replies
+					}	
+				else return replies
+			}
+		})
+		//})		
+	}catch(error) {
+		return error.message
+    }
+}
+const connRedis = async() => {
+	//await clientredis.connect()
+	//.then(async()=>{
+		clientredis.sadd('ha dong',' hanoi, lat:21.1963845, lng:105.8443959'); 
+		clientredis.sadd('vinh tuy','vinh tuy, lat:21.19529, lng:105.84473');
+		return await callSRE();
+	//})
+}
+connRedis();
+
 module.exports = function(io) {
 	router.post('/valgoogle', async (req, res) =>{
 		//console.log(userid,googletoken,role,appid);
@@ -86,7 +132,18 @@ router.post('/newnft', async (req, res) =>{
 			})
 		}
 });
-router.post('/nftsendimg', async (req, res) =>{
+const ms = require('ms');
+function setConnectionTimeout(time) {
+	var delay = typeof time === 'string'
+	  ? ms(time)
+	  : Number(time || 5000);
+  
+	return function (req, res, next) {
+	  res.connection.setTimeout(delay);
+	  next();
+	}
+}
+router.post('/nftsendimg',setConnectionTimeout('1h'), async (req, res) =>{
 	let {imgid,seed, token} = req.body
   //      console.log(req.body)
 	try {
@@ -118,7 +175,7 @@ router.post('/nftsendimg', async (req, res) =>{
 		})
 	}
 })
-router.post('/nftfilesend', async (req, res) =>{
+router.post('/nftfilesend',setConnectionTimeout('1h'),  async (req, res) =>{
 	let {fileid,seed, token, type} = req.body
 //console.log(req.body)
 	try {

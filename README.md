@@ -86,7 +86,7 @@ https://console.firebase.google.com/
 ```
 ### setup docker & docker compose that adapts with  your OS
 ```
-//follow, read and install
+//follow, read and install, docker-conpose should be >=1.26
 https://docs.docker.com/compose/gettingstarted/
 
 ```
@@ -112,11 +112,15 @@ https://go.dev/doc/install
 //follow https://getbootstrap.com/docs/5.0/getting-started/download
 //follow https://github.com/oraichain/cosmosjs 
 ```
-### run docker couchdb, create dbs
+### run docker couchdb, create some tables
 ```
 sudo docker run -d --name couchdb -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=123 couchdb
 
 //then create dbs: nftexp, nftu, nftasset, nftlog
+```
+### run docker redis
+```
+sudo docker run --name myredis -d -p 6379:6379 redis redis-server --requirepass "abcxyz123"
 ```
 ### get api and payment via Momo wallet
 ```
@@ -196,7 +200,8 @@ npm start
 
 //ports prepare
 8077/nft for frontend
-5984 for database
+5984 for couchdb
+6379 for redis
 5005 for rasa
 5002 for sound
 5000 for image
