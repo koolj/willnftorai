@@ -61,6 +61,7 @@ git clone https://github.com/deviantony/docker-elk
 
 //set xpack.security.enabled to FALSE on elasticsearch/config/elasticsearch.yml
 cluster.name: "docker-cluster"
+cluster.routing.allocation.disk.threshold_enabled: false
 network.host: 0.0.0.0
 xpack.license.self_generated.type: trial
 xpack.security.enabled: false

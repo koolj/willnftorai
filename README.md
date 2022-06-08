@@ -137,6 +137,7 @@ git clone https://github.com/deviantony/docker-elk
 
 //set xpack.security.enabled to FALSE on elasticsearch/config/elasticsearch.yml
 cluster.name: "docker-cluster"
+cluster.routing.allocation.disk.threshold_enabled: false
 network.host: 0.0.0.0
 xpack.license.self_generated.type: trial
 xpack.security.enabled: false
@@ -207,7 +208,7 @@ npm start
 5000 for image
 8080 for ipfs nft url
 5001 for ipfs api
-9002 for elasticsearch
+9200 for elasticsearch
 
 //after building dapp & components, access dapp via
 http://localhost:8077/nft/
