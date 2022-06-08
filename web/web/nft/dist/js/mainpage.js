@@ -884,7 +884,7 @@ function viewMedExam(){
 		setTimeout(()=>{
 			getnft();
 			get3nft();
-		},1000)
+		},5000)
 
 		/*
 		var url = apiroot+"/getlast200XElive";
