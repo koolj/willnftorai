@@ -13,7 +13,7 @@ npm start
 5000 for image
 8080 for ipfs nft url
 5001 for ipfs api
-9002 for elasticsearch
+9200 for elasticsearch
 
 //after building dapp & components, access dapp via
 http://localhost:8077/nft/
