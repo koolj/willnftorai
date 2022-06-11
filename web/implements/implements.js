@@ -4,11 +4,13 @@ Created by anhpt@
 Jan 18, 2021.
 */
 
-const esUrl = "https://013e48da8748.ap.ngrok.io"; //"http://localhost:9200";
-const ipfsApiUrl = "https://7f27dc2d1c80.ap.ngrok.io"; //"http://localhost:5001";
-const ipfsUrl = "https://dca41fbc0e2c.ap.ngrok.io";//"http://localhost:8080";
-const couchdbUrl = "https://admin:123@75e69d105ab6.ap.ngrok.io";// "http://admin:123@localhost:5984";
-const rasaUrl = "https://4f5a4db399e6.ap.ngrok.io"; //"http://localhost:5005";
+const esUrl = "http://localhost:9200";
+const ipfsApiUrl = "http://localhost:5001";
+const ipfsUrl = "http://localhost:8080";
+const couchdbUrl = "http://admin:123@localhost:5984";
+const rasaUrl = "http://localhost:5005";
+const checkLOCURL= "http://localhost:5003/detectimg";
+const checksoundURL = "http://localhost:5002/predict";
 
 const {
 	dbnftasset,dblog,dbu,dbexp,
@@ -812,6 +814,37 @@ var getnftid= async (nftid,token,idobject) => {
 		return {result: '1',message: `Error: ${error}`}
     }
 }
+var checkLOCimg= async (imgid) => {
+	//const checkLOCURL="http://localhost:5003/detectimg";
+	const imghost = path.join(__dirname+"/../_shared/");
+	var base64Data = imgid.replace(/^data:image\/jpeg;base64,/, "");
+	var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+	var texthash = '';
+	let rep = '';
+	for(i=0; i < 20; i++ )
+		texthash += charset.charAt(Math.floor(Math.random() * charset.length));
+
+	return new Promise((resolve, reject) => {
+		require('fs').writeFile(imghost+texthash+".jpg", base64Data, 'base64', async(err,data,) => {
+			resolve(imghost+texthash+".mp3");
+		})	
+	}).then(async(filename)=>{
+		//compare sound
+		request_config = {
+			url:checkLOCURL,
+			method: 'POST',
+			headers:'',
+			data:{filename:filename}
+		};
+		axios(request_config).then((resp1) => {
+			console.log(resp1.data);
+		})
+
+
+	}).catch((error)=>{ 
+		return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+	})	
+}
 var checkGPimg= async (imgid) => {
 	const imghost = path.join(__dirname+"/../_shared/");
 	var base64Data = imgid.replace(/^data:image\/jpeg;base64,/, "");
@@ -861,7 +894,7 @@ var checkGPimg= async (imgid) => {
 }
 var checkGPsound= async (imgid) => {
 	const imghost = path.join(__dirname+"/../_shared/");
-	const checksoundURL = "http://localhost:5002/predict";
+	
 	var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 	var texthash = '';
 	let rep = '';
@@ -1270,7 +1303,7 @@ var validText= async (message,chatbot) => {
 }
 
 module.exports = {
-	exptok,valgoogle,searchesnftid, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend,checkGPimg,checkGPsound
+	exptok,valgoogle,searchesnftid, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend,checkGPimg,checkGPsound,checkLOCimg
 }
 //dbvhspark,dbvhslog,dbu,dbexp,dbvhsnews,dbvhscomm,dbvhsecoservice,dblog
 // currentGtoken = "";

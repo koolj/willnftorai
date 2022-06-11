@@ -2,7 +2,7 @@
 Created by anhpt@
 Jan 18, 2021.
 */
-const couchdbUrl = "https://admin:123@75e69d105ab6.ap.ngrok.io";
+const couchdbUrl = "https://admin:123@localhost:5984";
 const nano = require('nano')(couchdbUrl);
 const dblog = nano.use('nftlog');
 const dbexp = nano.use('nftexp');

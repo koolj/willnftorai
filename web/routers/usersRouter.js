@@ -8,7 +8,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft,nftfilesend, checkGPimg, checkGPsound
+	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft,nftfilesend, checkGPimg, checkGPsound,checkLOCimg
 } = require('../implements/implements')
 //const { itestredis } = require('../database/models/coremap');
 var path    = require("path");
@@ -165,6 +165,38 @@ router.post('/checksound',setConnectionTimeout('1h'), async (req, res) =>{
 		await checkGPsound(imgid)
 		.then((rep)=>{
 			console.log("------------IMG---" +  + JSON.stringify(rep));
+			res.json({
+				rep
+			})
+		})
+		
+	} catch(error) {
+		console.log(error)
+		res.json({
+			result: '1',
+			message: `Could not send nft image: Internal Error!`
+		})
+	}
+})
+router.post('/checkLOCimg',setConnectionTimeout('1h'), async (req, res) =>{
+	let {imgid} = req.body
+  //      console.log(req.body)
+	try {
+		//get ip
+		clientIp = requestIp.getClientIp(req); 
+		reqip = clientIp.toString().replace(":fff:","");
+		reqip = reqip.replace(":ffff:","");
+		reqip = reqip.replace(":","");
+		let idobject = {
+			ip: reqip,
+			act: "check img"
+		}
+
+		//console.log(imgid);
+				
+		await checkLOCimg(imgid)
+		.then((rep)=>{
+			console.log("------------IMG LOC---" +  + JSON.stringify(rep));
 			res.json({
 				rep
 			})
