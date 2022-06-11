@@ -12,10 +12,9 @@ pub struct TokenInfo {
     /// approvals are stored here, as we clear them all upon transfer and cannot accumulate much
     pub approvals: Vec<Approval>,
 
-    ///
-
     /// Identifies the asset to which this NFT represents
     pub name: String,
+    pub price: u8,
     /// Describes the asset to which this NFT represents
     pub description: String,
     /// A URI pointing to an image representing the asset

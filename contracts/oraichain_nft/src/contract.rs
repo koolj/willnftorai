@@ -76,9 +76,10 @@ pub fn handle(
         HandleMsg::UpdateNft {
             token_id,
             name,
+            price,
             description,
             image,
-        } => handle_update_nft(deps, env, info, token_id, name, description, image),
+        } => handle_update_nft(deps, env, info, token_id, name, price, description, image),
         HandleMsg::ChangeMinter { minter } => handle_change_minter(deps, env, info, minter),
     }
 }
@@ -117,6 +118,7 @@ pub fn handle_mint(
 
     let name = msg.name;
     check_size!(name, MAX_CHARS_SIZE);
+    let price:u8 = msg.price;
     let description = msg.description.unwrap_or_default();
     check_size!(description, MAX_CHARS_SIZE);
     let image = msg.image;
@@ -127,6 +129,7 @@ pub fn handle_mint(
         owner: deps.api.canonical_address(&msg.owner)?,
         approvals: vec![],
         name,
+        price,
         description,
         image,
     };
@@ -202,6 +205,7 @@ pub fn handle_update_nft(
     info: MessageInfo,
     token_id: String,
     name: String,
+    price: u8,
     description: Option<String>,
     image: Option<String>,
 ) -> Result<HandleResponse, ContractError> {
@@ -215,6 +219,9 @@ pub fn handle_update_nft(
                 return Err(ContractError::Unauthorized {});
             }
             check_size!(name, MAX_CHARS_SIZE);
+            if token.price < price {
+                token.price = price;
+            }
             token.name = name;
             if let Some(description_val) = description {
                 check_size!(description_val, MAX_CHARS_SIZE);

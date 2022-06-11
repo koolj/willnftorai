@@ -109,6 +109,7 @@
           "type": "object",
           "required": [
             "name",
+            "price",
             "token_id"
           ],
           "properties": {
@@ -126,6 +127,11 @@
             },
             "name": {
               "type": "string"
+            },
+            "price": {
+              "type": "integer",
+              "format": "uint8",
+              "minimum": 0.0
             },
             "token_id": {
               "type": "string"
@@ -314,6 +320,7 @@
         "image",
         "name",
         "owner",
+        "price",
         "token_id"
       ],
       "properties": {
@@ -329,7 +336,7 @@
           "type": "string"
         },
         "name": {
-          "description": "Identifies the asset to which this NFT represents",
+          "description": "Idename:t to which this NFT represents",
           "type": "string"
         },
         "owner": {
@@ -339,6 +346,11 @@
               "$ref": "#/definitions/HumanAddr"
             }
           ]
+        },
+        "price": {
+          "type": "integer",
+          "format": "uint8",
+          "minimum": 0.0
         },
         "token_id": {
           "description": "Unique ID of the NFT",

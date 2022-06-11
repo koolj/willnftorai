@@ -51,6 +51,7 @@ pub enum HandleMsg {
     UpdateNft {
         token_id: String,
         name: String,
+        price: u8,
         description: Option<String>,
         image: Option<String>,
     },
@@ -88,8 +89,10 @@ pub struct MintMsg {
     pub token_id: String,
     /// The owner of the newly minter NFT
     pub owner: HumanAddr,
-    /// Identifies the asset to which this NFT represents
+    /// Idename:t to which this NFT represents
     pub name: String,
+    // Price
+    pub price: u8,
     /// Describes the asset to which this NFT represents (may be empty)
     pub description: Option<String>,
     /// A URI pointing to an image representing the asset

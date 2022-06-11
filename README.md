@@ -106,6 +106,8 @@ https://www.rust-lang.org/tools/install
 https://code.visualstudio.com/download
 https://docs.cosmwasm.com/docs/1.0/getting-started/installation 
 https://go.dev/doc/install
+
+//set $HOME/go/bin to PATH
 ```
 ### get html and bootstrap 4 tempalte, and cosmosjs library, to build frontend
 ```
