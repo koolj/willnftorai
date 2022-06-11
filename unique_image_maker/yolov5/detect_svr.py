@@ -23,6 +23,11 @@ Usage - formats:
                                          yolov5s.tflite             # TensorFlow Lite
                                          yolov5s_edgetpu.tflite     # TensorFlow Edge TPU
 """
+from flask import Flask, request, jsonify
+from flask_restful import Resource, Api
+import socketio
+import json
+import requests
 
 import argparse
 import os
@@ -209,6 +214,31 @@ def run(
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
 
+
+app = Flask(__name__)
+api = Api(app)
+class Quotes(Resource):
+    def get(self):
+        return 'BookWorm RULE image says: Hi!'
+
+api.add_resource(Quotes, '/')
+
+def detect(opt):
+    opt = parse_opt()
+    check_requirements(exclude=('tensorboard', 'thop'))
+    
+    with torch.no_grad():
+    if opt.update:  # update all models (to fix SourceChangeWarning)
+        for opt.weights in ['yolov5s.pt', 'yolov5m.pt', 'yolov5l.pt', 'yolov5x.pt']:
+            #detect()
+            run(**vars(opt))
+            strip_optimizer(opt.weights)
+    else:
+        #detect(opt)
+        run(**vars(opt))
+    return json.dumps('')
+
+@app.route('/decimg', methods=['GET'])
 def parse_opt():
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'yolov5s.pt', help='model path(s)')
@@ -243,11 +273,7 @@ def parse_opt():
     return opt
 
 
-def main(opt):
-    check_requirements(exclude=('tensorboard', 'thop'))
-    run(**vars(opt))
-
-
 if __name__ == "__main__":
-    opt = parse_opt()
-    main(opt)
+    app.run(debug=True,port='5003')
+    #opt = parse_opt()
+    #main(opt)

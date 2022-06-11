@@ -9,8 +9,9 @@ npm start
 5984 for couchdb
 6379 for redis
 5005 for rasa
-5002 for sound
-5000 for image
+5002 for sound compare
+5000 for image compare
+5003 for image RULE
 8080 for ipfs nft url
 5001 for ipfs api
 9200 for elasticsearch

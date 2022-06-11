@@ -37,7 +37,7 @@ flask run -h localhost -p 5003
 ```
 //api
 
-http://localhost:5003/detectimg
+http://localhost:5003/decimg
 
 ## deployment
 //deployment with Spark cluster, follow guideline deployment folder
