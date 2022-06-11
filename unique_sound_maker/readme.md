@@ -1,5 +1,6 @@
 # guideline
 
+## detect unique sound/audio
 //not included
 
 music.ann  ~130 mb
@@ -23,4 +24,5 @@ export FLASK_APP=audio_detect
 
 http://localhost:5002/predict
 
+## deployment
 //deployment with Spark cluster, follow guideline deployment folder

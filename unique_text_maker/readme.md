@@ -13,6 +13,7 @@ stopwords not full
 https://www.youtube.com/watch?v=CSASqIPjzNI&list=PL0ANjPcxElLgn0tuyGqt2LbMULLC0Hqkd
 
 
+## RULE text, normalize text
 //build rasa to validate text normalization
 
 //setup rasa, follow: https://rasa.com/docs/rasa/installation/ , using python v3.8
@@ -64,4 +65,5 @@ http://localhost:5005/webhooks/rest/webhook
 rasa train
 ```
 
+## deployment
 //deployment with Spark cluster, follow guideline deployment folder

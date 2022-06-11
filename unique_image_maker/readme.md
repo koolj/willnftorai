@@ -1,5 +1,6 @@
 # guideline
 
+## compare image
 //prepare
 ```
 pip3 install flask_restful
@@ -21,4 +22,22 @@ flask run -h localhost -p 5000
 
 http://localhost:5000/vc
 
+## RULE image, normalize image
+```
+cd yolov5
+pip install -r requirements.txt
+```
+//set FLASK
+```
+export FLASK_APP=detect_svr
+```
+//run
+```
+flask run -h localhost -p 5003
+```
+//api
+
+http://localhost:5003/detectimg
+
+## deployment
 //deployment with Spark cluster, follow guideline deployment folder
