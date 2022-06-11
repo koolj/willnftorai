@@ -344,7 +344,37 @@ function loginview(){
 	$("#loginview").append(htmlVar);
 };
 loginview();
-
+function getBase64(file) {
+	return new Promise((resolve, reject) => {
+	  const reader = new FileReader();
+	  reader.readAsDataURL(file);
+	  reader.onload = () => resolve(reader.result);
+	  reader.onerror = error => reject(error);
+	});
+  }
+function checkSoundRule(){
+	var file = document.querySelector('#filetext').files[0];
+	getBase64(file).then((data)=>{
+		  console.log(data.substr(0,50)+"...");
+		  //console.log(canvasdata.length);
+		if ((data.length < 30) || (data.length > 22100000) ){   
+			alert("Đầu vào cần có tệp tin audio, dung lượng <20mb.");
+			stoploading();
+		}else{    
+			startloading();
+			return fetch(apiroot+'/checksound', {
+				method: 'POST',
+				headers: { 'Content-type': 'application/json' },
+				body: JSON.stringify({ imgid: data})					
+			})
+			.then(res => res.json())
+			.then((data2) => {
+				console.log(data2);
+				alert(data2.rep.message);
+			})
+		}	
+	});
+}
 function checkImgRule(){
 	const canvasdata = $("#preview").prop('src');
 	console.log(canvasdata.length);
@@ -905,7 +935,7 @@ function viewMedExam(){
 		setTimeout(()=>{
 			getnft();
 			get3nft();
-		},1000)
+		},5000)
 
 		/*
 		var url = apiroot+"/getlast200XElive";
@@ -1377,14 +1407,7 @@ $(document).ready(function () {
 		reader.readAsDataURL(this.files[0]);
 	});
 
-	function getBase64(file) {
-		return new Promise((resolve, reject) => {
-		  const reader = new FileReader();
-		  reader.readAsDataURL(file);
-		  reader.onload = () => resolve(reader.result);
-		  reader.onerror = error => reject(error);
-		});
-	  }
+
 	  
 
 

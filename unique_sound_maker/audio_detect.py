@@ -16,9 +16,9 @@ from annoy import AnnoyIndex
 # Các thông số ban đầu của mô hình:
 f = 100
 u = AnnoyIndex(f)
-u.load(r'.\music.ann')
+u.load(r'./music.ann')
 
-infile = open(r'.\songs.pk','rb')
+infile = open(r'./songs.pk','rb')
 songs = pickle.load(infile)
 
 
@@ -43,18 +43,26 @@ app = Flask(__name__)
 
 # Khai báo các route cho API
 @app.route("/predict", methods=["POST"])
-
-def infer_sound():
-    if 'file' not in request.files:
-        return "Please try again. The sounds doesn't exist"
+def predict():
+    #if 'file' not in request.files:
+        #return "Please try again. The sounds doesn't exist"
     
-    file = request.files.get('file')
-    
+    #file = request.files.get('file')
+    #print(file);
+    data = request.json
+    soundname=data['filename']
+    print("============================================");
+    print(soundname);
+    file = request.files.get(soundname)
     if not file:
         return
     # Lấy file sound người dùng upload lên
-    sound = file.read()
+    sound = file.read(soundname)
+    
+    
     y, sr = librosa.load(sound)
+    print(sr);
+    print(y);
     feat = extract_features(y)
     
     # Tìm đặc chưng của file upload
@@ -76,15 +84,17 @@ def infer_sound():
             b.append(key)
     if len(b) == 0:
         print('Chúc mừng bạn đã có một NFT mới!')
+        return 1
     else:
         print('Có các NFT giống với sounds của bạn là: ')
         for i in range(len(b) - 1):
             print(b[i])
-        print('Hãy chọn một bản nhạc khác làm NFT!')
-    return
+            return b[i]
+            print('Hãy chọn một bản nhạc khác làm NFT!')
+    
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    app.run(debug=True)
 
 
 # In[ ]:

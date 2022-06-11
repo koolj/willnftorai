@@ -1,0 +1,275 @@
+2022-05-25 21:04:35,060 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-25 21:04:36,447 [INFO ]  Loading model models/20220525-205950-green-face.tar.gz...
+2022-05-25 21:04:53,427 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-25 21:05:00,111 [INFO ]  Rasa server is up and running.
+2022-05-25 21:19:44,238 [ERROR]  <Request: GET /> body not consumed.
+2022-05-25 21:24:47,621 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-25 21:24:48,964 [INFO ]  Loading model models/20220525-212353-augmenting-pollock.tar.gz...
+2022-05-25 21:25:04,591 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-25 21:25:11,223 [INFO ]  Rasa server is up and running.
+2022-05-25 21:27:18,058 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-25 21:27:19,355 [INFO ]  Loading model models/20220525-212632-nervous-circuit.tar.gz...
+2022-05-25 21:27:33,901 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-25 21:27:40,538 [INFO ]  Rasa server is up and running.
+2022-05-26 08:51:54,919 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-26 08:51:56,296 [INFO ]  Loading model models/20220525-212632-nervous-circuit.tar.gz...
+2022-05-26 08:52:12,020 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-26 08:52:18,525 [INFO ]  Rasa server is up and running.
+2022-05-27 09:14:49,091 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-27 09:14:50,544 [INFO ]  Loading model models/20220525-212632-nervous-circuit.tar.gz...
+2022-05-27 09:15:06,507 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-27 09:15:13,072 [INFO ]  Rasa server is up and running.
+2022-05-28 14:17:52,633 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:17:54,063 [INFO ]  Loading model models/20220528-141704-little-activation.tar.gz...
+2022-05-28 14:17:54,480 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:17:54,885 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:18:11,249 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:18:18,752 [INFO ]  Rasa server is up and running.
+2022-05-28 14:25:55,091 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:25:56,543 [INFO ]  Loading model models/20220528-142504-coped-dividend.tar.gz...
+2022-05-28 14:25:56,955 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:25:57,337 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:26:13,374 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:26:20,044 [INFO ]  Rasa server is up and running.
+2022-05-28 14:31:37,006 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:31:38,439 [INFO ]  Loading model models/20220528-143048-connected-milk.tar.gz...
+2022-05-28 14:31:38,836 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:31:39,209 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:31:54,887 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:32:01,430 [INFO ]  Rasa server is up and running.
+2022-05-28 14:39:01,759 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:39:03,075 [INFO ]  Loading model models/20220528-143048-connected-milk.tar.gz...
+2022-05-28 14:39:03,457 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:39:03,866 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:39:17,807 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:39:24,821 [INFO ]  Rasa server is up and running.
+2022-05-28 14:39:24,821 [ERROR]  Unable to start server
+Traceback (most recent call last):
+  File "/home/kj/anaconda3/envs/rasan/lib/python3.8/site-packages/sanic/server/runners.py", line 133, in serve
+    http_server = loop.run_until_complete(server_coroutine)
+  File "uvloop/loop.pyx", line 1501, in uvloop.loop.Loop.run_until_complete
+  File "uvloop/loop.pyx", line 1775, in create_server
+OSError: [Errno 98] error while attempting to bind on address ('0.0.0.0', 5005): address already in use
+2022-05-28 14:39:50,651 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:39:52,085 [INFO ]  Loading model models/20220528-143048-connected-milk.tar.gz...
+2022-05-28 14:39:52,476 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:39:52,845 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:40:08,563 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:40:15,040 [INFO ]  Rasa server is up and running.
+2022-05-28 14:41:47,803 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:41:49,228 [INFO ]  Loading model models/20220528-143048-connected-milk.tar.gz...
+2022-05-28 14:41:49,605 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:41:49,961 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:42:05,589 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:42:12,193 [INFO ]  Rasa server is up and running.
+2022-05-28 14:44:41,351 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:44:42,757 [INFO ]  Loading model models/20220528-144346-thundering-cage.tar.gz...
+2022-05-28 14:44:43,144 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:44:43,517 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:44:58,906 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:45:06,047 [INFO ]  Rasa server is up and running.
+2022-05-28 14:54:06,556 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-05-28 14:54:08,065 [INFO ]  Loading model models/20220528-145259-gritty-drawbridge.tar.gz...
+2022-05-28 14:54:08,495 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:54:08,925 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-05-28 14:54:25,321 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-05-28 14:54:32,152 [INFO ]  Rasa server is up and running.
+2022-06-01 12:04:56,885 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-01 12:04:58,377 [INFO ]  Loading model models/20220528-145259-gritty-drawbridge.tar.gz...
+2022-06-01 12:04:58,989 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-01 12:04:59,520 [ERROR]  Could not load model due to Error initializing graph component for node provide_SpacyNLP0..
+2022-06-01 12:04:59,549 [INFO ]  Rasa server is up and running.
+2022-06-01 12:05:39,612 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-01 12:05:52,005 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-01 12:12:09,010 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-01 12:12:10,569 [INFO ]  Loading model models/20220528-145259-gritty-drawbridge.tar.gz...
+2022-06-01 12:12:11,184 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-01 12:12:11,717 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-01 12:12:32,722 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-06-01 12:12:42,924 [INFO ]  Rasa server is up and running.
+2022-06-09 14:35:17,994 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-09 14:35:19,634 [INFO ]  Loading model models/20220528-145259-gritty-drawbridge.tar.gz...
+2022-06-09 14:35:20,165 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-09 14:35:20,933 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-09 14:35:40,648 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-06-09 14:35:50,059 [INFO ]  Rasa server is up and running.
+2022-06-10 15:00:35,161 [ERROR]  An exception occured while handling user message 'Tập thể dục để có sức khoẻ mày tao'.
+Traceback (most recent call last):
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/channels/rest.py", line 127, in receive
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/channels/channel.py", line 89, in handler
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/agent.py", line 420, in handle_message
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/processor.py", line 136, in handle_message
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/processor.py", line 379, in log_message
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/processor.py", line 297, in fetch_tracker_and_update_session
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/processor.py", line 260, in _update_tracker_session
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/processor.py", line 615, in _get_action
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/actions/action.py", line 176, in action_for_name_or_text
+  File "/home/koolj/anaconda3/envs/rasa/lib/python3.8/site-packages/rasa/core/actions/action.py", line 91, in default_actions
+ModuleNotFoundError: No module named 'rasa.core.actions.two_stage_fallback'
+2022-06-10 15:09:25,705 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 15:09:27,337 [INFO ]  Loading model models/20220528-145259-gritty-drawbridge.tar.gz...
+2022-06-10 15:09:27,936 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:09:28,455 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:09:28,879 [ERROR]  Could not load model due to Error initializing graph component for node run_DIETClassifier7..
+2022-06-10 15:09:28,879 [INFO ]  Rasa server is up and running.
+2022-06-10 15:10:14,075 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 15:10:37,836 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 15:11:31,556 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 15:11:33,027 [INFO ]  Loading model models/20220528-145259-gritty-drawbridge.tar.gz...
+2022-06-10 15:11:33,682 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:11:34,214 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:11:34,639 [ERROR]  Could not load model due to Error initializing graph component for node run_DIETClassifier7..
+2022-06-10 15:11:34,640 [INFO ]  Rasa server is up and running.
+2022-06-10 15:11:38,316 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 15:15:02,131 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 15:15:03,723 [INFO ]  Loading model models/20220528-145259-gritty-drawbridge.tar.gz...
+2022-06-10 15:15:04,320 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:15:04,820 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:15:05,245 [ERROR]  Could not load model due to Error initializing graph component for node run_DIETClassifier7..
+2022-06-10 15:15:05,245 [INFO ]  Rasa server is up and running.
+2022-06-10 15:15:13,003 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 15:16:36,065 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 15:16:37,707 [INFO ]  Loading model models/20220610-151559-savory-disk.tar.gz...
+2022-06-10 15:16:38,328 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:16:38,874 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 15:16:39,365 [ERROR]  Could not load model due to Error initializing graph component for node run_DIETClassifier7..
+2022-06-10 15:16:39,367 [INFO ]  Rasa server is up and running.
+2022-06-10 16:39:46,484 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 16:39:48,094 [INFO ]  Loading model models/20220610-151559-savory-disk.tar.gz...
+2022-06-10 16:39:48,720 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 16:39:49,335 [ERROR]  Could not load model due to Error initializing graph component for node provide_SpacyNLP0..
+2022-06-10 16:39:49,373 [INFO ]  Rasa server is up and running.
+2022-06-10 16:41:04,272 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 16:41:05,806 [INFO ]  Loading model models/20220610-151559-savory-disk.tar.gz...
+2022-06-10 16:41:06,416 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 16:41:06,973 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 16:41:07,475 [ERROR]  Could not load model due to Error initializing graph component for node run_DIETClassifier7..
+2022-06-10 16:41:07,476 [INFO ]  Rasa server is up and running.
+2022-06-10 16:41:16,566 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 16:42:28,492 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 16:43:05,989 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 16:43:07,522 [INFO ]  Loading model models/20220610-164244-hasty-ocean.tar.gz...
+2022-06-10 16:43:08,132 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 16:43:08,663 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 16:43:09,082 [ERROR]  Could not load model due to Error initializing graph component for node run_DIETClassifier7..
+2022-06-10 16:43:09,083 [INFO ]  Rasa server is up and running.
+2022-06-10 16:43:23,189 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 16:52:55,263 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 16:52:56,158 [INFO ]  Rasa server is up and running.
+2022-06-10 16:57:51,519 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 16:57:53,140 [INFO ]  Loading model models/20220610-165543-intense-rating.tar.gz...
+2022-06-10 16:57:53,738 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 16:57:54,279 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 16:58:04,456 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 16:58:04,457 [INFO ]  Rasa server is up and running.
+2022-06-10 16:59:19,902 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 17:12:18,191 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:12:19,738 [INFO ]  Loading model models/20220610-171201-bounded-weed.tar.gz...
+2022-06-10 17:12:20,339 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:12:20,874 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:12:30,697 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:12:30,697 [INFO ]  Rasa server is up and running.
+2022-06-10 17:12:32,858 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 17:14:44,351 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:14:45,827 [INFO ]  Loading model models/20220610-171201-bounded-weed.tar.gz...
+2022-06-10 17:14:46,439 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:14:46,990 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:14:57,289 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:14:57,289 [INFO ]  Rasa server is up and running.
+2022-06-10 17:16:20,945 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:16:22,425 [INFO ]  Loading model models/20220610-171524-avocado-longhair.tar.gz...
+2022-06-10 17:16:23,038 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:16:23,619 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:16:33,382 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:16:33,382 [INFO ]  Rasa server is up and running.
+2022-06-10 17:17:06,103 [INFO ]  Ignoring message as there is no agent to handle it.
+2022-06-10 17:18:03,127 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:18:04,729 [INFO ]  Loading model models/20220610-171524-avocado-longhair.tar.gz...
+2022-06-10 17:18:05,339 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:18:05,862 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:18:16,148 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:18:16,148 [INFO ]  Rasa server is up and running.
+2022-06-10 17:18:52,506 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:18:54,145 [INFO ]  Loading model models/20220610-171524-avocado-longhair.tar.gz...
+2022-06-10 17:18:54,683 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:18:55,193 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:19:05,996 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:19:05,996 [INFO ]  Rasa server is up and running.
+2022-06-10 17:19:55,220 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:19:56,802 [INFO ]  Loading model models/20220610-171929-chalky-covey.tar.gz...
+2022-06-10 17:19:57,346 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:19:57,870 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:20:07,895 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy0..
+2022-06-10 17:20:07,895 [INFO ]  Rasa server is up and running.
+2022-06-10 17:22:50,941 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:22:52,468 [INFO ]  Loading model models/20220610-172235-cerulean-fractal.tar.gz...
+2022-06-10 17:22:53,082 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:22:53,612 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:23:03,902 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:23:03,902 [INFO ]  Rasa server is up and running.
+2022-06-10 17:25:08,373 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:25:09,854 [INFO ]  Loading model models/20220610-172235-cerulean-fractal.tar.gz...
+2022-06-10 17:25:10,447 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:25:10,959 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:25:21,194 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:25:21,194 [INFO ]  Rasa server is up and running.
+2022-06-10 17:25:55,842 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:25:57,483 [INFO ]  Loading model models/20220610-172533-perfect-laser.tar.gz...
+2022-06-10 17:25:58,034 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:25:58,560 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:26:09,012 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:26:09,013 [INFO ]  Rasa server is up and running.
+2022-06-10 17:26:29,909 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:26:31,482 [INFO ]  Loading model models/20220610-172533-perfect-laser.tar.gz...
+2022-06-10 17:26:32,069 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:26:32,576 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:26:42,327 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:26:42,328 [INFO ]  Rasa server is up and running.
+2022-06-10 17:28:42,308 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:28:43,744 [INFO ]  Loading model models/20220610-172755-merciless-lime.tar.gz...
+2022-06-10 17:28:44,346 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:28:44,892 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:28:55,708 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:28:55,709 [INFO ]  Rasa server is up and running.
+2022-06-10 17:29:18,157 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:29:19,727 [INFO ]  Loading model models/20220610-172755-merciless-lime.tar.gz...
+2022-06-10 17:29:20,331 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:29:20,850 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:29:31,012 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:29:31,013 [INFO ]  Rasa server is up and running.
+2022-06-10 17:30:18,561 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:30:20,157 [INFO ]  Loading model models/20220610-172755-merciless-lime.tar.gz...
+2022-06-10 17:30:20,736 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:30:21,231 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:30:31,247 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:30:31,248 [INFO ]  Rasa server is up and running.
+2022-06-10 17:39:43,083 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 17:39:44,619 [INFO ]  Loading model models/20220610-173850-scared-sriracha.tar.gz...
+2022-06-10 17:39:45,117 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:39:45,609 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 17:39:55,739 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 17:39:55,739 [INFO ]  Rasa server is up and running.
+2022-06-10 22:27:17,137 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-10 22:27:18,622 [INFO ]  Loading model models/20220610-222620-equidistant-newton.tar.gz...
+2022-06-10 22:27:19,117 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 22:27:19,862 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-10 22:27:29,984 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-10 22:27:29,984 [INFO ]  Rasa server is up and running.
+2022-06-11 08:04:25,543 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-11 08:04:27,955 [INFO ]  Loading model models/20220610-222620-equidistant-newton.tar.gz...
+2022-06-11 08:04:28,543 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-11 08:04:29,041 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-11 08:04:39,265 [ERROR]  Could not load model due to Error initializing graph component for node run_UnexpecTEDIntentPolicy2..
+2022-06-11 08:04:39,266 [INFO ]  Rasa server is up and running.
+2022-06-11 08:08:32,695 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-11 08:08:34,188 [INFO ]  Loading model models/20220611-080644-bipartite-stylus.tar.gz...
+2022-06-11 08:08:34,783 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-11 08:08:35,319 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-11 08:08:55,444 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-06-11 08:09:04,464 [INFO ]  Rasa server is up and running.
+2022-06-11 08:09:40,285 [INFO ]  Starting Rasa server on http://0.0.0.0:5005
+2022-06-11 08:09:41,856 [INFO ]  Loading model models/20220611-080644-bipartite-stylus.tar.gz...
+2022-06-11 08:09:42,444 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-11 08:09:42,925 [INFO ]  Trying to load SpaCy model with name 'vi_spacy_model'.
+2022-06-11 08:10:02,885 [WARNI]  The UnexpecTED Intent Policy is currently experimental and might change or be removed in the future 🔬 Please share your feedback on it in the forum (https://forum.rasa.com) to help us make this feature ready for production.
+2022-06-11 08:10:13,068 [INFO ]  Rasa server is up and running.

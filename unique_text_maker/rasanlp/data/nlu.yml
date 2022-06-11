@@ -18,12 +18,8 @@ nlu:
     - anh
 - intent: badwords
   examples: |
-    - gọi số
     - phang
     - hiếp
-    - bán
-    - mua
-    - mất
     - thằng 
     - đĩ
     - rồ

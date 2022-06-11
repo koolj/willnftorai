@@ -4,11 +4,11 @@ Created by anhpt@
 Jan 18, 2021.
 */
 
-const esUrl = "http://localhost:9200";
-const ipfsApiUrl = "http://localhost:5001";
-const ipfsUrl = "http://localhost:8080";
-const couchdbUrl = "http://admin:123@localhost:5984";
-const rasaUrl = "http://localhost:5005";
+const esUrl = "https://013e48da8748.ap.ngrok.io"; //"http://localhost:9200";
+const ipfsApiUrl = "https://7f27dc2d1c80.ap.ngrok.io"; //"http://localhost:5001";
+const ipfsUrl = "https://dca41fbc0e2c.ap.ngrok.io";//"http://localhost:8080";
+const couchdbUrl = "https://admin:123@75e69d105ab6.ap.ngrok.io";// "http://admin:123@localhost:5984";
+const rasaUrl = "https://4f5a4db399e6.ap.ngrok.io"; //"http://localhost:5005";
 
 const {
 	dbnftasset,dblog,dbu,dbexp,
@@ -859,6 +859,46 @@ var checkGPimg= async (imgid) => {
 		return {result: '1',message: error}
 	})
 }
+var checkGPsound= async (imgid) => {
+	const imghost = path.join(__dirname+"/../_shared/");
+	const checksoundURL = "http://localhost:5002/predict";
+	var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+	var texthash = '';
+	let rep = '';
+	for(i=0; i < 20; i++ )
+		texthash += charset.charAt(Math.floor(Math.random() * charset.length));
+
+	var base64Data = imgid.replace(/^data:audio\/mpeg;base64,/, "");
+	//console.log(base64Data.substring(0,56))
+	if((base64Data.length < 30) || (base64Data.length > 22000000) || (imgid.indexOf("data:audio/mpeg;base64,") == -1) ){
+		return {result:'1', message:"Tệp không hợp lệ! Hãy đảm bảo tệp là mp3/audio và kích thước <20mb."}
+	}
+	else{
+		return new Promise((resolve, reject) => {
+			require('fs').writeFile(imghost+texthash+".mp3", base64Data, 'base64', async(err,data,) => {
+				resolve(imghost+texthash+".mp3");
+				//console.log(fileid.substr(0,65));
+				
+			})	
+		}).then(async(filename)=>{
+			//compare sound
+			request_config = {
+				url:checksoundURL,
+				method: 'POST',
+				headers:'',
+				data:{filename:filename}
+			};
+			axios(request_config).then((resp1) => {
+				console.log(resp1.data);
+				console.log(resp1.data);
+			})
+
+
+		}).catch((error)=>{ 
+			return {result: '1',message: `Lỗi khi tạo NFT, bạn thử lại lúc khác!`}
+		})	
+	}
+}
 var nftsendimg= async (imgid,seed,token,idobject) => {
     try {
 		//validate token expire
@@ -1230,7 +1270,7 @@ var validText= async (message,chatbot) => {
 }
 
 module.exports = {
-	exptok,valgoogle,searchesnftid, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend,checkGPimg
+	exptok,valgoogle,searchesnftid, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend,checkGPimg,checkGPsound
 }
 //dbvhspark,dbvhslog,dbu,dbexp,dbvhsnews,dbvhscomm,dbvhsecoservice,dblog
 // currentGtoken = "";

@@ -15,7 +15,7 @@ export FLASK_APP=imsearch_svr
 ```
 //run
 ```
-flask run
+flask run -h localhost -p 5000
 ```
 //api
 

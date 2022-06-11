@@ -2,13 +2,13 @@
 Created by anhpt@
 Jan 18, 2021.
 */
-const redisUrl = 'redis:///fc7a55934642.ap.ngrok.io'; 
+const redisUrl = 'redis://localhost:6379'; 
 
 const express = require('express');
 const router = express.Router();
 
 const {
-	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft,nftfilesend, checkGPimg
+	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft,nftfilesend, checkGPimg, checkGPsound
 } = require('../implements/implements')
 //const { itestredis } = require('../database/models/coremap');
 var path    = require("path");
@@ -146,6 +146,38 @@ function setConnectionTimeout(time) {
 	  next();
 	}
 }
+router.post('/checksound',setConnectionTimeout('1h'), async (req, res) =>{
+	let {imgid} = req.body
+  //      console.log(req.body)
+	try {
+		//get ip
+		clientIp = requestIp.getClientIp(req); 
+		reqip = clientIp.toString().replace(":fff:","");
+		reqip = reqip.replace(":ffff:","");
+		reqip = reqip.replace(":","");
+		let idobject = {
+			ip: reqip,
+			act: "check img"
+		}
+
+		//console.log(imgid);
+				
+		await checkGPsound(imgid)
+		.then((rep)=>{
+			console.log("------------IMG---" +  + JSON.stringify(rep));
+			res.json({
+				rep
+			})
+		})
+		
+	} catch(error) {
+		console.log(error)
+		res.json({
+			result: '1',
+			message: `Could not send nft image: Internal Error!`
+		})
+	}
+})
 router.post('/checkimg',setConnectionTimeout('1h'), async (req, res) =>{
 	let {imgid} = req.body
   //      console.log(req.body)
