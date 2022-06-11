@@ -375,6 +375,27 @@ function checkSoundRule(){
 		}	
 	});
 }
+function checkLOCImg(){
+	const canvasdata = $("#preview").prop('src');
+	console.log(canvasdata.length);
+	if ((canvasdata.length < 300) || (canvasdata.length > 22000000) ){   
+		alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <20mb.");
+		stoploading();
+	}else{    
+		startloading();
+		return fetch(apiroot+'/checkLOCimg', {
+			method: 'POST',
+			headers: { 'Content-type': 'application/json' },
+			body: JSON.stringify({ imgid: canvasdata})					
+		})
+		.then(res => res.json())
+		.then((data2) => {
+			console.log(data2);
+			stoploading();
+			alert(data2.rep.message);
+		})
+	}
+}
 function checkImgRule(){
 	const canvasdata = $("#preview").prop('src');
 	console.log(canvasdata.length);
