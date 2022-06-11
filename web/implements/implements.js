@@ -3,11 +3,16 @@
 Created by anhpt@
 Jan 18, 2021.
 */
+
+const esUrl = "http://localhost:9200";
+const ipfsApiUrl = "http://localhost:5001";
+const ipfsUrl = "http://localhost:8080";
+const couchdbUrl = "http://admin:123@localhost:5984";
+const rasaUrl = "http://localhost:5005";
+
 const {
 	dbnftasset,dblog,dbu,dbexp,
 	} = require('../database/database')
-
-const esUrl = "http://localhost:9200";
 
 const fs = require('fs');
 const path = require('path');
@@ -386,7 +391,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 
 					var configIPFS = {
 						method: 'post',
-						url: 'http://localhost:5001/api/v0/add',
+						url: ipfsApiUrl+ '/api/v0/add',
 						headers: { 
 							...data.getHeaders()
 						},
@@ -396,7 +401,7 @@ var toesnft= async (db,rawdata,type,owner,b64,token,idobject) => {
 					return await axios(configIPFS)
 						.then(async(response)=>{
 						//console.log(JSON.stringify(response.data));
-						ipfsFileUrl = "http://localhost:8080/ipfs/" + response.data.Hash;
+						ipfsFileUrl = ipfsUrl + "/ipfs/" + response.data.Hash;
 						
 						
 						//to blockchain
@@ -476,6 +481,7 @@ var searchesnft= async (db,val1,token,type) => {
 					data:keysearch
 				};
 				axios(request_config).then((resp1) => {
+					console.log(resp1.data);
 					//console.log("Checking..." + i + " %..");
 					if(resp1.data.hits.hits.length > 0){
 						found++;
@@ -595,7 +601,7 @@ var newnft= async (db,seed,text,type,b64,token,idobject,chatbot) => {
 
 				//console.log("----- go here3");
 
-				chatbot = "http://localhost:5005/webhooks/rest/webhook";
+				chatbot = rasaUrl + "/webhooks/rest/webhook";
 				//nft 0
 				if(type == 0 ){
 					if(text.length >= 8){
@@ -732,7 +738,7 @@ var get3nft= async (token,idobject) => {
 			if(okdocter){
 
 				//
-				return await axios({url:"http://admin:123@localhost:5984/nftasset/_all_docs?limit=3&include_docs=true&descending=true",
+				return await axios({url:couchdbUrl + "/nftasset/_all_docs?limit=3&include_docs=true&descending=true",
 				method: 'GET',
 				data:{}	
 				})
@@ -805,6 +811,53 @@ var getnftid= async (nftid,token,idobject) => {
     } catch(error) {
 		return {result: '1',message: `Error: ${error}`}
     }
+}
+var checkGPimg= async (imgid) => {
+	const imghost = path.join(__dirname+"/../_shared/");
+	var base64Data = imgid.replace(/^data:image\/jpeg;base64,/, "");
+	var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+	var texthash = '';
+	let rep = '';
+	for(i=0; i < 20; i++ )
+		texthash += charset.charAt(Math.floor(Math.random() * charset.length));
+
+	//write file
+	let savefile = await require('fs').writeFile(imghost+texthash+".jpg", base64Data, 'base64', async(err,data,) => {})
+
+
+	//check gore/porn
+	const axios = require('axios')
+	const fs = require('fs');
+	const FormData = require('form-data');
+	var picpurifyUrl = 'https://www.picpurify.com/analyse/1.1';
+	var imagePath = imghost+texthash+".jpg"
+
+	const form = new FormData();
+	form.append('file_image', fs.createReadStream(imagePath));
+	form.append('API_KEY', '85tZFFbYXewXhleliKXLrsKgXIMzCZC6');
+	form.append('task','porn_moderation,drug_moderation,gore_moderation,weapon_moderation,obscene_gesture_moderation,suggestive_nudity_moderation,hate_sign_moderation');
+	form.append('origin_id',"xxxxxxxxx");
+	form.append('reference_id',"yyyyyyyy");
+
+	return await axios.post(picpurifyUrl, form, { headers: form.getHeaders() })
+	.then(async(response) => {
+		console.log(response.data.confidence_score_decision)
+		console.log(response.data.final_decision)
+		console.log("----check violation, porn... -----------------------")
+		var resmark = response.data.confidence_score_decision.toFixed(2);
+		if(response.data.final_decision != "OK"){
+			console.log("----found violated -----"+resmark*100+"------------------")
+
+			return {result:'1', message: "Phát hiện vi phạm nội quy mạng & pháp luật Việt Nam, vi phạm thuần phong mỹ tục: "+resmark*100+"%!\nVui lòng chọn data khác!"}
+		}else{
+			console.log("----found NO violated -----------------------");
+			return {result:'0', message: 'Found NO violated!'};
+
+		}						
+	})//check violate 
+	.catch((error)=>{ 
+		return {result: '1',message: error}
+	})
 }
 var nftsendimg= async (imgid,seed,token,idobject) => {
     try {
@@ -1177,7 +1230,7 @@ var validText= async (message,chatbot) => {
 }
 
 module.exports = {
-	exptok,valgoogle,searchesnftid, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend
+	exptok,valgoogle,searchesnftid, newnft,getnft,getnftid,get3nft,nftsendimg,nftfilesend,checkGPimg
 }
 //dbvhspark,dbvhslog,dbu,dbexp,dbvhsnews,dbvhscomm,dbvhsecoservice,dblog
 // currentGtoken = "";

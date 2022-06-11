@@ -4,7 +4,7 @@ recipe: default.v1
 
 # Configuration for Rasa NLU.
 # https://rasa.com/docs/rasa/nlu/components/
-language: vi
+language: "vi"
 
 pipeline:
   - name: SpacyNLP
@@ -20,9 +20,11 @@ pipeline:
     max_ngram: 10
   - name: DIETClassifier
     epochs: 200
+    constrain_similarities: true
   - name: EntitySynonymMapper
   - name: SklearnIntentClassifier
     epochs: 200
+    
 
 # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
 # # If you'd like to customize it, uncomment and adjust the pipeline.
@@ -52,12 +54,12 @@ policies:
 # # No configuration for policies was provided. The following default policies were used to train your model.
 # # If you'd like to customize them, uncomment and adjust the policies.
 # # See https://rasa.com/docs/rasa/policies for more information.
-#   - name: MemoizationPolicy
-#   - name: RulePolicy
-#   - name: UnexpecTEDIntentPolicy
-#     max_history: 5
-#     epochs: 100
-#   - name: TEDPolicy
-#     max_history: 5
-#     epochs: 100
-#     constrain_similarities: true
+   - name: MemoizationPolicy
+   - name: RulePolicy
+   - name: UnexpecTEDIntentPolicy
+     max_history: 5
+     epochs: 100
+   - name: TEDPolicy
+     max_history: 5
+     epochs: 100
+     constrain_similarities: true

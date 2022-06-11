@@ -5,8 +5,8 @@ Apr 28, 2021.
 
 let sockhost = '';
 let roothost = '';
-let rooturl = "http://localhost:8077/";
-var apiroot = "http://localhost:8077/api";
+let rooturl = "/";
+var apiroot = "/api";
 function gethttpapi(url, dataget){
 	var settings = {
 	  "async": true,
@@ -345,6 +345,27 @@ function loginview(){
 };
 loginview();
 
+function checkImgRule(){
+	const canvasdata = $("#preview").prop('src');
+	console.log(canvasdata.length);
+	if ((canvasdata.length < 300) || (canvasdata.length > 22000000) ){   
+		alert("Đầu vào cần có tệp tin ảnh jpg/png, kích cỡ 1024, dung lượng <20mb.");
+		stoploading();
+	}else{    
+		startloading();
+		return fetch(apiroot+'/checkimg', {
+			method: 'POST',
+			headers: { 'Content-type': 'application/json' },
+			body: JSON.stringify({ imgid: canvasdata})					
+		})
+		.then(res => res.json())
+		.then((data2) => {
+			console.log(data2);
+			stoploading();
+			alert(data2.rep.message);
+		})
+	}
+}
 
 function viewLogin(){
 	//startloading();
@@ -884,7 +905,7 @@ function viewMedExam(){
 		setTimeout(()=>{
 			getnft();
 			get3nft();
-		},5000)
+		},1000)
 
 		/*
 		var url = apiroot+"/getlast200XElive";
@@ -1332,6 +1353,7 @@ $(document).ready(function () {
 	//check image
 	$("#previewImg").hide();
 	$(document).on("click", ".browse", function() {
+		$("#previewImg").empty();
 		$("#previewImg").show();
 		//$("#arrresult").show();
 		var file = $(this).parents().find(".file");
@@ -1532,7 +1554,8 @@ $(document).ready(function () {
 		else if(currentsymp == "b004") currentnfttype = 3
 		else if(currentsymp == "b005") currentnfttype = 4
 		console.log(currentnfttype);	
-		viewInput(currentnfttype);													
+		viewInput(currentnfttype);	
+		$("#previewImg").empty();												
 		$("#dropbnbenh").text(selText);
 	});
 

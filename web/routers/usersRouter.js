@@ -2,12 +2,13 @@
 Created by anhpt@
 Jan 18, 2021.
 */
+const redisUrl = 'redis:///fc7a55934642.ap.ngrok.io'; 
 
 const express = require('express');
 const router = express.Router();
 
 const {
-	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft,nftfilesend
+	valgoogle,newnft,getnftid,get3nft,nftsendimg, getnft,nftfilesend, checkGPimg
 } = require('../implements/implements')
 //const { itestredis } = require('../database/models/coremap');
 var path    = require("path");
@@ -28,7 +29,7 @@ const dateFormat = require('dateformat')
 
 //redis
 const redis = require('redis');
-const redisUrl = 'redis:///fc7a55934642.ap.ngrok.io'; //"http://localhost:6379";
+//"http://localhost:6379";
 const clientredis = redis.createClient(redisUrl);
 clientredis.auth("abcxyz123");
 //var georedis = require('georedis').initialize(clientredis)
@@ -41,7 +42,7 @@ const callSRE = async() => {
 		
 		//rep = new Promise((resolve, reject) => {
 		//console.log("===================");
-		rep = await clientredis.sinter(['hanoi'],function(err, replies) {
+		rep = await clientredis.sinter(['vinh tuy 2'],function(err, replies) {
 			if(err) {return  err}
 			else {
 				console.log("======111=============");
@@ -67,6 +68,8 @@ const connRedis = async() => {
 	//.then(async()=>{
 		clientredis.sadd('ha dong',' hanoi, lat:21.1963845, lng:105.8443959'); 
 		clientredis.sadd('vinh tuy','vinh tuy, lat:21.19529, lng:105.84473');
+		clientredis.sadd('vinh tuy 2','vinh tuy, lat:21.19529, lng:105.84473');
+		clientredis.sadd('4 vinh tuy','vinh tuy, lat:21.19529, lng:105.84473');
 		return await callSRE();
 	//})
 }
@@ -143,6 +146,38 @@ function setConnectionTimeout(time) {
 	  next();
 	}
 }
+router.post('/checkimg',setConnectionTimeout('1h'), async (req, res) =>{
+	let {imgid} = req.body
+  //      console.log(req.body)
+	try {
+		//get ip
+		clientIp = requestIp.getClientIp(req); 
+		reqip = clientIp.toString().replace(":fff:","");
+		reqip = reqip.replace(":ffff:","");
+		reqip = reqip.replace(":","");
+		let idobject = {
+			ip: reqip,
+			act: "check img"
+		}
+
+		//console.log(imgid);
+				
+		await checkGPimg(imgid)
+		.then((rep)=>{
+			console.log("------------IMG---" +  + JSON.stringify(rep));
+			res.json({
+				rep
+			})
+		})
+		
+	} catch(error) {
+		console.log(error)
+		res.json({
+			result: '1',
+			message: `Could not send nft image: Internal Error!`
+		})
+	}
+})
 router.post('/nftsendimg',setConnectionTimeout('1h'), async (req, res) =>{
 	let {imgid,seed, token} = req.body
   //      console.log(req.body)
