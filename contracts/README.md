@@ -1,5 +1,16 @@
 ### get new OraiChain testnet account (if you dont have), setup go, cosmwasm, wasmd, vscode, cosmwasm-ide
 ```
+//current nft contract
+orai1m3ys3fwhf26gzywfv9mhd2fwafktpev7jsn2f7
+//current ow20 contract
+orai1ktp6mapg73s89muz4jda9jvcgtu6wgmnk3fzs7
+//ai oracle
+orai1yewy87r70klkjxasx3p8fms778hzn778d4dltn
+//account 1
+orai16dmsyrlcv8qa88hfkavttgg0xms7a6hjk8nrhj
+//account 2
+orai12r3n3njnsqmw65u9agcwagjuff6kjfkhq5u0sd
+
 //register oraichain testnet account
 https://testnet.scan.orai.io/
 
