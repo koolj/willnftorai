@@ -25,6 +25,7 @@ https://www.rust-lang.org/tools/install
 https://code.visualstudio.com/download
 https://docs.cosmwasm.com/docs/1.0/getting-started/installation 
 https://go.dev/doc/install
+//apply some sample scripts for contract interactions: https://github.com/oraichain/oraicli/tree/master/src/cmd/wasm/cmd
 ```
 
 # build some blockchain contracts: cw_erc20, cw721, compile & deploy to OraiChain testnet
