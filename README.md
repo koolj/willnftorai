@@ -113,6 +113,7 @@ https://go.dev/doc/install
 ```
 //follow https://getbootstrap.com/docs/5.0/getting-started/download
 //follow https://github.com/oraichain/cosmosjs 
+//apply some sample scripts for contract interactions: https://github.com/oraichain/oraicli/tree/master/src/cmd/wasm/cmd
 ```
 ### run docker couchdb, create some tables
 ```
